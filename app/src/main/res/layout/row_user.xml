@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="myModel"
+            type="com.secretmenu.roomdatabase.User" />
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:cardCornerRadius="2dp">
+
+
+        <LinearLayout
+            android:id="@+id/ll_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:weightSum="10">
+
+
+            <TextView
+                android:id="@+id/tv_uid"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="wrap_content"
+                android:text="@{myModel.uid+``}"
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tv_ridedate"
+                android:layout_width="@dimen/dp_160"
+                android:layout_height="wrap_content"
+                android:text="@{myModel.firstName}"
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="wrap_content"
+                android:text="@{myModel.syncStatus.toString()}"
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

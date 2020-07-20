@@ -1,0 +1,44 @@
+
+<!DOCTYPE resources [
+    <!ENTITY app_name "mvvmbase">
+    ]>
+<resources xmlns:tools="http://schemas.android.com/tools"  tools:ignore="MissingTranslation" >
+    <string name="app_name" >Secret Menu</string>
+    <!--<string name="fb_login_protocol_scheme">fb398611477210562</string>-->
+
+    <!-- @string/dummy: Remove or change this placeholder text -->
+
+    <!-- @string/dummy: Remove or change this placeholder text -->
+    <string name="internal_server_error">Internal server error, so please try after some time!</string>
+    <string name="internet_connection">Please check your internet connection and try after some time!</string>
+    <string name="sorry_text">We couldn\'t find any matches \nGo ahead and start a ride. </string>
+    <string name="time">Time</string>
+    <string name="no_rides">You haven\'t started any rides yet</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="dummy">dummy</string>
+    <string name="click_me">click Me</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="enter_fname">Please enter First name</string>
+    <string name="enter_lname">Please enter last name</string>
+    <string name="add">Add New</string>
+    <string name="clear_all">Clear All</string>
+    <string name="ok">OK</string>
+    <string name="todo">Todo</string>
+    <string name="log_in">Login</string>
+    <string name="your_email">Enter Email</string>
+    <string name="your_password">Enter Your Password</string>
+    <string name="forgot_your_password">I Forgot</string>
+    <string name="empty">Please Enter</string>
+    <string name="email">Email</string>
+    <string name="invalid">Please Enter Valid</string>
+    <string name="password">Password</string>
+    <string name="guest_text">Login as Guest</string>
+    <string name="signup">Sign Up</string>
+    <string name="email_user_phone">Username/Email/Mobile No</string>
+
+
+</resources>
+
+
+

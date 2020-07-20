@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#15b5d9</color>
+    <color name="colorPrimaryDark">#CC15b5d9</color>
+    <color name="colorButton">#CC15b5d9</color>
+
+    <color name="colorAccent">#15b5d9</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGrey">#9C9C9C</color>
+    <!--<color name="colorButton">#FF6871</color>-->
+    <color name="appBackground">#ffffff</color>
+    <color name="btnTextColor">#000</color>
+    <color name="colorblack">#000000</color>
+    <color name="colorOrange">#FC9539</color>
+    <color name="transparentBlack">#88000000</color>
+    <color name="colorSuccess">#00BB27</color>
+    <color name="colorRed">#E72F1A</color>
+
+</resources>
