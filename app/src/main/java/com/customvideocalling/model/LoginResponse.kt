@@ -10,10 +10,13 @@ class LoginResponse {
     @SerializedName("status")
     @Expose
     var status: String? = null
-    @SerializedName("result")
+    @SerializedName("data")
     @Expose
     var result: Result? = null
-    @SerializedName("goodsDeliveryMessage")
+    @SerializedName("message")
+    @Expose
+    var goodsDeliveryMessage: String? = null
+ /*   @SerializedName("goodsDeliveryMessage")
     @Expose
     var goodsDeliveryMessage: String? = null
     @SerializedName("recordsTotal")
@@ -21,57 +24,21 @@ class LoginResponse {
     var recordsTotal: Int? = null
     @SerializedName("recordsFiltered")
     @Expose
-    var recordsFiltered: Int? = null
+    var recordsFiltered: Int? = null*/
 
     inner class Result {
         @SerializedName("userId")
         @Expose
-        var userId: Int? = null
-        @SerializedName("firstName")
+        var userId: String? = null
+        @SerializedName("userName")
         @Expose
-        var firstName: String? = null
-        @SerializedName("lastName")
-        @Expose
-        var lastName: String? = null
-        @SerializedName("mobilePhone")
-        @Expose
-        var mobilePhone: String? = null
-        @SerializedName("email")
-        @Expose
-        var email: String? = null
-        @SerializedName("blockStatus")
-        @Expose
-        var blockStatus: String? = null
-        @SerializedName("token")
+        var userName: String? = null
+        @SerializedName("authToken")
         @Expose
         var token: String? = null
-        @SerializedName("countryName")
+        @SerializedName("type")
         @Expose
-        var countryName: String? = null
-        @SerializedName("ocupation")
-        @Expose
-        var ocupation: String? = null
-        @SerializedName("hobbies")
-        @Expose
-        var hobbies: String? = null
-        @SerializedName("education")
-        @Expose
-        var education: String? = null
-        @SerializedName("companyName")
-        @Expose
-        var companyName: String? = null
-        @SerializedName("companyTaxNumber")
-        @Expose
-        var companyTaxNumber: String? = null
-        @SerializedName("companyAccountNumber")
-        @Expose
-        var companyAccountNumber: String? = null
-        @SerializedName("otpVerified")
-        @Expose
-        var otpVerified: String? = null
-        @SerializedName("address")
-        @Expose
-        var address: String? = null
+        var type: Int? = null
 
     }
 }

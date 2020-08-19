@@ -16,7 +16,7 @@ interface ApiInterface {
     fun uploadUser(@Body mJsonObject:JsonObject):Call<JsonObject>
 
 
-    @POST("api/user/logIn")
+    @POST("login")
     fun callLogin(@Body jsonObject:JsonObject):Call<JsonObject>
 
     @POST("auth/logout/")
