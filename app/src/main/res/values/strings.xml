@@ -1,9 +1,6 @@
-
-<!DOCTYPE resources [
-    <!ENTITY app_name "mvvmbase">
-    ]>
-<resources xmlns:tools="http://schemas.android.com/tools"  tools:ignore="MissingTranslation" >
-    <string name="app_name" >Secret Menu</string>
+<!DOCTYPE resources [<!ENTITY app_name "mvvmbase">]>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">VideoCall</string>
     <!--<string name="fb_login_protocol_scheme">fb398611477210562</string>-->
 
     <!-- @string/dummy: Remove or change this placeholder text -->
@@ -36,6 +33,13 @@
     <string name="guest_text">Login as Guest</string>
     <string name="signup">Sign Up</string>
     <string name="email_user_phone">Username/Email/Mobile No</string>
+    <string name="agora_app_id">3c6f62a1455642ba8269bf7820693ddf</string>
+    <!-- Obtain a temp Access Token at https://dashboard.agora.io -->
+    <!-- You will need to deploy your own token server for production release -->
+    <!-- Leave this value empty if Security keys/Token is not enabled for your project -->
+    <string name="agora_access_token">006f989a8e0d53a44b68f1cd9ce017ade0eIAACoVaee0kCMgi2SDsVQ/nEo+ztQYEmCebn9Rac89227RJtWVYAAAAAEAChLLDAa+88XwEAAQBq7zxf</string>
+    <string name="doctor">Doctor</string>
+    <string name="patient">Patient</string>
 
 
 </resources>

@@ -4,15 +4,15 @@
 
 
     <data>
-        <import type="com.secretmenu.common.BindingUtils" />
+        <import type="com.customvideocalling.common.BindingUtils" />
         <variable
             name="myModel"
-            type="com.secretmenu.model.RideListModel.Datum" />
+            type="com.customvideocalling.model.RideListModel.Datum" />
 
 
         <variable
             name="itemClickListener"
-            type="com.secretmenu.RideListAdapter" />
+            type="com.customvideocalling.RideListAdapter" />
     </data>
 
     <androidx.cardview.widget.CardView

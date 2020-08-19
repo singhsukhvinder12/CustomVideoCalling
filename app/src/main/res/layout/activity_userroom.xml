@@ -6,7 +6,7 @@
 
         <variable
             name="userViewModel"
-            type="com.secretmenu.viewmodels.UserViewModel" />
+            type="com.customvideocalling.viewmodels.UserViewModel" />
 
 
     </data>

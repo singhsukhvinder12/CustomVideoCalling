@@ -16,4 +16,7 @@
     <color name="colorSuccess">#00BB27</color>
     <color name="colorRed">#E72F1A</color>
 
+    <color name="localBackground">#827b92</color>
+    <color name="remoteBackground">#484258</color>
+
 </resources>

@@ -6,14 +6,14 @@
 
         <variable
             name="myAdapter"
-            type="com.secretmenu.RideListAdapter" />
+            type="com.customvideocalling.RideListAdapter" />
 
         <variable
             name="clickListener"
-            type="com.secretmenu.viewmodels.MainViewModel" />
+            type="com.customvideocalling.viewmodels.MainViewModel" />
         <variable
             name="myModel"
-            type="com.secretmenu.model.RideListModel.Datum" />
+            type="com.customvideocalling.model.RideListModel.Datum" />
 
 
     </data>
