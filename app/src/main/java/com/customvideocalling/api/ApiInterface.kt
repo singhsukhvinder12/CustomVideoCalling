@@ -21,4 +21,10 @@ interface ApiInterface {
 
     @POST("auth/logout/")
     fun callLogout(@Body mJsonObject:JsonObject):Call<JsonObject>
+
+    @GET("sBookingList/{id}")
+    fun getStudentBooings(@Path("id") id: String): Call<JsonObject>
+
+    @GET("getCompleteClass/{id}")
+    fun getStudentHistoryBooings(@Path("id") id: String): Call<JsonObject>
 }
