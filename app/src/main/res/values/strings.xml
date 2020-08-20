@@ -40,6 +40,8 @@
     <string name="agora_access_token">006f989a8e0d53a44b68f1cd9ce017ade0eIAACoVaee0kCMgi2SDsVQ/nEo+ztQYEmCebn9Rac89227RJtWVYAAAAAEAChLLDAa+88XwEAAQBq7zxf</string>
     <string name="doctor">Teacher</string>
     <string name="patient">Student</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -38,7 +38,7 @@ class SplashActivity : BaseActivity() {
                     checkScreenType()
                 }
             }
-        }, 3000)
+        }, 500)
     }
 
     private fun checkScreenType() {
@@ -54,7 +54,7 @@ class SplashActivity : BaseActivity() {
         val intent = if (login == "true") {
             Intent(this, MainActivity::class.java)
         } else {
-            Intent(this, LoginActivity::class.java)
+            Intent(this, MainActivity::class.java)
 
         }
 
