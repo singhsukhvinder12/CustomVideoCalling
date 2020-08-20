@@ -1,6 +1,7 @@
 package com.customvideocalling.views.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,6 +18,8 @@ import com.google.gson.JsonObject
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseFragment
 import com.customvideocalling.viewmodels.HomeViewModel
+import com.customvideocalling.views.VideoChatViewActivity
+import com.customvideocalling.views.student.AddAppoitmentActivity
 import com.uniongoods.adapters.JobRequestsAdapter
 
 class JobRequestsFragment : BaseFragment(), DialogssInterface {
@@ -37,6 +40,10 @@ class JobRequestsFragment : BaseFragment(), DialogssInterface {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         fragmentHomeBinding.homeViewModel = homeViewModel
         baseActivity.startProgressDialog()
+        fragmentHomeBinding.floatAdd.setOnClickListener {
+            val intent = Intent(activity, AddAppoitmentActivity::class.java)
+            activity!!.startActivity(intent)
+        }
 
         if (UtilsFunctions.isNetworkConnected()) {
             val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String

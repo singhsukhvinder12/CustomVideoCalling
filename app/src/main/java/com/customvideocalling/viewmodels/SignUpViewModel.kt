@@ -50,7 +50,7 @@ class SignUpViewModel : BaseViewModel() {
 
     fun hitTeacherSignUpApi(mJsonObject: JsonObject) {
         if (UtilsFunctions.isNetworkConnected()) {
-            dataTeacher = signUpRepository.getStudentSignUpData(mJsonObject)
+            dataTeacher = signUpRepository.getTeacherSignUpData(mJsonObject)
             mIsUpdating.postValue(true)
         }
     }

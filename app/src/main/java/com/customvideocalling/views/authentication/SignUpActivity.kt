@@ -1,8 +1,6 @@
 package com.customvideocalling.views.authentication
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.text.TextUtils
 import android.widget.RadioGroup
 import androidx.databinding.DataBindingUtil
@@ -15,15 +13,19 @@ import com.customvideocalling.databinding.ActivitySignUpBinding
 import com.customvideocalling.model.LoginResponse
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
-import com.customvideocalling.viewmodels.LoginViewModel
 import com.customvideocalling.viewmodels.SignUpViewModel
 import com.customvideocalling.views.MainActivity
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+
 
 class SignUpActivity : BaseActivity() {
     private lateinit var activitySignUpBinding: ActivitySignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
     private var sharedPrefClass = SharedPrefClass()
+    private var isTeacher = true
+    private var isStudent = false
 
     override fun initViews() {
         activitySignUpBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
@@ -38,9 +40,11 @@ class SignUpActivity : BaseActivity() {
                 val confirmPassword = activitySignUpBinding.etConfirmPassword.text.toString()
                 activitySignUpBinding.rgUserType.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
                     if(i == R.id.rb_teacher){
-                       // Toast.makeText(this@TextViewAndRadioButtonActivity17, "Male Selected", Toast.LENGTH_LONG).show()
+                        isTeacher = true
+                        isStudent = false
                     }else if(i == R.id.rb_student){
-                      //  Toast.makeText(this@TextViewAndRadioButtonActivity17, "Female Selected", Toast.LENGTH_LONG).show()
+                        isTeacher = false
+                        isStudent = true
                     }
                 })
                 when (it) {
@@ -61,24 +65,57 @@ class SignUpActivity : BaseActivity() {
                             showConfirmPasswordError("Password and confirm password is different")
                         }
                         else {
-                            val mJsonObject = JsonObject()
-                            mJsonObject.addProperty("email", email)
-                            mJsonObject.addProperty("password", password)
-                            mJsonObject.addProperty("lName", "aaaa")
-                            mJsonObject.addProperty("fName", userName)
-                            mJsonObject.addProperty("rollNo", "12")
-                            mJsonObject.addProperty("dob", "1995-12-24")
-                            mJsonObject.addProperty("class", "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
-                            mJsonObject.addProperty("house", "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
-                            mJsonObject.addProperty("section", "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
-                            mJsonObject.addProperty("planId", "7")
-                            mJsonObject.addProperty("amount", "100")
-                            mJsonObject.addProperty("info", "")
-                            mJsonObject.addProperty("grade", "")
-                            mJsonObject.addProperty("needed", "")
-                            mJsonObject.addProperty("help", "")
-                            mJsonObject.addProperty("superhero", "")
-                            signUpViewModel.hitStudentSignUpApi(mJsonObject)
+                            if (isStudent) {
+                                val mJsonObject = JsonObject()
+                                mJsonObject.addProperty("email", email)
+                                mJsonObject.addProperty("password", password)
+                                mJsonObject.addProperty("lName", "aaaa")
+                                mJsonObject.addProperty("fName", userName)
+                                mJsonObject.addProperty("rollNo", "12")
+                                mJsonObject.addProperty("dob", "1995-12-24")
+                                mJsonObject.addProperty(
+                                    "class",
+                                    "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000"
+                                )
+                                mJsonObject.addProperty(
+                                    "house",
+                                    "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000"
+                                )
+                                mJsonObject.addProperty(
+                                    "section",
+                                    "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000"
+                                )
+                                mJsonObject.addProperty("planId", "7")
+                                mJsonObject.addProperty("amount", "100")
+                                mJsonObject.addProperty("info", "")
+                                mJsonObject.addProperty("grade", "")
+                                mJsonObject.addProperty("needed", "")
+                                mJsonObject.addProperty("help", "")
+                                mJsonObject.addProperty("superhero", "")
+                                signUpViewModel.hitStudentSignUpApi(mJsonObject)
+                            }else if(isTeacher){
+                                val gson = GsonBuilder().setPrettyPrinting().create()
+                                val array = JsonArray()
+                                array.add("11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
+                                array.add("75442486-0878-440c-9db1-a7006c25a39f")
+                                val mJsonObject = JsonObject()
+                                mJsonObject.addProperty("email", email)
+                                mJsonObject.addProperty("password", password)
+                                mJsonObject.addProperty("lName", "aaaa")
+                                mJsonObject.addProperty("fName", userName)
+                                mJsonObject.addProperty("teacherId", "1234567")
+                                mJsonObject.addProperty("dob", "1995-12-24")
+                                mJsonObject.addProperty(
+                                    "faculty",
+                                    "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000"
+                                )
+                                mJsonObject.addProperty(
+                                    "designation",
+                                    "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000"
+                                )
+                                mJsonObject.addProperty("subjects",gson.toJson(array))
+                                signUpViewModel.hitTeacherSignUpApi(mJsonObject)
+                            }
 
                         }
 
@@ -123,6 +160,11 @@ class SignUpActivity : BaseActivity() {
                             MyApplication.instance,
                             GlobalConstants.USERNAME,
                             loginResponse.result!!.userName
+                        )
+                        sharedPrefClass.putObject(
+                            MyApplication.instance,
+                            GlobalConstants.TYPE,
+                            loginResponse.result!!.type
                         )
 //                            SharedPrefClass().putObject(
 //                                    MyApplication.instance,

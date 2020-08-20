@@ -82,6 +82,18 @@
             android:layout_centerInParent="true"
             android:text="@string/no_record_found" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/float_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:src="@drawable/ic_add_white" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             style="@style/TabLayout"

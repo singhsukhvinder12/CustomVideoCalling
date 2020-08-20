@@ -113,6 +113,11 @@ class LoginActivity : BaseActivity() {
                                     GlobalConstants.USERNAME,
                                     loginResponse.result!!.userName
                             )
+                            sharedPrefClass.putObject(
+                                MyApplication.instance,
+                                GlobalConstants.TYPE,
+                                loginResponse.result!!.type
+                            )
 //                            SharedPrefClass().putObject(
 //                                    MyApplication.instance,
 //                                    GlobalConstants.CUSTOMER_IAMGE,

@@ -40,6 +40,12 @@ class JobsResponse {
         @SerializedName("lName")
         @Expose
         var lName : String? = null
+        @SerializedName("channelName")
+        @Expose
+        var channelName : String? = null
+        @SerializedName("accessToken")
+        @Expose
+        var accessToken : String? = null
     }
 
 }

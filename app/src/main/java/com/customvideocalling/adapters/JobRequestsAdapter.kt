@@ -2,6 +2,7 @@ package com.uniongoods.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.customvideocalling.R
 import com.customvideocalling.databinding.RequestItemBinding
 import com.customvideocalling.model.JobsResponse
+import com.customvideocalling.views.MainActivity
+import com.customvideocalling.views.VideoChatViewActivity
 import com.customvideocalling.views.fragment.JobRequestsFragment
 
 
@@ -46,6 +49,15 @@ class JobRequestsAdapter(
         viewHolder = holder
         //holder.binding!!.tvAddress.text = jobsList!![position]
         holder.binding!!.tvFromLocationName.text = jobsList[position].bookingDate
+      //  if (jobsList[position].channelName!!.isNotEmpty() && jobsList[position].accessToken!!.isNotEmpty()){
+            holder.binding!!.cardView.setOnClickListener {
+                val intent = Intent(activity, VideoChatViewActivity::class.java)
+                intent.putExtra("channelName", jobsList[position].channelName)
+                intent.putExtra("accessToken", jobsList[position].accessToken)
+                activity.startActivity(intent)
+            }
+      //  }
+
       //  holder.binding.tvToLocationName.text = jobsList[position].to_location
 
       /*  if (!TextUtils.isEmpty(jobsList[position].scheduleDatetime) && !jobsList[position].scheduleDatetime.equals("null")) {

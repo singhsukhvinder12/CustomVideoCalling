@@ -51,7 +51,7 @@ class SignUpRepository {
 
                     }
 
-                }, GetRestAdapter.getRestAdapter(false).callLogin(jsonObject)
+                }, GetRestAdapter.getRestAdapter(false).callTeacherSignUp(jsonObject)
 
             )
 

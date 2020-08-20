@@ -34,6 +34,8 @@ class VideoChatViewActivity : AppCompatActivity() {
     private var mCallBtn: ImageView? = null
     private var mMuteBtn: ImageView? = null
     private var mSwitchCameraBtn: ImageView? = null
+    private var accessToken = ""
+    private var channelName = ""
 
     // Customized logger view
 
@@ -163,7 +165,14 @@ class VideoChatViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_chat_view)
         initUI()
-
+        if (intent.hasExtra("channelName")) {
+            val extras = intent.extras
+            channelName = (extras!!.getString("channelName")).toString()
+        }
+        if (intent.hasExtra("accessToken")) {
+            val extras = intent.extras
+            accessToken = (extras!!.getString("accessToken")).toString()
+        }
         // Ask for permissions at runtime.
         // This is just an example set of permissions. Other permissions
         // may be needed, and please refer to our online documents.
@@ -312,11 +321,11 @@ class VideoChatViewActivity : AppCompatActivity() {
         // same channel successfully using the same app id.
         // 2. One token is only valid for the channel name that
         // you use to generate this token.
-        var token: String? = getString(R.string.agora_access_token)
+        var token: String? = /*getString(R.string.agora_access_token)*/accessToken
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null // default, no token
         }
-        mRtcEngine!!.joinChannel(token, "sahil", "Extra Optional Data", 0)
+        mRtcEngine!!.joinChannel(token, channelName, "Extra Optional Data", 0)
     }
 
     protected override fun onDestroy() {
