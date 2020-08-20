@@ -29,7 +29,7 @@ class SharedPrefClass {
     }
 
     fun putObject(mContext: Context, mObjectKey: String, mObject: Any?) {
-        val mPreferences = mContext.getSharedPreferences(GlobalConstants.SEND_DATA, Context.MODE_PRIVATE)
+        val mPreferences = mContext.getSharedPreferences(GlobalConstants.SHARED_PREF, Context.MODE_PRIVATE)
         val mEditor = mPreferences.edit()
         if (mObject == null || mObjectKey == "") {
             throw IllegalArgumentException("object/key is empty or null")

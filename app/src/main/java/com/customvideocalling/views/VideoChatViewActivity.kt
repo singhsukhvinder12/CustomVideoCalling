@@ -316,7 +316,7 @@ class VideoChatViewActivity : AppCompatActivity() {
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null // default, no token
         }
-        mRtcEngine!!.joinChannel(token, "TestSahil", "Extra Optional Data", 0)
+        mRtcEngine!!.joinChannel(token, "sahil", "Extra Optional Data", 0)
     }
 
     protected override fun onDestroy() {

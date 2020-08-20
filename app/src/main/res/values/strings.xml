@@ -35,14 +35,16 @@
     <string name="email_user_phone">Email</string>
     <string name="user_name">User Name</string>
     <string name="agora_app_id">3c6f62a1455642ba8269bf7820693ddf</string>
+    <string name="day_month">DD/MM/YYYY</string>
     <!-- Obtain a temp Access Token at https://dashboard.agora.io -->
     <!-- You will need to deploy your own token server for production release -->
     <!-- Leave this value empty if Security keys/Token is not enabled for your project -->
-    <string name="agora_access_token">006f989a8e0d53a44b68f1cd9ce017ade0eIAACoVaee0kCMgi2SDsVQ/nEo+ztQYEmCebn9Rac89227RJtWVYAAAAAEAChLLDAa+88XwEAAQBq7zxf</string>
+    <string name="agora_access_token">006f989a8e0d53a44b68f1cd9ce017ade0eIABQpf0vHkPwuzXHMOht+2wJZKT9G+ovcyXhMimqYH4zUWGaNU0AAAAAIgDjgOYe3co/XwQAAQBthz5fAgBthz5fAwBthz5fBABthz5f</string>
     <string name="doctor">Teacher</string>
     <string name="patient">Student</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_booking">Add Booking</string>
 
 
 </resources>

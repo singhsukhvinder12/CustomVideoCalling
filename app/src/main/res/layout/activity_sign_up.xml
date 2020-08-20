@@ -196,7 +196,7 @@
             <RadioButton
                 android:layout_weight="1"
                 android:text="@string/doctor"
-                android:id="@+id/rb_dr"
+                android:id="@+id/rb_teacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
@@ -204,7 +204,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/dp_20"
                 android:text="@string/patient"
-                android:id="@+id/rb_patient"
+                android:id="@+id/rb_student"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20" />

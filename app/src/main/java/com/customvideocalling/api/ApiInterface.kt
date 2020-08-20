@@ -3,6 +3,9 @@ package com.customvideocalling.api
 //* Created by Saira on 03/07/2019.
 
 
+import com.customvideocalling.model.ClassSubjectListResponse
+import com.customvideocalling.model.SlotListResponse
+import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.*
@@ -27,4 +30,13 @@ interface ApiInterface {
 
     @POST("auth/logout/")
     fun callLogout(@Body mJsonObject:JsonObject):Call<JsonObject>
+
+    @GET("streamOptions")
+    fun getClassSubject():Call<ClassSubjectListResponse>
+
+    @POST("addBooking")
+    fun addBookingStudent(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @POST("getAllSlots")
+    fun getSlotList(@Body jsonObject:JsonObject):Call<SlotListResponse>
 }

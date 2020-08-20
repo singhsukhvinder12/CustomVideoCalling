@@ -1,12 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.customvideocalling.views.student.AddAppoitmentActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appBackground">
+        <include
+            android:id="@+id/toolBar"
+            layout="@layout/common_toolbar_back"/>
+
+        <View
+            android:id="@+id/toolbar_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/toolBar"
+            android:background="@color/colorGrey" />
+
+        <TextView
+            android:id="@+id/txtSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="@dimen/sp_12"
+            android:layout_marginEnd="10sp"
+            android:text="Select Subject"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            android:layout_below="@+id/toolbar_line" />
+
+        <RelativeLayout
+            android:id="@+id/rel_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/rectangle_blue_stroke"
+            android:visibility="visible"
+            android:padding="@dimen/dp_2"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+           android:layout_below="@+id/txtSubject"
+            tools:ignore="UnusedAttribute">
 
 
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+            <Spinner
+                android:id="@+id/sp_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow"
+                android:background="@drawable/edittext_round_layout"
+                tools:ignore="RtlHardcoded,UnusedAttribute" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtDob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="12dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="Select Date"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+           android:layout_below="@+id/rel_spinner" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDob"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/rectangle_blue_stroke"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:drawableRight="@drawable/ic_calendar"
+            android:padding="12dp"
+            android:hint="@string/day_month"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/txtSlot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="@dimen/sp_12"
+            android:layout_marginEnd="10sp"
+            android:text="Select Slot"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            android:layout_below="@+id/tv_date" />
+
+        <RelativeLayout
+            android:id="@+id/rel_spinner_slot"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/rectangle_blue_stroke"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:padding="@dimen/dp_2"
+            android:layout_below="@+id/txtSlot"
+            tools:ignore="UnusedAttribute">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/iv_arrow_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+            <Spinner
+                android:id="@+id/sp_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow_slot"
+                android:background="@drawable/edittext_round_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlHardcoded,UnusedAttribute" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_add_booking"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="@dimen/dp_25"
+            android:background="@drawable/round_back_transparent"
+            android:padding="@dimen/dp_10"
+            android:text="Add Booking"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorblack"
+
+            />
+
+    </RelativeLayout>
+
+</layout>

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.RadioGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -35,6 +36,13 @@ class SignUpActivity : BaseActivity() {
                 val email = activitySignUpBinding.etEmail.text.toString()
                 val password = activitySignUpBinding.etPassword.text.toString()
                 val confirmPassword = activitySignUpBinding.etConfirmPassword.text.toString()
+                activitySignUpBinding.rgUserType.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+                    if(i == R.id.rb_teacher){
+                       // Toast.makeText(this@TextViewAndRadioButtonActivity17, "Male Selected", Toast.LENGTH_LONG).show()
+                    }else if(i == R.id.rb_student){
+                      //  Toast.makeText(this@TextViewAndRadioButtonActivity17, "Female Selected", Toast.LENGTH_LONG).show()
+                    }
+                })
                 when (it) {
                     "btn_login" -> {
                         if(TextUtils.isEmpty(userName)) run{
@@ -56,7 +64,7 @@ class SignUpActivity : BaseActivity() {
                             val mJsonObject = JsonObject()
                             mJsonObject.addProperty("email", email)
                             mJsonObject.addProperty("password", password)
-                            mJsonObject.addProperty("lName", "")
+                            mJsonObject.addProperty("lName", "aaaa")
                             mJsonObject.addProperty("fName", userName)
                             mJsonObject.addProperty("rollNo", "12")
                             mJsonObject.addProperty("dob", "1995-12-24")
