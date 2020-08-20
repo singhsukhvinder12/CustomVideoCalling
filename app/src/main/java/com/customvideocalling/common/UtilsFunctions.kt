@@ -1,10 +1,12 @@
 package com.customvideocalling.common
 
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Build
 import android.provider.Settings
 import android.view.Gravity
 import android.view.View
@@ -30,6 +32,28 @@ object UtilsFunctions {
         messageTextView.gravity = Gravity.CENTER
         view!!.setBackgroundColor(ContextCompat.getColor(MyApplication.instance, R.color.colorRed))
         toast.show()
+    }
+
+    @JvmStatic
+    @TargetApi(Build.VERSION_CODES.M)
+    fun isNetworkConnectedWithoutToast() : Boolean {
+        val cm = MyApplication.instance.applicationContext
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        var activeNetwork : NetworkInfo? = null
+        activeNetwork = cm.activeNetworkInfo
+
+        return if (activeNetwork != null && activeNetwork.isConnectedOrConnecting) {
+            activeNetwork != null && activeNetwork.isConnectedOrConnecting
+        } else {
+            // showToastWarning(MyApplication.instance.getString(R.string.internet_connection))
+            // Toast.makeText(MyApplication.getInstance().getApplicationContext(), R.string.internet_connection, Toast.LENGTH_SHORT).show();
+            false
+        }
+    }
+
+    @JvmStatic
+    fun checkObjectNull(obj : Any?) : Boolean {
+        return obj != null
     }
 
     @JvmStatic
