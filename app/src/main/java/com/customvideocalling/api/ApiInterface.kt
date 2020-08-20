@@ -19,6 +19,12 @@ interface ApiInterface {
     @POST("login")
     fun callLogin(@Body jsonObject:JsonObject):Call<JsonObject>
 
+    @POST("sRegister")
+    fun callStudentSignUp(@Body jsonObject:JsonObject):Call<JsonObject>
+
+    @POST("tRegister")
+    fun callTeacherSignUp(@Body jsonObject:JsonObject):Call<JsonObject>
+
     @POST("auth/logout/")
     fun callLogout(@Body mJsonObject:JsonObject):Call<JsonObject>
 }

@@ -7,6 +7,10 @@
 
         <import type="com.customvideocalling.common.BindingUtils" />
 
+
+        <variable
+            name="signUpViewModel"
+            type="com.customvideocalling.viewmodels.SignUpViewModel" />
     </data>
 
     <ScrollView
@@ -225,6 +229,7 @@
             android:layout_height="@dimen/btn_height"
             android:layout_margin="@dimen/dp_25"
             android:background="@drawable/round_back_transparent"
+            android:onClick="@{(v) -> signUpViewModel.clickListener(v)}"
             android:padding="@dimen/dp_10"
             android:text="@string/signup"
             android:textColor="@color/colorblack"

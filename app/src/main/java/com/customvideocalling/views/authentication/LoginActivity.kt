@@ -15,6 +15,7 @@ import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.viewmodels.LoginViewModel
 import com.customvideocalling.views.MainActivity
+import com.customvideocalling.views.VideoChatViewActivity
 
 class LoginActivity : BaseActivity() {
     private lateinit var activityLoginbinding: ActivityLoginBinding
@@ -36,6 +37,11 @@ class LoginActivity : BaseActivity() {
             val email = activityLoginbinding.etEmail.text.toString()
             val password = activityLoginbinding.etPassword.text.toString()
             when (it) {
+
+                "tv_signup" ->{
+                    val i = Intent(applicationContext, SignUpActivity::class.java)
+                    startActivity(i)
+                }
                 "btn_login" -> {
                     if (TextUtils.isEmpty(email)) run {
                         showEmailError(getString(R.string.empty) + " " + getString(
@@ -53,8 +59,8 @@ class LoginActivity : BaseActivity() {
                         val mJsonObject = JsonObject()
                         mJsonObject.addProperty("email", email)
                         mJsonObject.addProperty("password", password)
-                        mJsonObject.addProperty("mobilePhone", "")
-                        mJsonObject.addProperty("token", "")
+                        /*mJsonObject.addProperty("mobilePhone", "")
+                        mJsonObject.addProperty("token", "")*/
                         loginViewModel.hitLoginApi(mJsonObject)
 
                     }
