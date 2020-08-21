@@ -1,7 +1,9 @@
 package com.customvideocalling.Interfaces
 
 import com.customvideocalling.model.ClassSubjectListResponse
+import com.customvideocalling.model.PlanListResponse
 import com.customvideocalling.model.SlotListResponse
+import com.customvideocalling.model.TokenHistoryListResponse
 import com.example.artha.model.CommonModel
 
 class CallBackResult {
@@ -19,5 +21,20 @@ class CallBackResult {
     interface AddBookingCallBack {
         fun onAddBookingSuccess(response: CommonModel)
         fun onAddBookingFailed(message: String)
+    }
+
+    interface PlanListCallBack {
+        fun onGetPlanListSuccess(response: PlanListResponse)
+        fun onGetPlanListFailed(message: String)
+    }
+
+    interface TokenHistoryCallBack {
+        fun onGetTokenHistorySuccess(response: TokenHistoryListResponse)
+        fun onGetTokenHistoryFailed(message: String)
+    }
+
+    interface PaymentCallBack {
+        fun onPaymentSuccess(response: CommonModel)
+        fun onPaymentFailed(message: String)
     }
 }

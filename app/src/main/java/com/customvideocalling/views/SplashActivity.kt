@@ -3,11 +3,15 @@ package com.customvideocalling.views
 import android.content.Context
 import android.content.Intent
 import com.customvideocalling.R
+import com.customvideocalling.application.MyApplication
 import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.databinding.ActivitySplashBinding
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.views.authentication.LoginActivity
+import com.customvideocalling.views.student.AddTokentActivity
+import com.customvideocalling.views.student.TokenHistoryActivity
+import com.google.firebase.iid.FirebaseInstanceId
 import java.util.*
 
 class SplashActivity : BaseActivity() {
@@ -42,6 +46,8 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun checkScreenType() {
+        var sharedPref = SharedPrefClass()
+        sharedPref.putObject(MyApplication.instance.applicationContext,GlobalConstants.DEVICETOKEN,FirebaseInstanceId.getInstance().getToken())
         var login = ""
         if (checkObjectNull(
                         SharedPrefClass().getPrefValue(
