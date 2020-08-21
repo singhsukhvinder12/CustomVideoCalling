@@ -31,7 +31,7 @@ class RideRepository {
 
                 override fun onError(mKey: String) {
                     data.value = null
-                    UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
+                   // UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
                 }
 
             }, ApiClient.getApiInterface().getRideHistory(page, "10")

@@ -6,6 +6,7 @@ import android.widget.RadioGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.application.MyApplication
 import com.customvideocalling.constants.GlobalConstants
@@ -15,12 +16,13 @@ import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.viewmodels.SignUpViewModel
 import com.customvideocalling.views.MainActivity
+import com.example.artha.model.CommonModel
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 
 
-class SignUpActivity : BaseActivity() {
+class SignUpActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
     private lateinit var activitySignUpBinding: ActivitySignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
     private var sharedPrefClass = SharedPrefClass()
@@ -172,9 +174,16 @@ class SignUpActivity : BaseActivity() {
 //                                    loginResponse.result!!.userIm
 //                            )
 
-
+                        val mJsonObject = JsonObject()
+                        mJsonObject.addProperty("deviceToken", sharedPrefClass.getPrefValue(this,GlobalConstants.DEVICETOKEN).toString())
+                        mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(this,GlobalConstants.USERID).toString())
+                        /*mJsonObject.addProperty("mobilePhone", "")
+                        mJsonObject.addProperty("token", "")*/
+                        signUpViewModel.addDeviceToken(this, mJsonObject)
                         showToastSuccess(message)
                         val intent = Intent(this, MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         finish()
 
@@ -219,5 +228,12 @@ class SignUpActivity : BaseActivity() {
     private fun showUserNameError(passError: String) {
         activitySignUpBinding.etUserName.requestFocus()
         activitySignUpBinding.etUserName.error = passError
+    }
+
+    override fun onAddDeviceTokenSuccess(response: CommonModel) {
+
+    }
+
+    override fun onAddDeviceTokenFailed(message: String) {
     }
 }

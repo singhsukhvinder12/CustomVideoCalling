@@ -37,4 +37,9 @@ class CallBackResult {
         fun onPaymentSuccess(response: CommonModel)
         fun onPaymentFailed(message: String)
     }
+
+    interface AddDeviceTokenCallBack {
+        fun onAddDeviceTokenSuccess(response: CommonModel)
+        fun onAddDeviceTokenFailed(message: String)
+    }
 }

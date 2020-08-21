@@ -1,6 +1,6 @@
 <!DOCTYPE resources [<!ENTITY app_name "mvvmbase">]>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">VideoCall</string>
+    <string name="app_name">Tutor App</string>
     <!--<string name="fb_login_protocol_scheme">fb398611477210562</string>-->
 
     <!-- @string/dummy: Remove or change this placeholder text -->

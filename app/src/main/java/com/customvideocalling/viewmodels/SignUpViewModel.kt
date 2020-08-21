@@ -3,15 +3,18 @@ package com.customvideocalling.viewmodels
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.customvideocalling.Interfaces.CallBackResult
 import com.google.gson.JsonObject
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.model.LoginResponse
 import com.customvideocalling.repositories.LoginRepository
 import com.customvideocalling.repositories.SignUpRepository
+import com.example.artha.model.CommonModel
 
 class SignUpViewModel : BaseViewModel() {
     private var dataStudent: MutableLiveData<LoginResponse>? = null
     private var dataTeacher: MutableLiveData<LoginResponse>? = null
+    private var data1: MutableLiveData<CommonModel>? = null
     private var signUpRepository = SignUpRepository()
     private val mIsUpdating = MutableLiveData<Boolean>()
     private val btnClick = MutableLiveData<String>()
@@ -51,6 +54,13 @@ class SignUpViewModel : BaseViewModel() {
     fun hitTeacherSignUpApi(mJsonObject: JsonObject) {
         if (UtilsFunctions.isNetworkConnected()) {
             dataTeacher = signUpRepository.getTeacherSignUpData(mJsonObject)
+            mIsUpdating.postValue(true)
+        }
+    }
+
+    fun addDeviceToken(callBack: CallBackResult.AddDeviceTokenCallBack, mJsonObject: JsonObject) {
+        if (UtilsFunctions.isNetworkConnected()) {
+            data1 = signUpRepository.addDeviceToken(callBack, mJsonObject)
             mIsUpdating.postValue(true)
         }
     }

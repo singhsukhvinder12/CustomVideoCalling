@@ -47,6 +47,13 @@
             android:textColor="@color/colorblack"
             android:textSize="@dimen/sp_14" />
 
+        <com.manojbhadane.PaymentCardView
+            android:id="@+id/creditCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@+id/et_amount" />
+
 
         <Button
             android:id="@+id/btn_add_payment"

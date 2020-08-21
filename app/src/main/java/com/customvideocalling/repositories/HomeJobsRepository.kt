@@ -45,7 +45,7 @@ class HomeJobsRepository {
                         }
 
                         override fun onError(mKey: String) {
-                            UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
+                          //  UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
                             data!!.postValue(null)
 
                         }
@@ -79,7 +79,7 @@ class HomeJobsRepository {
                         }
 
                         override fun onError(mKey: String) {
-                            UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
+                       //     UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
                             data!!.postValue(null)
 
                         }

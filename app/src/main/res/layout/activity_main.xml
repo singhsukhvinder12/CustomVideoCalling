@@ -175,7 +175,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:id="@+id/tv_nav_vehicle"
+                            android:id="@+id/tv_nav_history"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
@@ -191,7 +191,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:id="@+id/tv_nav_fuel"
+                            android:id="@+id/tv_add_token"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
@@ -200,7 +200,7 @@
                             android:paddingLeft="@dimen/dp_10"
                             android:paddingTop="@dimen/dp_12"
                             android:paddingBottom="@dimen/dp_5"
-                            android:text="@string/recordings"
+                            android:text="Add Token"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp_18"
@@ -220,6 +220,7 @@
                         android:paddingLeft="@dimen/dp_10"
                         android:paddingTop="@dimen/dp_12"
                         android:paddingBottom="@dimen/dp_5"
+                        android:visibility="gone"
                         android:text="@string/feedback"
                         android:textAllCaps="true"
                         android:textColor="@color/colorBlack"
@@ -237,6 +238,7 @@
                         android:paddingTop="@dimen/dp_12"
                         android:paddingBottom="@dimen/dp_5"
                         android:text="@string/notifications"
+                        android:visibility="gone"
                         android:textAllCaps="true"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/sp_18"
@@ -265,6 +267,7 @@
                         android:layout_marginTop="@dimen/dp_30"
                         android:layout_marginBottom="@dimen/dp_20"
                         android:contentDescription="@string/todo"
+                        android:visibility="gone"
                         android:onClick="@{(v) -> MainViewModel.clickListener(v)}"
                         android:src="@drawable/ic_cross"
                         android:tint="@color/colorBlack" />

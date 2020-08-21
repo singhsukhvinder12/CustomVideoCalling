@@ -67,7 +67,7 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
                              FirebaseFunctions.sendOTP("signup", mJsonObject, this)
                          }*/
                         else -> message?.let {
-                            UtilsFunctions.showToastError(it)
+                        //    UtilsFunctions.showToastError(it)
 
                             fragmentHomeBinding.rvJobs.visibility = View.GONE
                             fragmentHomeBinding.tvNoRecord.visibility = View.VISIBLE

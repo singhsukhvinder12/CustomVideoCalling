@@ -16,9 +16,12 @@ import com.customvideocalling.databinding.ActivityMainBinding
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.viewmodels.MainViewModel
+import com.customvideocalling.views.authentication.LoginActivity
 import com.customvideocalling.views.fragment.HomeFragment
 import com.customvideocalling.views.fragment.JobRequestsFragment
 import com.customvideocalling.views.fragment.StudentHistoryFragment
+import com.customvideocalling.views.student.AddTokentActivity
+import com.customvideocalling.views.student.TokenHistoryActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.layout_custom_alert.*
@@ -29,6 +32,7 @@ class MainActivity : BaseActivity() {
     var mainViewModel: MainViewModel? = null
     private var navigationView: NavigationView? = null
     private var drawer: DrawerLayout? = null
+    private var sharedPrefClass = SharedPrefClass()
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
@@ -91,13 +95,17 @@ class MainActivity : BaseActivity() {
 
                     }
                     "tv_nav_history" -> {
-
+                        val intent = Intent(this, TokenHistoryActivity::class.java)
+                        startActivity(intent)
                     }
-                    "tv_nav_services" -> {
-
+                    "tv_add_token" -> {
+                        val intent = Intent(this, AddTokentActivity::class.java)
+                        startActivity(intent)
                     }
                     "tv_nav_home" -> {
-
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "tv_nav_contact" -> {
                         showToastSuccess("Coming Soon")
@@ -113,6 +121,11 @@ class MainActivity : BaseActivity() {
                         }
                     }
                     "tv_nav_logout" -> {
+                        sharedPrefClass!!.cleanPref(this)
+                        val intent = Intent(this, LoginActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
 /*
                         confirmationDialog = mDialogClass.setDefaultDialog(
                             this,

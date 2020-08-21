@@ -59,4 +59,7 @@ interface ApiInterface {
 
     @POST("addToken")
     fun addToken(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @POST("updateDeviceToken")
+    fun addDeviceToken(@Body jsonObject:JsonObject):Call<CommonModel>
 }
