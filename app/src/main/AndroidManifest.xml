@@ -25,7 +25,12 @@
         <activity android:name=".views.WebViewActivity" />
         <activity android:name=".views.authentication.LoginActivity" />
         <activity android:name=".views.VideoChatViewActivity" />
-        <activity android:name=".views.MainActivity"/>
+        <activity android:name=".views.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".views.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".views.TeacherMainActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".views.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

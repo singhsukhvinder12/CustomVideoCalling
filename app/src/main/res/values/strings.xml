@@ -220,6 +220,7 @@
     <string name="contact">Contact</string>
     <string name="my_account">My Account</string>
     <string name="fuel">Fuel</string>
+    <string name="recordings">Recordings</string>
     <string name="pick_your_therapy">Pick Your therapy</string>
     <string name="therapy_long_text">ARTHA, a state-of-the-art wellness
         sanctuary, provides the best in class equipment for our members to have
@@ -239,6 +240,7 @@
     <string name="help_and_info">Help and info</string>
     <string name="feedback">Feedback</string>
     <string name="my_vehicles">My Vehicles</string>
+    <string name="token_history">Token History</string>
     <string name="insurance">Insurance</string>
     <string name="contact_us">Contact Us</string>
     <string name="booked">Booked</string>
@@ -269,7 +271,11 @@
     </string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="birth_day">Birthday</string>
     <string name="address">Address</string>
+    <string name="summary">Summary</string>
+    <string name="basic_info">Basic Info</string>
+    <string name="questionnaire">Questionnaire</string>
     <string name="key_country_code">country_code</string>
     <string name="upload_profile_picture">Upload profile picture</string>
     <string name="upload_with_camera">Upload with camera</string>

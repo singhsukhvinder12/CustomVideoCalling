@@ -71,6 +71,7 @@
     <dimen name="dp_300">300dp</dimen>
     <dimen name="dp_8">8dp</dimen>
     <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
     <dimen name="dp_cimage">50dp</dimen>
     <dimen name="dp_cimage_70">70dp</dimen>
     <dimen name="dp_cimage_100">100dp</dimen>
