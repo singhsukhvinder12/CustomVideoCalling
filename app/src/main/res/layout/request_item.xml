@@ -8,9 +8,6 @@
     <data>
 
 
-
-
-
     </data>
 
     <RelativeLayout
@@ -30,39 +27,77 @@
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/tv_from"
-                                android:layout_width="@dimen/dp_100"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="@dimen/dp_5"
-                                android:padding="@dimen/dp_3"
-                                android:text="@string/from"
-                                android:textAllCaps="false"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_3"
+                    android:padding="@dimen/dp_5"
+                    android:text="Date"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_12" />
 
-                            <TextView
-                                android:id="@+id/tv_from_location_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginLeft="@dimen/dp_5"
-                                android:maxLines="2"
-                                android:padding="@dimen/dp_5"
-                                android:text="Seasia Infotech Mohali"
-                                android:textAllCaps="false"
-                                android:textColor="@color/list_text_color"
-                                android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/tv_from_location_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/tv_from"
+                    android:padding="@dimen/dp_5"
+                    android:text="Seasia Infotech Mohali"
+                    android:textAllCaps="false"
+                    android:textColor="@color/list_text_color"
+                    android:textSize="@dimen/sp_12" />
 
+                <TextView
+                    android:id="@+id/tv_fro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_from"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:padding="@dimen/dp_5"
+                    android:text="Time"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_12" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_from_location_name"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/tv_from"
+                    android:maxLines="2"
+                    android:padding="@dimen/dp_5"
+                    android:text="Seasia Infotech Mohali"
+                    android:textAllCaps="false"
+                    android:textColor="@color/list_text_color"
+                    android:textSize="@dimen/sp_12" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/round_back_transparent"
+                    android:text="Join"
+                    android:textColor="@color/list_text_color"
+                    android:textSize="@dimen/sp_12" />
+
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
