@@ -14,6 +14,7 @@ import com.customvideocalling.repositories.RideRepository
 class MainViewModel : ViewModel() {
     private var rideRepository = RideRepository()
     private var onLineList: MutableLiveData<RideListModel>?=null
+    private val btnClick = MutableLiveData<String>()
     var offlineList:MutableLiveData<List<RideListModel.Datum>>?=null
     private val pageCount = "1"
     private val mIsUpdating = MutableLiveData<Boolean>()
@@ -30,8 +31,9 @@ class MainViewModel : ViewModel() {
 
     val loading: LiveData<Boolean>
         get() = mIsUpdating
-    val isClick: LiveData<String>
-        get() = isClicked
+
+    /*val isClick: LiveData<String>
+        get() = isClicked*/
 
     init {
         paginate(pageCount)
@@ -58,6 +60,13 @@ class MainViewModel : ViewModel() {
             }
         }.execute()
 
+    }
+     fun isClick() : LiveData<String> {
+        return btnClick
+    }
+
+     fun clickListener(v : View) {
+        btnClick.postValue(v.resources.getResourceName(v.id).split("/")[1])
     }
 
 }

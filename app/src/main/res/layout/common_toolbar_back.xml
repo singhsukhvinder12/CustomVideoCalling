@@ -25,6 +25,7 @@
             android:layout_centerVertical="true"
             android:contentDescription="@string/todo"
             android:padding="@dimen/dp_10"
+            android:onClick="@{onClick}"
             android:src="@drawable/ic_back" />
 
         <ImageView

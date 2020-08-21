@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="profileViewModel"
+            type="com.customvideocalling.viewmodels.ProfileViewModel" />
+
+        <variable
+            name="profileModel"
+            type="com.customvideocalling.model.ProfileResponse.Data" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+       <!-- <include
+            android:id="@+id/common_tool_bar"
+            layout="@layout/common_toolbar_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v) -> profileViewModel.clickListener(v)}" />
+
+        <ScrollView
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/upload_profile_layer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:onClick="@{(v) -> profileViewModel.clickListener(v)}"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_profile"
+                            android:layout_width="@dimen/dp_120"
+                            android:layout_height="@dimen/dp_120"
+                            android:layout_centerInParent="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@{profileModel.userDetail.setUniqueId!=null ?  profileModel.userDetail.setUniqueId:@string/todo,default=@drawable/ic_dummy_image}" />
+
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_edit"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignEnd="@+id/img_profile"
+                            android:layout_alignRight="@+id/img_profile"
+                            android:layout_alignBottom="@+id/img_profile"
+                            android:elevation="@dimen/dp_10"
+                            android:onClick="@{(v) -> profileViewModel.clickListener(v)}"
+                            tools:targetApi="lollipop" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/iv_profile_picture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="@string/upload_profile_picture"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBlack2"
+                        android:textSize="@dimen/sp_13"
+                        android:visibility="gone" />
+
+                </LinearLayout>-->
+
+              <!--  <EditText
+                    android:id="@+id/et_firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:background="@drawable/edt_back_shape_colored"
+                    android:elevation="2dp"
+                    android:hint="@string/first_name"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/dp_15"
+
+                    android:singleLine="true"
+                    android:text="@{profileModel.UserDetail.setFName}"
+                    android:textColor="@color/colorblack"
+                    android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/sp_14"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/et_lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:background="@drawable/edt_back_shape_colored"
+                    android:elevation="2dp"
+                    android:hint="@string/last_name"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/dp_15"
+
+                    android:singleLine="true"
+                    android:text="@{profileModel.userDetail.setLName}"
+                    android:textColor="@color/colorblack"
+                    android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/sp_14"
+                    tools:ignore="MissingConstraints" />
+
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:background="@drawable/edt_back_shape_colored"
+                    android:elevation="2dp"
+                    android:hint="@string/email1"
+                    android:maxLength="100"
+                    android:padding="@dimen/dp_15"
+
+                    android:singleLine="true"
+                    android:text="@{profileModel.email}"
+                    android:textColor="@color/colorblack"
+                    android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/sp_14"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:background="@drawable/edt_back_shape_colored"
+                    android:elevation="2dp"
+                    android:hint="@string/address"
+                    android:maxLength="80"
+                    android:maxLines="5"
+                    android:padding="@dimen/dp_15"
+
+                    android:singleLine="true"
+
+                    android:textColor="@color/colorblack"
+                    android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/sp_14"
+                    tools:ignore="MissingConstraints" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp">
+
+                    <EditText
+                        android:id="@+id/etCode"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/edt_back_shape_colored"
+                        android:elevation="2dp"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:hint="@string/code"
+                        android:inputType="phone"
+                        android:maxLength="12"
+                        android:padding="@dimen/dp_15"
+                        android:singleLine="true"
+                        android:textColor="@color/colorblack"
+                        android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/sp_14"
+                        tools:ignore="MissingConstraints,TextFields" />
+
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/edt_back_shape_colored"
+                        android:elevation="2dp"
+                        android:hint="@string/phone_number"
+                        android:inputType="phone"
+                        android:maxLength="12"
+                        android:padding="@dimen/dp_15"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="@dimen/dp_15"
+                        android:singleLine="true"
+                        android:textColor="@color/colorblack"
+                        android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/sp_14"
+                        tools:ignore="MissingConstraints,TextFields" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:elevation="@dimen/dp_10"
+                    android:onClick="@{(v) -> profileViewModel.clickListener(v)}"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:text="@string/update"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite" />-->
+
+          <!--  </LinearLayout>
+       // </ScrollView>-->
+
+    </LinearLayout>
+</layout>

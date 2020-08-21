@@ -48,6 +48,9 @@ interface ApiInterface {
     @POST("getAllSlots")
     fun getSlotList(@Body jsonObject:JsonObject):Call<SlotListResponse>
 
+    @GET("getProfile/{id}")
+    fun getProfile(@Path("id") id: String): Call<JsonObject>
+
     @GET("getPlanlist")
     fun getPlanList():Call<PlanListResponse>
 
