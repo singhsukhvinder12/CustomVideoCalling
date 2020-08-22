@@ -11,6 +11,7 @@ import com.customvideocalling.R
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.databinding.FragmentHomeBinding
+import com.customvideocalling.databinding.FragmentTeacherHomeBinding
 import com.customvideocalling.model.JobsResponse
 import com.customvideocalling.utils.DialogClass
 import com.customvideocalling.utils.DialogssInterface
@@ -18,40 +19,43 @@ import com.google.gson.JsonObject
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseFragment
 import com.customvideocalling.viewmodels.HomeViewModel
+import com.customvideocalling.viewmodels.TeacherHomeViewModel
+import com.customvideocalling.views.VideoChatViewActivity
 import com.customvideocalling.views.student.AddAppoitmentActivity
 import com.uniongoods.adapters.JobRequestsAdapter
-import com.uniongoods.adapters.StudentHistoryAdapter
+import com.uniongoods.adapters.TeacherLiveAdapter
 
-class StudentHistoryFragment : BaseFragment(), DialogssInterface {
+class TeacherLiveFragment : BaseFragment(), DialogssInterface {
     private var pendingJobsList = ArrayList<JobsResponse.Data>()
-    private var myStudentHistoryAdapter : StudentHistoryAdapter? = null
+    private var mTeacherLiveAdapter : TeacherLiveAdapter? = null
     private var confirmationDialog : Dialog? = null
     private var mDialogClass = DialogClass()
     private val mJobListObject = JsonObject()
     override fun getLayoutResId() : Int {
-        return R.layout.fragment_home
+        return R.layout.fragment_teacher_home
     }
 
-    private lateinit var fragmentHomeBinding : FragmentHomeBinding
-    private lateinit var homeViewModel : HomeViewModel
+    private lateinit var fragmentTeacherHomeBinding : FragmentTeacherHomeBinding
+    private lateinit var teacherHomeViewModel : TeacherHomeViewModel
     private val mJsonObject = JsonObject()
     override fun initView() {
-        fragmentHomeBinding = viewDataBinding as FragmentHomeBinding
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        fragmentHomeBinding.homeViewModel = homeViewModel
+        fragmentTeacherHomeBinding = viewDataBinding as FragmentTeacherHomeBinding
+        teacherHomeViewModel = ViewModelProviders.of(this).get(TeacherHomeViewModel::class.java)
+        fragmentTeacherHomeBinding.homeViewModel = teacherHomeViewModel
         baseActivity.startProgressDialog()
-        fragmentHomeBinding.floatAdd.setOnClickListener {
+        fragmentTeacherHomeBinding.floatAdd.setOnClickListener {
             val intent = Intent(activity, AddAppoitmentActivity::class.java)
             activity!!.startActivity(intent)
         }
+
         if (UtilsFunctions.isNetworkConnected()) {
             val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
-            homeViewModel.getMyJobsHistory(userId)
+            teacherHomeViewModel.getMyJobs(userId)
         } else {
             baseActivity.stopProgressDialog()
         }
 
-        homeViewModel.getJobsHistory().observe(this,
+        teacherHomeViewModel.getJobs().observe(this,
             Observer<JobsResponse> { response->
                 baseActivity.stopProgressDialog()
                 if (response != null) {
@@ -59,18 +63,18 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
                     when {
                         response.code == 200 -> {
                             pendingJobsList.addAll(response.data!!)
-                            fragmentHomeBinding.rvJobs.visibility = View.VISIBLE
-                            fragmentHomeBinding.tvNoRecord.visibility = View.GONE
+                            fragmentTeacherHomeBinding.rvJobs.visibility = View.VISIBLE
+                            fragmentTeacherHomeBinding.tvNoRecord.visibility = View.GONE
                             initRecyclerView()
                         }
                         /* response.code == 204 -> {
                              FirebaseFunctions.sendOTP("signup", mJsonObject, this)
                          }*/
                         else -> message?.let {
-                        //    UtilsFunctions.showToastError(it)
+                          //  UtilsFunctions.showToastError(it)
 
-                            fragmentHomeBinding.rvJobs.visibility = View.GONE
-                            fragmentHomeBinding.tvNoRecord.visibility = View.VISIBLE
+                            fragmentTeacherHomeBinding.rvJobs.visibility = View.GONE
+                            fragmentTeacherHomeBinding.tvNoRecord.visibility = View.VISIBLE
                         }
                     }
 
@@ -82,13 +86,13 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
 
 
     private fun initRecyclerView() {
-        myStudentHistoryAdapter =
-            StudentHistoryAdapter(this@StudentHistoryFragment, pendingJobsList, activity!!)
+        mTeacherLiveAdapter =
+            TeacherLiveAdapter(this@TeacherLiveFragment, pendingJobsList, activity!!)
         val linearLayoutManager = LinearLayoutManager(this.baseActivity)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
-        fragmentHomeBinding.rvJobs.layoutManager = linearLayoutManager
-        fragmentHomeBinding.rvJobs.adapter = myStudentHistoryAdapter
-        fragmentHomeBinding.rvJobs.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        fragmentTeacherHomeBinding.rvJobs.layoutManager = linearLayoutManager
+        fragmentTeacherHomeBinding.rvJobs.adapter = mTeacherLiveAdapter
+        fragmentTeacherHomeBinding.rvJobs.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView : RecyclerView, dx : Int, dy : Int) {
 
             }
