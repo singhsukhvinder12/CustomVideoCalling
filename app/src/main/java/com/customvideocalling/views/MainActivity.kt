@@ -58,17 +58,20 @@ class MainActivity : BaseActivity() {
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         activityMainBinding!!.mainViewModel = mainViewModel
 
-        activityMainBinding!!.commonToolBar.toolbarBack.setImageResource(R.drawable.ic_sidebar)
+//        activityMainBinding!!.commonToolBar.toolbarBack.setImageResource(R.drawable.ic_sidebar)
+
+        activityMainBinding!!.commonToolBar.toolbarNavigationBtn.visibility=View.VISIBLE
+        activityMainBinding!!.commonToolBar.toolbarBack.visibility=View.GONE
+
         activityMainBinding!!.commonToolBar.toolbarRightImage.visibility = View.VISIBLE
         activityMainBinding!!.commonToolBar.toolbarRightImage.setImageResource(R.drawable.ic_notifications)
         activityMainBinding!!.commonToolBar.toolbarText.text =
             resources.getString(R.string.home)
-        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("Active"))
-        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("History"))
-        activityMainBinding!!.tabs.tabGravity = TabLayout.GRAVITY_CENTER
+//        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("Active"))
+//        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("History"))
+//        activityMainBinding!!.tabs.tabGravity = TabLayout.GRAVITY_CENTER
 
-        val adapter =
-            MyViewPagerAdapter(this, supportFragmentManager, activityMainBinding!!.tabs.tabCount)
+        val adapter = MyViewPagerAdapter(this, supportFragmentManager, activityMainBinding!!.tabs.tabCount)
         activityMainBinding!!.pager.adapter = adapter
 
 
@@ -141,6 +144,11 @@ class MainActivity : BaseActivity() {
             this, Observer<String>(function =
             fun(it: String?) {
                 when (it) {
+
+                   "toolbar_navigationBtn"->{
+                       drawer!!.openDrawer(Gravity.LEFT)
+                    }
+
                     "img_right" -> {
                         /* val intent = Intent(this, NotificationsListActivity::class.java)
                          startActivity(intent)*/
@@ -204,36 +212,36 @@ class MainActivity : BaseActivity() {
 
                     }
 
-                    "toolbar_back" -> {
-                        /* val image = SharedPrefClass().getPrefValue(
-                             MyApplication.instance.applicationContext,
-                             GlobalConstants.USER_IAMGE
-                         )
-                         // ic_profile
-                         Glide.with(this)
-                             .load(image)
-                             .placeholder(R.drawable.user)
-                             .into(activityDashboardBinding!!.icProfile)*/
-                        /*val name = SharedPrefClass().getPrefValue(
-                            MyApplication.instance.applicationContext,
-                            getString(R.string.first_name)
-                        )*/
-
-
-                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
-                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
-                        } else {
-                            drawer!!.openDrawer(Gravity.LEFT)
-                        }
-                        /* val fragmentType =
-                             supportFragmentManager.findFragmentById(R.id.frame_layout)
-                         when (fragmentType) {
-                             is HomeFragment -> {
-                                 activityDashboardBinding!!.toolbarCommon.imgRight.visibility =
-                                     View.VISIBLE
-                             }
-                         }*/
-                    }
+//                    "toolbar_back" -> {
+//                        /* val image = SharedPrefClass().getPrefValue(
+//                             MyApplication.instance.applicationContext,
+//                             GlobalConstants.USER_IAMGE
+//                         )
+//                         // ic_profile
+//                         Glide.with(this)
+//                             .load(image)
+//                             .placeholder(R.drawable.user)
+//                             .into(activityDashboardBinding!!.icProfile)*/
+//                        /*val name = SharedPrefClass().getPrefValue(
+//                            MyApplication.instance.applicationContext,
+//                            getString(R.string.first_name)
+//                        )*/
+//
+//
+//                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+//                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+//                        } else {
+//                            drawer!!.openDrawer(Gravity.LEFT)
+//                        }
+//                        /* val fragmentType =
+//                             supportFragmentManager.findFragmentById(R.id.frame_layout)
+//                         when (fragmentType) {
+//                             is HomeFragment -> {
+//                                 activityDashboardBinding!!.toolbarCommon.imgRight.visibility =
+//                                     View.VISIBLE
+//                             }
+//                         }*/
+//                    }
                 }
             })
         )
