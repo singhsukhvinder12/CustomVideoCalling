@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".views.student.PaymentActivity"></activity>
+        <activity android:name=".views.teacher.AddScheduleActivity"></activity>
+        <activity android:name=".views.student.PaymentActivity" />
         <activity android:name=".views.student.TokenHistoryActivity" />
         <activity android:name=".views.student.AddTokentActivity" />
         <activity android:name=".views.teacher.TeacherNotificationListActivity" />
@@ -29,12 +30,15 @@
         <activity android:name=".views.WebViewActivity" />
         <activity android:name=".views.authentication.LoginActivity" />
         <activity android:name=".views.VideoChatViewActivity" />
-        <activity android:name=".views.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".views.ProfileActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".views.TeacherMainActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".views.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.TeacherMainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".views.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
