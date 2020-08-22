@@ -19,7 +19,7 @@ class MyViewTeacherPagerAdapter(private val myContext: Context, fm: FragmentMana
                 return TeacherLiveFragment()
             }
             1 -> {
-                return TeacherHistoryFragment()//TODO
+                return TeacherHistoryFragment()
             }
 
             else -> return TeacherLiveFragment()
