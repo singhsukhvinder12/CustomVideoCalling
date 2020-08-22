@@ -367,6 +367,7 @@
     <string name="tons">Tons</string>
     <string name="no_record_found">No Record Found</string>
     <string name="choose">Choose</string>
+    <string name="new_user_signup"><u>New User? Signup</u></string>
 
 </resources>
 
