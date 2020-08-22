@@ -4,7 +4,9 @@ package com.customvideocalling.api
 
 
 import com.customvideocalling.model.ClassSubjectListResponse
+import com.customvideocalling.model.PlanListResponse
 import com.customvideocalling.model.SlotListResponse
+import com.customvideocalling.model.TokenHistoryListResponse
 import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -48,4 +50,16 @@ interface ApiInterface {
 
     @GET("getProfile/{id}")
     fun getProfile(@Path("id") id: String): Call<JsonObject>
+
+    @GET("getPlanlist")
+    fun getPlanList():Call<PlanListResponse>
+
+    @GET("sTokenHistory/{id}")
+    fun getTokenHistoryList(@Path("id") id: String):Call<TokenHistoryListResponse>
+
+    @POST("addToken")
+    fun addToken(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @POST("updateDeviceToken")
+    fun addDeviceToken(@Body jsonObject:JsonObject):Call<CommonModel>
 }

@@ -20,8 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".views.authentication.SignUpActivity"></activity>
-        <activity android:name=".views.student.AddAppoitmentActivity"></activity>
+        <activity android:name=".views.student.PaymentActivity"></activity>
+        <activity android:name=".views.student.TokenHistoryActivity" />
+        <activity android:name=".views.student.AddTokentActivity" />
+        <activity android:name=".views.teacher.TeacherNotificationListActivity" />
+        <activity android:name=".views.authentication.SignUpActivity" />
+        <activity android:name=".views.student.AddAppoitmentActivity" />
         <activity android:name=".views.WebViewActivity" />
         <activity android:name=".views.authentication.LoginActivity" />
         <activity android:name=".views.VideoChatViewActivity" />
@@ -38,6 +42,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -28,5 +28,7 @@ object GlobalConstants {
     val USERID = "USERID"
     @JvmStatic
     val TYPE = "type"
+    @JvmStatic
+    val DEVICETOKEN = "deviceToken"
 
 }

@@ -5,6 +5,7 @@ import android.text.TextUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.customvideocalling.Interfaces.CallBackResult
 import com.google.gson.JsonObject
 import com.customvideocalling.R
 import com.customvideocalling.application.MyApplication
@@ -16,8 +17,9 @@ import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.viewmodels.LoginViewModel
 import com.customvideocalling.views.MainActivity
 import com.customvideocalling.views.VideoChatViewActivity
+import com.example.artha.model.CommonModel
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
     private lateinit var activityLoginbinding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     private var sharedPrefClass = SharedPrefClass()
@@ -124,7 +126,12 @@ class LoginActivity : BaseActivity() {
 //                                    loginResponse.result!!.userIm
 //                            )
 
-
+                            val mJsonObject = JsonObject()
+                            mJsonObject.addProperty("deviceToken", sharedPrefClass.getPrefValue(this,GlobalConstants.DEVICETOKEN).toString())
+                            mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(this,GlobalConstants.USERID).toString())
+                            /*mJsonObject.addProperty("mobilePhone", "")
+                            mJsonObject.addProperty("token", "")*/
+                            loginViewModel.addDeviceToken(this, mJsonObject)
                             showToastSuccess(message)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
@@ -158,6 +165,14 @@ class LoginActivity : BaseActivity() {
     private fun showPasswordError(passError: String) {
         activityLoginbinding.etPassword.requestFocus()
         activityLoginbinding.etPassword.error = passError
+    }
+
+    override fun onAddDeviceTokenSuccess(response: CommonModel) {
+
+    }
+
+    override fun onAddDeviceTokenFailed(message: String) {
+
     }
 
 }

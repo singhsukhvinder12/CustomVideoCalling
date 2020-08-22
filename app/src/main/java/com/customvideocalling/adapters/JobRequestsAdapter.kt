@@ -50,8 +50,7 @@ class JobRequestsAdapter(
         //holder.binding!!.tvAddress.text = jobsList!![position]
         holder.binding!!.tvFromLocationName.text = jobsList[position].bookingDate
         holder.binding!!.tvTime.text = jobsList[position].timeSlot
-
-        //  if (jobsList[position].channelName!!.isNotEmpty() && jobsList[position].accessToken!!.isNotEmpty()){
+      //  if (jobsList[position].channelName!!.isNotEmpty() && jobsList[position].accessToken!!.isNotEmpty()){
             holder.binding!!.cardView.setOnClickListener {
                 val intent = Intent(activity, VideoChatViewActivity::class.java)
                 intent.putExtra("channelName", jobsList[position].channelName)

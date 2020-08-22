@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#15b5d9</color>
-    <color name="colorPrimaryDark">#CC15b5d9</color>
-    <color name="colorButton">#CC15b5d9</color>
+    <color name="colorPrimary">#0055C9</color>
+    <color name="colorPrimaryDark">#0055C9</color>
+    <color name="colorButton">#FFC905</color>
 
     <color name="colorAccent">#15b5d9</color>
     <color name="colorWhite">#ffffff</color>
@@ -37,5 +37,6 @@
     <color name="tabSelection">#DB6589</color>
     <color name="btnBackground">#DB6589</color>
     <color name="btnBackgroundWhite">#F8F8F8</color>
+    <color name="custom_blue">#0055C9</color>
 
 </resources>

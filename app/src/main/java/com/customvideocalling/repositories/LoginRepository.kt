@@ -1,6 +1,7 @@
 package com.customvideocalling.repositories
 
 import androidx.lifecycle.MutableLiveData
+import com.customvideocalling.Interfaces.CallBackResult
 import com.example.artha.model.CommonModel
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
@@ -12,6 +13,8 @@ import com.customvideocalling.api.GetRestAdapter
 import com.customvideocalling.application.MyApplication
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.model.LoginResponse
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class LoginRepository {
@@ -46,7 +49,7 @@ class LoginRepository {
                     }
 
                     override fun onError(mKey : String) {
-                        UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
+                    //    UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
                         data!!.postValue(null)
 
                     }
@@ -58,6 +61,33 @@ class LoginRepository {
         }
         return data!!
 
+    }
+
+    fun addDeviceToken(callBack: CallBackResult.AddDeviceTokenCallBack, mJsonObject: JsonObject): MutableLiveData<CommonModel> {
+        val call = GetRestAdapter.getRestAdapter(false).addDeviceToken(mJsonObject)
+        call.enqueue(object : Callback<CommonModel> {
+            override fun onResponse(
+                call: Call<CommonModel>,
+                response: retrofit2.Response<CommonModel>?
+            ) {
+                if (response?.body() != null) {
+                    if (response?.body()!!.code == 200) {
+                        callBack.onAddDeviceTokenSuccess(response.body()!!)
+                    }
+                    else {
+                        callBack.onAddDeviceTokenFailed(response?.body()?.message!!)
+                    }
+                } else {
+                    callBack.onAddDeviceTokenFailed("Something went wrong")
+                }
+
+            }
+
+            override fun onFailure(call: Call<CommonModel>, t: Throwable) {
+                callBack.onAddDeviceTokenFailed(t.message!!)
+            }
+        })
+        return data1!!
     }
 
     fun getLogoutResonse(jsonObject : JsonObject?) : MutableLiveData<CommonModel> {
@@ -80,7 +110,7 @@ class LoginRepository {
                     }
 
                     override fun onError(mKey : String) {
-                        UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
+                     //   UtilsFunctions.showToastError(MyApplication.instance.getString(R.string.internal_server_error))
                         data1!!.postValue(null)
 
                     }

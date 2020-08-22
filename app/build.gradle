@@ -2,16 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.secretmenu"
-        minSdkVersion 16
+        applicationId "com.customvideocalling"
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,6 +44,7 @@ dependencies {
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -57,5 +60,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation 'com.android.support:design:22.2.0'
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.manojbhadane:PaymentCardView:v1.3'
 
 }

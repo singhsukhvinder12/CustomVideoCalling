@@ -3,13 +3,16 @@ package com.customvideocalling.viewmodels
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.customvideocalling.Interfaces.CallBackResult
 import com.google.gson.JsonObject
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.model.LoginResponse
 import com.customvideocalling.repositories.LoginRepository
+import com.example.artha.model.CommonModel
 
 class LoginViewModel : BaseViewModel() {
     private var data: MutableLiveData<LoginResponse>? = null
+    private var data1: MutableLiveData<CommonModel>? = null
     private var loginRepository = LoginRepository()
     private val mIsUpdating = MutableLiveData<Boolean>()
     private val btnClick = MutableLiveData<String>()
@@ -37,6 +40,13 @@ class LoginViewModel : BaseViewModel() {
     fun hitLoginApi(mJsonObject: JsonObject) {
         if (UtilsFunctions.isNetworkConnected()) {
             data = loginRepository.getLoginData(mJsonObject)
+            mIsUpdating.postValue(true)
+        }
+    }
+
+    fun addDeviceToken(callBack: CallBackResult.AddDeviceTokenCallBack, mJsonObject: JsonObject) {
+        if (UtilsFunctions.isNetworkConnected()) {
+            data1 = loginRepository.addDeviceToken(callBack, mJsonObject)
             mIsUpdating.postValue(true)
         }
     }

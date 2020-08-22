@@ -28,7 +28,7 @@
     <dimen name="dp_toobar">40dp</dimen>
     <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_2">2dp</dimen>
-    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_0">0.5dp</dimen>
     <dimen name="dp_35">35dp</dimen>
     <dimen name="hint_size">14sp</dimen>
     <dimen name="sp_12">12sp</dimen>
@@ -92,4 +92,5 @@
     <dimen name="btn_height2">60dp</dimen>
     <dimen name="progress_height">35dp</dimen>
     <dimen name="dp_250">250dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
 </resources>

@@ -19,6 +19,12 @@ class SharedPrefClass {
         gson = mBuilder.serializeNulls().create()
     }
 
+    fun cleanPref(mContext: Context) {
+        val mPreferences = mContext.getSharedPreferences(GlobalConstants.SHARED_PREF, Context.MODE_PRIVATE)
+        val settings = mPreferences
+        settings.edit().clear().apply()
+    }
+
     fun getPrefValue(mContext: Context, mValueKey: String): Any? {
         val mPreferences = mContext.getSharedPreferences(GlobalConstants.SHARED_PREF, Context.MODE_PRIVATE)
         val mMap = mPreferences.all

@@ -1,6 +1,7 @@
 package com.customvideocalling.views.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,6 +18,7 @@ import com.google.gson.JsonObject
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseFragment
 import com.customvideocalling.viewmodels.HomeViewModel
+import com.customvideocalling.views.student.AddAppoitmentActivity
 import com.uniongoods.adapters.JobRequestsAdapter
 import com.uniongoods.adapters.StudentHistoryAdapter
 
@@ -38,7 +40,10 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         fragmentHomeBinding.homeViewModel = homeViewModel
         baseActivity.startProgressDialog()
-
+        fragmentHomeBinding.floatAdd.setOnClickListener {
+            val intent = Intent(activity, AddAppoitmentActivity::class.java)
+            activity!!.startActivity(intent)
+        }
         if (UtilsFunctions.isNetworkConnected()) {
             val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
             homeViewModel.getMyJobsHistory(userId)
@@ -62,7 +67,7 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
                              FirebaseFunctions.sendOTP("signup", mJsonObject, this)
                          }*/
                         else -> message?.let {
-                            UtilsFunctions.showToastError(it)
+                        //    UtilsFunctions.showToastError(it)
 
                             fragmentHomeBinding.rvJobs.visibility = View.GONE
                             fragmentHomeBinding.tvNoRecord.visibility = View.VISIBLE

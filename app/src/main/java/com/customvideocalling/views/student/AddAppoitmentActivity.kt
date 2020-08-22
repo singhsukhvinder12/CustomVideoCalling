@@ -3,6 +3,7 @@ package com.customvideocalling.views.student
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
@@ -51,6 +52,9 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
         bookingAddStudentViewModel.getSubjectList(this)
         subjectItemSelection()
         slotItemSelection()
+        slotList!!.add(0,"Please Select")
+        val adapter = SlotListDropdownAdapter(this, slotList)
+        activityAddAppoitmentBinding!!.spSlot.adapter = adapter
     }
 
     override fun getLayoutId(): Int {
@@ -110,13 +114,25 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
                 finish()
             }
             R.id.btn_add_booking -> {
-                startProgressDialog()
-                val mJsonObject = JsonObject()
-                mJsonObject.addProperty("date", date)
-                mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString())
-                mJsonObject.addProperty("subjectId", subjectId)
-                mJsonObject.addProperty("time", selectedSlot)
-                bookingAddStudentViewModel.hitAddBookingApi(this,mJsonObject)
+                if (TextUtils.isEmpty(date)) run {
+                    showDateError(getString(R.string.empty) + " " + "date")
+
+                } else if (TextUtils.isEmpty(subjectId)
+                ) run {
+                    showSubjectError("Please select subject")
+                }else if (TextUtils.isEmpty(selectedSlot) || selectedSlot == "Please Select") run {
+                    showSlotError("Please select slot")
+                }
+                else{
+                    startProgressDialog()
+                    val mJsonObject = JsonObject()
+                    mJsonObject.addProperty("date", date)
+                    mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString())
+                    mJsonObject.addProperty("subjectId", subjectId)
+                    mJsonObject.addProperty("time", selectedSlot)
+                    bookingAddStudentViewModel.hitAddBookingApi(this,mJsonObject)
+                }
+
             }
             R.id.tv_date ->{
                selectDatePicker()
@@ -178,5 +194,18 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
 
     override fun onGetSlotListFailed(message: String) {
 
+    }
+
+    private fun showDateError(emailError: String) {
+        activityAddAppoitmentBinding.tvDate.error = emailError
+        activityAddAppoitmentBinding.tvDate.requestFocus()
+    }
+
+    private fun showSubjectError(passError: String) {
+        showToastError(passError)
+    }
+
+    private fun showSlotError(passError: String) {
+        showToastError(passError)
     }
 }
