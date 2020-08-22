@@ -18,6 +18,7 @@ import com.customvideocalling.viewmodels.LoginViewModel
 import com.customvideocalling.views.MainActivity
 import com.customvideocalling.views.VideoChatViewActivity
 import com.example.artha.model.CommonModel
+import com.google.firebase.iid.FirebaseInstanceId
 
 class LoginActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
     private lateinit var activityLoginbinding: ActivityLoginBinding
@@ -32,6 +33,8 @@ class LoginActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
         activityLoginbinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         activityLoginbinding.loginViewModel = loginViewModel
+        sharedPrefClass.putObject(MyApplication.instance.applicationContext,GlobalConstants.DEVICETOKEN,
+            FirebaseInstanceId.getInstance().getToken())
         // activityLoginbinding.tvForgotPassword.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         loginViewModel.isClick().observe(
                 this, Observer<String>(function =

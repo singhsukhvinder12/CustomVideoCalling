@@ -44,8 +44,10 @@
             <EditText
                 android:id="@+id/ed_info"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLines="2"
+                android:padding="@dimen/dp_10"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_20"
@@ -55,13 +57,15 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/ed_what_grade"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLines="2"
+                android:padding="@dimen/dp_10"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_20"
@@ -71,13 +75,15 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <EditText
                 android:id="@+id/ed_what_is_needed"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:padding="@dimen/dp_10"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
@@ -88,14 +94,16 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <EditText
                 android:id="@+id/ed_what_need_help"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLines="3"
+                android:padding="@dimen/dp_10"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_20"
@@ -105,25 +113,27 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <EditText
                 android:id="@+id/ed_superhero"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:padding="@dimen/dp_10"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_20"
                 android:layout_marginBottom="@dimen/dp_20"
+                android:maxLines="5"
                 android:background="@drawable/rectangle_blue_stroke"
                 android:gravity="start|center"
                 android:hint="What is your favorite superhero and why?"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
 

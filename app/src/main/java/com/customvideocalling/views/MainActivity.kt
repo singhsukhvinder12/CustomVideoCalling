@@ -154,10 +154,16 @@ class MainActivity : BaseActivity() {
                     "tv_nav_history" -> {
                         val intent = Intent(this, TokenHistoryActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "tv_add_token" -> {
                         val intent = Intent(this, AddTokentActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "tv_nav_home" -> {
                         if (drawer!!.isDrawerOpen(GravityCompat.START)) {
@@ -171,6 +177,9 @@ class MainActivity : BaseActivity() {
                     "ivProfile" -> {
                         val intent = Intent(this, ProfileActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "img_nav_cancel" -> {
                         if (drawer!!.isDrawerOpen(GravityCompat.START)) {
