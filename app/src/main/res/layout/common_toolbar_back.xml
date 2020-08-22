@@ -27,8 +27,21 @@
             android:contentDescription="@string/todo"
             android:padding="@dimen/dp_10"
             android:tint="@color/white"
-            android:onClick="@{onClick}"
             android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:id="@+id/toolbar_navigationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:onClick="@{onClick}"
+            android:contentDescription="@string/todo"
+            android:padding="@dimen/dp_10"
+            android:tint="@color/white"
+            android:src="@drawable/ic_sidebar" />
+
+
 
         <ImageView
             android:id="@+id/toolbar_back_route"

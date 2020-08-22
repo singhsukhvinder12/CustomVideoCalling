@@ -116,7 +116,6 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
             R.id.btn_add_booking -> {
                 if (TextUtils.isEmpty(date)) run {
                     showDateError(getString(R.string.empty) + " " + "date")
-
                 } else if (TextUtils.isEmpty(subjectId)
                 ) run {
                     showSubjectError("Please select subject")
