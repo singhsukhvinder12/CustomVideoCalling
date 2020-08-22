@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.customvideocalling.views.fragment.JobRequestsFragment
 import com.customvideocalling.views.fragment.StudentHistoryFragment
+import com.customvideocalling.views.fragment.TeacherHistoryFragment
 import com.customvideocalling.views.fragment.TeacherLiveFragment
 
 class MyViewTeacherPagerAdapter(private val myContext: Context, fm: FragmentManager, internal var totalTabs: Int) : FragmentPagerAdapter(fm) {
@@ -18,7 +19,7 @@ class MyViewTeacherPagerAdapter(private val myContext: Context, fm: FragmentMana
                 return TeacherLiveFragment()
             }
             1 -> {
-                return StudentHistoryFragment()//TODO
+                return TeacherHistoryFragment()//TODO
             }
 
             else -> return TeacherLiveFragment()
