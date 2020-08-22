@@ -1,5 +1,6 @@
 package com.customvideocalling.views.student
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -19,12 +20,13 @@ import com.customvideocalling.viewmodels.BookingAddStudentViewModel
 import com.uniongoods.adapters.JobRequestsAdapter
 import com.uniongoods.adapters.PlanListAdapter
 
-class AddTokentActivity : BaseActivity(), View.OnClickListener, CallBackResult.PlanListCallBack {
+class AddTokentActivity : BaseActivity(), View.OnClickListener, CallBackResult.PlanListCallBack, CallBackResult.SelectedPlanCallBack {
     private lateinit var activityAddTokentBinding: ActivityAddTokentBinding
     private lateinit var addTokenViewModel: AddTokenViewModel
     private var sharedPrefClass = SharedPrefClass()
     private var planList: ArrayList<PlanListResponse.Result>?=null
     private var planListAdapter : PlanListAdapter? = null
+    private var throughSignup = ""
 
     override fun getLayoutId(): Int {
         return R.layout.activity_add_tokent
@@ -37,6 +39,10 @@ class AddTokentActivity : BaseActivity(), View.OnClickListener, CallBackResult.P
         activityAddTokentBinding.toolBar.toolbarBack.setOnClickListener(this)
         planList = ArrayList()
         addTokenViewModel.getPlanList(this)
+        if (intent.hasExtra("throughSignUp")){
+            val extras = intent.extras
+            throughSignup = (extras!!.getString("throughSignUp"))!!
+        }
     }
 
     override fun onClick(p0: View?) {
@@ -73,7 +79,7 @@ class AddTokentActivity : BaseActivity(), View.OnClickListener, CallBackResult.P
 
     private fun initRecyclerView() {
         planListAdapter =
-            PlanListAdapter(this, planList!!, this!!)
+            PlanListAdapter(this, planList!!, this!!, throughSignup, this)
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         activityAddTokentBinding.rvPlan.layoutManager = linearLayoutManager
@@ -83,6 +89,14 @@ class AddTokentActivity : BaseActivity(), View.OnClickListener, CallBackResult.P
 
             }
         })
+    }
+
+    override fun selectedPlan(pos: Int, planId: String, amount: String) {
+        val data = Intent()
+        data.putExtra("planId", planId)
+        data.putExtra("amount", amount)
+        setResult(RESULT_OK, data)
+        finish()
     }
 
 }

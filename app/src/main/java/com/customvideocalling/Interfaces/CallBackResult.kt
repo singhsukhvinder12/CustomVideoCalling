@@ -42,4 +42,12 @@ class CallBackResult {
         fun onAddDeviceTokenSuccess(response: CommonModel)
         fun onAddDeviceTokenFailed(message: String)
     }
+
+    interface AddQuestionnaireCallBack {
+        fun onAddQuestionnaire(info: String, grade: String, need: String, help: String, superhero: String)
+    }
+
+    interface SelectedPlanCallBack {
+        fun selectedPlan(pos: Int, planId: String, amount: String)
+    }
 }

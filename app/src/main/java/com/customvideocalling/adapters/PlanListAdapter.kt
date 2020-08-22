@@ -1,23 +1,20 @@
 package com.uniongoods.adapters
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.databinding.PlanListItemBinding
-import com.customvideocalling.databinding.RequestItemBinding
-import com.customvideocalling.model.JobsResponse
 import com.customvideocalling.model.PlanListResponse
-import com.customvideocalling.views.MainActivity
-import com.customvideocalling.views.VideoChatViewActivity
-import com.customvideocalling.views.fragment.JobRequestsFragment
+import com.customvideocalling.views.authentication.SignUpActivity
 import com.customvideocalling.views.student.AddTokentActivity
 import com.customvideocalling.views.student.PaymentActivity
 
@@ -25,16 +22,22 @@ import com.customvideocalling.views.student.PaymentActivity
 class PlanListAdapter(
         context: AddTokentActivity,
         planList: ArrayList<PlanListResponse.Result>,
-        var activity: Context
+        var activity: Context,
+        var throughSignUp: String,
+        var callBack: CallBackResult.SelectedPlanCallBack
 ) :
         RecyclerView.Adapter<PlanListAdapter.ViewHolder>() {
     private val mContext: AddTokentActivity
     private var viewHolder: ViewHolder? = null
     private var planList: ArrayList<PlanListResponse.Result>
+    private var mThroughSignUp: String? = null
+    private var callBackResult: CallBackResult.SelectedPlanCallBack? = null
 
     init {
         this.mContext = context
         this.planList = planList
+        this.mThroughSignUp = throughSignUp
+        this.callBackResult = callBack
     }
 
     @NonNull
@@ -53,10 +56,15 @@ class PlanListAdapter(
         viewHolder = holder
         holder.binding!!.planName.text = planList!![position].description
         holder.binding!!.btSelectPlan.setOnClickListener {
-            val intent = Intent(activity, PaymentActivity::class.java)
-            intent.putExtra("amount", planList[position].tokenAmount.toString())
-            intent.putExtra("planId", planList[position].id.toString())
-            activity.startActivity(intent)
+            if (throughSignUp.equals("1")){
+                callBackResult!!.selectedPlan(position,planList[position].id.toString(), planList[position].tokenAmount.toString())
+            }else{
+                val intent = Intent(activity, PaymentActivity::class.java)
+                intent.putExtra("amount", planList[position].tokenAmount.toString())
+                intent.putExtra("planId", planList[position].id.toString())
+                activity.startActivity(intent)
+            }
+
         }
     }
 
