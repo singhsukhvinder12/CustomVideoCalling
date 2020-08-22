@@ -35,7 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/rectangle_blue_stroke"
             android:visibility="visible"
             android:padding="@dimen/dp_2"
             android:layout_marginStart="@dimen/dp_10"
@@ -52,7 +51,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:padding="8dp"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:src="@drawable/ic_down"
                 tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
 
             <Spinner
@@ -66,8 +65,18 @@
                 android:background="@drawable/edittext_round_layout"
                 tools:ignore="RtlHardcoded,UnusedAttribute" />
         </RelativeLayout>
+        <View
+            android:id="@+id/subView"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_below="@+id/rel_spinner"
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"/>
 
         <TextView
+
             android:id="@+id/txtDob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +89,7 @@
             android:textColor="@color/colorblack"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
-           android:layout_below="@+id/rel_spinner" />
+           android:layout_below="@+id/subView" />
 
         <TextView
             android:id="@+id/tv_date"
@@ -93,13 +102,22 @@
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@drawable/rectangle_blue_stroke"
             android:drawableEnd="@drawable/ic_calendar"
             android:drawableRight="@drawable/ic_calendar"
             android:padding="12dp"
             android:hint="@string/day_month"
             android:textColor="@color/colorblack"
             android:textSize="@dimen/sp_14" />
+
+        <View
+            android:id="@+id/dateView"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_below="@+id/tv_date"
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"/>
 
         <TextView
             android:id="@+id/txtSlot"
@@ -112,14 +130,13 @@
             android:textColor="@color/colorblack"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
-            android:layout_below="@+id/tv_date" />
+            android:layout_below="@+id/dateView" />
 
         <RelativeLayout
             android:id="@+id/rel_spinner_slot"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/rectangle_blue_stroke"
             android:visibility="visible"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
@@ -136,7 +153,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:padding="8dp"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:src="@drawable/ic_down"
                 tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
 
             <Spinner
@@ -153,16 +170,30 @@
                 tools:ignore="RtlHardcoded,UnusedAttribute" />
         </RelativeLayout>
 
+
+        <View
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_below="@+id/rel_spinner_slot"
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"/>
+
         <Button
             android:id="@+id/btn_add_booking"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
-            android:layout_margin="@dimen/dp_25"
+            android:layout_marginBottom="@dimen/dp_25"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/round_back_transparent"
             android:padding="@dimen/dp_10"
+
             android:text="Add Booking"
+            android:textAllCaps="false"
             android:layout_alignParentBottom="true"
-            android:textColor="@color/colorblack"
+            android:textColor="@color/white"
 
             />
 

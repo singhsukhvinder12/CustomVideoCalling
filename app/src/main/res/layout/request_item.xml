@@ -11,23 +11,19 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
+
         android:layout_margin="@dimen/dp_5"
-        android:background="@drawable/shape_round_corner"
-        android:elevation="@dimen/dp_20"
+        android:background="@drawable/shape_round_corner_full_round"
+        android:elevation="5dp"
         android:padding="@dimen/dp_5">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="@dimen/dp_5"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
+
 
             <RelativeLayout
+                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -36,12 +32,12 @@
                     android:id="@+id/tv_from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_3"
+                    android:layout_marginLeft="@dimen/dp_10"
                     android:padding="@dimen/dp_5"
-                    android:text="Date"
+                    android:text="Date:"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/tv_from_location_name"
@@ -55,16 +51,16 @@
                     android:text="Seasia Infotech Mohali"
                     android:textAllCaps="false"
                     android:textColor="@color/list_text_color"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/tv_fro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_from"
-                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_10"
                     android:padding="@dimen/dp_5"
-                    android:text="Time"
+                    android:text="Time:"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/sp_12" />
@@ -87,18 +83,17 @@
 
                 <Button
                     android:id="@+id/button"
-                    android:layout_width="@dimen/dp_50"
+                    android:layout_width="@dimen/dp_70"
                     android:layout_height="@dimen/dp_30"
                     android:layout_marginRight="@dimen/dp_20"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/round_back_transparent"
                     android:text="Join"
-                    android:textColor="@color/list_text_color"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_12" />
 
             </RelativeLayout>
-        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 

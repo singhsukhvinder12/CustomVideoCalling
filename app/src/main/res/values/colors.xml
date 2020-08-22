@@ -37,5 +37,6 @@
     <color name="tabSelection">#DB6589</color>
     <color name="btnBackground">#DB6589</color>
     <color name="btnBackgroundWhite">#F8F8F8</color>
+    <color name="custom_blue">#0055C9</color>
 
 </resources>

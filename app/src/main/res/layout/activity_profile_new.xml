@@ -114,12 +114,13 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/dp_80"
                     android:textAllCaps="false"
+                    android:padding="@dimen/dp_15"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginRight="@dimen/dp_5"
                     android:background="@drawable/edt_back_shape_colored"
                     android:textColor="@color/colorBlack2"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_14"
                     android:visibility="visible" />
 
                 <TextView
@@ -144,6 +145,7 @@
                     android:background="@drawable/edt_back_shape_colored"
                     android:elevation="2dp"
                     android:hint="@string/first_name"
+                    android:enabled="false"
                     android:inputType="text"
                     android:maxLength="30"
                     android:padding="@dimen/dp_15"
@@ -155,6 +157,7 @@
                     tools:ignore="MissingConstraints" />
 
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_lastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,6 +179,7 @@
                     tools:ignore="MissingConstraints" />
 
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -220,6 +224,7 @@
                     android:textSize="@dimen/sp_13"
                     android:visibility="visible" />
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -250,6 +255,7 @@
                     android:textSize="@dimen/sp_13"
                     android:visibility="visible" />
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_grade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -281,6 +287,7 @@
                     android:textSize="@dimen/sp_13"
                     android:visibility="visible" />
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_needed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -312,6 +319,7 @@
                     android:textSize="@dimen/sp_13"
                     android:visibility="visible" />
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -341,6 +349,7 @@
                     android:textSize="@dimen/sp_13"
                     android:visibility="visible" />
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_superhero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -374,6 +383,7 @@
                     android:visibility="visible" />
 
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -394,6 +404,7 @@
                     tools:ignore="MissingConstraints" />
 
                 <EditText
+                    android:enabled="false"
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
