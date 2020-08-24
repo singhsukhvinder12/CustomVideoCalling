@@ -11,6 +11,7 @@ import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.views.authentication.LoginActivity
 import com.customvideocalling.views.student.AddTokentActivity
 import com.customvideocalling.views.student.TokenHistoryActivity
+import com.customvideocalling.views.teacher.AddScheduleActivity
 import com.google.firebase.iid.FirebaseInstanceId
 import java.util.*
 
