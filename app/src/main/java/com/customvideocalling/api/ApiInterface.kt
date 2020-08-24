@@ -39,10 +39,10 @@ interface ApiInterface {
     @GET("getCompleteClass/{id}")
     fun getStudentHistoryBooings(@Path("id") id: String): Call<JsonObject>
 
-    @GET("getCompleteClass/{id}")
+    @GET("tCompleteClass/{id}")
     fun getTeacherHistoryBookings(@Path("id") id: String): Call<JsonObject>
 
-    @GET("getCompleteClass/{id}")
+    @GET("listBooking/{id}")
     fun getTeacherLiveBookings(@Path("id") id: String): Call<JsonObject>
 
     @GET("streamOptions")

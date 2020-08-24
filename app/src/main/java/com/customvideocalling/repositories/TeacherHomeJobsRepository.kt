@@ -50,7 +50,7 @@ class TeacherHomeJobsRepository {
 
                         }
 
-                    }, GetRestAdapter.getRestAdapter(false).getStudentBooings(userid)
+                    }, GetRestAdapter.getRestAdapter(false).getTeacherLiveBookings(userid)
             )
         }
         return data!!
