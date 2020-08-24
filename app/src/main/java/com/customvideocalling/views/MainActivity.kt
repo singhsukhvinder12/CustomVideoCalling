@@ -37,8 +37,8 @@ class MainActivity : BaseActivity() {
     var mIndicator: View? = null
     private var indicatorWidth = 0
 
-    lateinit var tv_active:TextView
-    lateinit var tv_history:TextView
+    lateinit var tv_active: TextView
+    lateinit var tv_history: TextView
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -46,8 +46,8 @@ class MainActivity : BaseActivity() {
 
     override fun initViews() {
 
-        tv_active=findViewById(R.id.tv_active)
-        tv_history=findViewById(R.id.tv_history)
+        tv_active = findViewById(R.id.tv_active)
+        tv_history = findViewById(R.id.tv_history)
 
         activityMainBinding = viewDataBinding as ActivityMainBinding
         mIndicator = findViewById(R.id.indicator);
@@ -100,13 +100,13 @@ class MainActivity : BaseActivity() {
                 positionOffset: Float,
                 positionOffsetPx: Int
             ) {
-              /*  val params =
-                    mIndicator!!.getLayoutParams() as FrameLayout.LayoutParams
+                /*  val params =
+                      mIndicator!!.getLayoutParams() as FrameLayout.LayoutParams
 
-                //Multiply positionOffset with indicatorWidth to get translation
-                val translationOffset = (positionOffset + i) * indicatorWidth
-                params.leftMargin = translationOffset.toInt()
-                mIndicator!!.setLayoutParams(params)*/
+                  //Multiply positionOffset with indicatorWidth to get translation
+                  val translationOffset = (positionOffset + i) * indicatorWidth
+                  params.leftMargin = translationOffset.toInt()
+                  mIndicator!!.setLayoutParams(params)*/
 
 
             }
@@ -122,11 +122,11 @@ class MainActivity : BaseActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 activityMainBinding!!.pager.currentItem = tab.position
 
-                if (tab.position==0){
-                    changeBackgroundAndText(tv_active,tv_history,"1")
-                }else  if (tab.position==1){
-                    changeBackgroundAndText(tv_active,tv_history,"2")
-                }else{
+                if (tab.position == 0) {
+                    changeBackgroundAndText(tv_active, tv_history, "1")
+                } else if (tab.position == 1) {
+                    changeBackgroundAndText(tv_active, tv_history, "2")
+                } else {
 
                 }
             }
@@ -248,13 +248,13 @@ class MainActivity : BaseActivity() {
 
         tv_active.setOnClickListener {
             activityMainBinding!!.pager.setCurrentItem(0)
-            changeBackgroundAndText(tv_active,tv_history,"1")
+            changeBackgroundAndText(tv_active, tv_history, "1")
         }
-  tv_history.setOnClickListener {
-      activityMainBinding!!.pager.setCurrentItem(1)
-            changeBackgroundAndText(tv_active,tv_history,"2")
+        tv_history.setOnClickListener {
+            activityMainBinding!!.pager.setCurrentItem(1)
+            changeBackgroundAndText(tv_active, tv_history, "2")
         }
-        changeBackgroundAndText(tv_active,tv_history,"1")
+        changeBackgroundAndText(tv_active, tv_history, "1")
 
         // replaceFragment()
     }
@@ -269,25 +269,25 @@ class MainActivity : BaseActivity() {
         activityMainBinding!!.tvName.text = name.toString()
     }
 
-    fun changeBackgroundAndText(text:TextView,text2:TextView,status:String){
+    fun changeBackgroundAndText(text: TextView, text2: TextView, status: String) {
 
-        if (status.equals("1")){
+        if (status.equals("1")) {
             text.setTextColor(resources.getColor(R.color.white))
-            text.setBackgroundResource( R.drawable.shape_left_round_yellow)
+            text.setBackgroundResource(R.drawable.shape_left_round_yellow)
             text.setTypeface(text.getTypeface(), Typeface.NORMAL);
 
             text2.setTextColor(resources.getColor(R.color.custom_blue))
-            text2.setBackgroundResource( R.drawable.shape_right_round_yellow_stroke)
+            text2.setBackgroundResource(R.drawable.shape_right_round_yellow_stroke)
             text2.setTypeface(text2.getTypeface(), Typeface.BOLD);
 
-        }else if (status.equals("2")){
+        } else if (status.equals("2")) {
             text.setTextColor(resources.getColor(R.color.custom_blue))
-            text.setBackgroundResource(  R.drawable.shape_left_round_yellow_stroke)
+            text.setBackgroundResource(R.drawable.shape_left_round_yellow_stroke)
             text.setTypeface(text.getTypeface(), Typeface.BOLD);
 
 
             text2.setTextColor(resources.getColor(R.color.white))
-            text2.setBackgroundResource( R.drawable.shape_right_round_yellow)
+            text2.setBackgroundResource(R.drawable.shape_right_round_yellow)
             text2.setTypeface(text2.getTypeface(), Typeface.NORMAL);
 
         }
