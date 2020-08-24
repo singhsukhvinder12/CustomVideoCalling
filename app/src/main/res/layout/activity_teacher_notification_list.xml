@@ -18,14 +18,11 @@
             android:background="@color/colorGrey" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_jobs"
+            android:id="@+id/rv_booking_teacher"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar_line"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+            />
         <TextView
             android:id="@+id/tv_no_record"
             android:layout_width="wrap_content"

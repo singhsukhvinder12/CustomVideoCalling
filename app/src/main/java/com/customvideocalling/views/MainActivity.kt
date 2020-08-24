@@ -67,9 +67,9 @@ class MainActivity : BaseActivity() {
         activityMainBinding!!.commonToolBar.toolbarRightImage.setImageResource(R.drawable.ic_notifications)
         activityMainBinding!!.commonToolBar.toolbarText.text =
             resources.getString(R.string.home)
-//        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("Active"))
-//        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("History"))
-//        activityMainBinding!!.tabs.tabGravity = TabLayout.GRAVITY_CENTER
+        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("Active"))
+        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("History"))
+        activityMainBinding!!.tabs.tabGravity = TabLayout.GRAVITY_CENTER
 
         val adapter = MyViewPagerAdapter(this, supportFragmentManager, activityMainBinding!!.tabs.tabCount)
         activityMainBinding!!.pager.adapter = adapter

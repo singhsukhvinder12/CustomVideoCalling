@@ -1,9 +1,6 @@
 package com.customvideocalling.Interfaces
 
-import com.customvideocalling.model.ClassSubjectListResponse
-import com.customvideocalling.model.PlanListResponse
-import com.customvideocalling.model.SlotListResponse
-import com.customvideocalling.model.TokenHistoryListResponse
+import com.customvideocalling.model.*
 import com.example.artha.model.CommonModel
 
 class CallBackResult {
@@ -49,5 +46,19 @@ class CallBackResult {
 
     interface SelectedPlanCallBack {
         fun selectedPlan(pos: Int, planId: String, amount: String)
+    }
+
+    interface TeacherAcceptRejectCallBack {
+        fun onClickAcceptReject(pos: Int, status: Int)
+    }
+
+    interface TeacherNotificationListCallBack {
+        fun onTeacherNotificationListSuccess(response: TeacherNotificationListResponse)
+        fun oTeacherNotificationListFailed(message: String)
+    }
+
+    interface TeacherAcceptRejectApiCallBack {
+        fun onTeacherAcceptRejectSuccess(response: CommonModel)
+        fun onTeacherAcceptRejectFailed(message: String)
     }
 }
