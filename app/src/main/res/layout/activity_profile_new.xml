@@ -201,17 +201,27 @@
                     android:textSize="@dimen/sp_14"
                     tools:ignore="MissingConstraints" />
 
+                <LinearLayout
+                    android:id="@+id/ll_questionaire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+
                 <TextView
                     android:id="@+id/tv_questionnaire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
+
                     android:text="@string/questionnaire"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/colorBlack2"
                     android:textSize="@dimen/sp_15"
-                    android:visibility="visible" />
+                 />
 
                 <TextView
                     android:id="@+id/tv_info"
@@ -222,7 +232,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack2"
                     android:textSize="@dimen/sp_13"
-                    android:visibility="visible" />
+                    />
                 <EditText
                     android:enabled="false"
                     android:id="@+id/et_info"
@@ -253,7 +263,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack2"
                     android:textSize="@dimen/sp_13"
-                    android:visibility="visible" />
+                   />
                 <EditText
                     android:enabled="false"
                     android:id="@+id/et_grade"
@@ -285,7 +295,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack2"
                     android:textSize="@dimen/sp_13"
-                    android:visibility="visible" />
+                    />
                 <EditText
                     android:enabled="false"
                     android:id="@+id/et_needed"
@@ -317,7 +327,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack2"
                     android:textSize="@dimen/sp_13"
-                    android:visibility="visible" />
+                    />
                 <EditText
                     android:enabled="false"
                     android:id="@+id/et_help"
@@ -347,7 +357,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack2"
                     android:textSize="@dimen/sp_13"
-                    android:visibility="visible" />
+                    />
                 <EditText
                     android:enabled="false"
                     android:id="@+id/et_superhero"
@@ -369,7 +379,7 @@
                     android:textSize="@dimen/sp_14"
                     tools:ignore="MissingConstraints" />
 
-
+                </LinearLayout>
                 <TextView
                     android:id="@+id/tv_contact"
                     android:layout_width="wrap_content"

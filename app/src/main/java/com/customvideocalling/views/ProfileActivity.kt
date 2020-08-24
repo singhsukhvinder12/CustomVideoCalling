@@ -50,12 +50,12 @@ class ProfileActivity : BaseActivity() {
         profileBinding = viewDataBinding as ActivityProfileNewBinding
         profieViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         profileBinding.profileViewModel = profieViewModel
-       // profileBinding.commonToolBar.txtEdit.visibility = View.VISIBLE
+        // profileBinding.commonToolBar.txtEdit.visibility = View.VISIBLE
         //profileBinding.commonToolBar.imgRight.setImageResource(R.drawable.ic_nav_edit_icon)
         profileBinding.commonToolBar.toolbarText.text =
             resources.getString(R.string.view_profile)
 
-       // makeEnableDisableViews(false)
+        // makeEnableDisableViews(false)
         mJsonObject.addProperty(
             "id", "id"/* sharedPrefClass!!.getPrefValue(
                 MyApplication.instance,
@@ -66,6 +66,16 @@ class ProfileActivity : BaseActivity() {
             MyApplication.instance,
             GlobalConstants.USERID
         ).toString()
+
+        val roleType = SharedPrefClass().getPrefValue(
+            MyApplication.instance,
+            GlobalConstants.TYPE
+        ).toString()
+        if (roleType != null) {
+            if (roleType.equals("2")) {// 2 = teacher
+                hideQuestonaire()
+            }
+        }
 
         if (UtilsFunctions.isNetworkConnected()) {
             startProgressDialog()
@@ -81,16 +91,16 @@ class ProfileActivity : BaseActivity() {
                         response.code == 200 -> {
 
                             setData(response)
-                          //  profileBinding.profileModel = response.data!!.userDetail
-                           // profileBinding.etCode.setText(response.data!!.countryCodename)
-                           /* Glide.with(this)
-                                .load(response.data?.licenseImage)
-                                .placeholder(R.drawable.ic_user)
-                                .into(profileBinding.imgLicense)
-                            Glide.with(this)
-                                .load(response.data?.otherimage)
-                                .placeholder(R.drawable.ic_user)
-                                .into(profileBinding.imgOther)*/
+                            //  profileBinding.profileModel = response.data!!.userDetail
+                            // profileBinding.etCode.setText(response.data!!.countryCodename)
+                            /* Glide.with(this)
+                                 .load(response.data?.licenseImage)
+                                 .placeholder(R.drawable.ic_user)
+                                 .into(profileBinding.imgLicense)
+                             Glide.with(this)
+                                 .load(response.data?.otherimage)
+                                 .placeholder(R.drawable.ic_user)
+                                 .into(profileBinding.imgOther)*/
                         }
 
                         else -> showToastError(message)
@@ -107,31 +117,31 @@ class ProfileActivity : BaseActivity() {
             fun(it: String?) {
                 when (it) {
                     "imgLicense" -> {
-                      /*  imageSelected = 1
-                        if (checkAndRequestPermissions()) {
-                            confirmationDialog =
-                                mDialogClass.setUploadConfirmationDialog(this, this, "gallery")
-                        }*/
+                        /*  imageSelected = 1
+                          if (checkAndRequestPermissions()) {
+                              confirmationDialog =
+                                  mDialogClass.setUploadConfirmationDialog(this, this, "gallery")
+                          }*/
                     }
                     "imgOther" -> {
-                       /* imageSelected = 2
-                        if (checkAndRequestPermissions()) {
-                            confirmationDialog =
-                                mDialogClass.setUploadConfirmationDialog(this, this, "gallery")
-                        }*/
+                        /* imageSelected = 2
+                         if (checkAndRequestPermissions()) {
+                             confirmationDialog =
+                                 mDialogClass.setUploadConfirmationDialog(this, this, "gallery")
+                         }*/
                     }
                     "txt_edit" -> {
-                      /*  // isEditable = true
-                        profileBinding.commonToolBar.imgToolbarText.text =
-                            resources.getString(R.string.edit_profile)
-                        makeEnableDisableViews(true)*/
+                        /*  // isEditable = true
+                          profileBinding.commonToolBar.imgToolbarText.text =
+                              resources.getString(R.string.edit_profile)
+                          makeEnableDisableViews(true)*/
                     }
                     "iv_edit" -> {
-                      /*  imageSelected = 0
-                        if (checkAndRequestPermissions()) {
-                            confirmationDialog =
-                                mDialogClass.setUploadConfirmationDialog(this, this, "gallery")
-                        }*/
+                        /*  imageSelected = 0
+                          if (checkAndRequestPermissions()) {
+                              confirmationDialog =
+                                  mDialogClass.setUploadConfirmationDialog(this, this, "gallery")
+                          }*/
 
                     }
 
@@ -142,7 +152,7 @@ class ProfileActivity : BaseActivity() {
 
     }
 
-    private fun setData(respone : ProfileResponse) {
+    private fun setData(respone: ProfileResponse) {
         profileBinding.tvSummary.setText(respone.data!!.userDetail!!.summery)
         profileBinding.etFirstname.setText(respone.data!!.userDetail!!.fName)
         profileBinding.etLastname.setText(respone.data!!.userDetail!!.lName)
@@ -157,6 +167,22 @@ class ProfileActivity : BaseActivity() {
         profileBinding.etPhone.setText(respone.data!!.userDetail!!.info)
 
 
+    }
+
+    fun hideQuestonaire() {
+        profileBinding.llQuestionaire.visibility = View.GONE
+/*
+        profileBinding.tvInfo.visibility = View.GONE
+        profileBinding.etInfo.visibility = View.GONE
+        profileBinding.tvGrade.visibility = View.GONE
+        profileBinding.etGrade.visibility = View.GONE
+        profileBinding.etNeeded.visibility = View.GONE
+        profileBinding.etNeeded.visibility = View.GONE
+        profileBinding.etHelp.visibility = View.GONE
+        profileBinding.etHelp.visibility = View.GONE
+        profileBinding.etSuperhero.visibility = View.GONE
+        profileBinding.etSuperhero.visibility = View.GONE
+*/
 
     }
 
