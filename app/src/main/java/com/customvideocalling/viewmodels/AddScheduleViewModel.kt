@@ -7,20 +7,18 @@ import com.customvideocalling.Interfaces.CallBackResult
 import com.google.gson.JsonObject
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.model.*
-import com.customvideocalling.repositories.AddBookingStudentRepository
-import com.customvideocalling.repositories.AddTokenRepository
-import com.customvideocalling.repositories.LoginRepository
-import com.customvideocalling.repositories.TokenHistoryRepository
+import com.customvideocalling.repositories.*
 import com.example.artha.model.CommonModel
 
-class TokenHistoryViewModel : BaseViewModel() {
-    private var data: MutableLiveData<TokenHistoryListResponse>? = null
-    private var tokenHistoryRepository = TokenHistoryRepository()
+class AddScheduleViewModel : BaseViewModel() {
+    private var data: MutableLiveData<ScheduleListResponse>? = null
+    private var data1: MutableLiveData<CommonModel>? = null
+    private var addScheduleRepository = AddScheduleRepository()
     private val mIsUpdating = MutableLiveData<Boolean>()
     private val btnClick = MutableLiveData<String>()
 
 
-    fun getList(): LiveData<TokenHistoryListResponse> {
+    fun getList(): LiveData<ScheduleListResponse> {
         return data!!
     }
 
@@ -35,16 +33,16 @@ class TokenHistoryViewModel : BaseViewModel() {
     override fun clickListener(v: View) {
         btnClick.postValue(v.resources.getResourceName(v.id).split("/")[1])    }
 
-    fun getTokenHistoryList(callBack: CallBackResult.TokenHistoryCallBack, userId: String) {
+    fun getScheduleList(callBack: CallBackResult.ScheduleListCallBack, userId: String) {
         if (UtilsFunctions.isNetworkConnected()) {
-            data = tokenHistoryRepository.getTokenHistoryList(callBack, userId)
+            data = addScheduleRepository.getScheduleList(callBack, userId)
             mIsUpdating.postValue(true)
         }
     }
 
-    fun getTeacherTokenHistoryList(callBack: CallBackResult.TokenHistoryCallBack, userId: String) {
+    fun hitAddSchedule(callBack: CallBackResult.AddScheduleCallBack, jsonObject:JsonObject) {
         if (UtilsFunctions.isNetworkConnected()) {
-            data = tokenHistoryRepository.getTokenHistoryTeacherList(callBack, userId)
+            data1 = addScheduleRepository.hitAddSchedule(callBack, jsonObject)
             mIsUpdating.postValue(true)
         }
     }

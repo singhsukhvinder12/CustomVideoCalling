@@ -248,7 +248,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:id="@+id/tv_add_token"
+                            android:id="@+id/tv_add_schedule"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
@@ -257,7 +257,7 @@
                             android:paddingLeft="@dimen/dp_10"
                             android:paddingTop="@dimen/dp_12"
                             android:paddingBottom="@dimen/dp_5"
-                            android:text="Add Token"
+                            android:text="Schedule List"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp_18"

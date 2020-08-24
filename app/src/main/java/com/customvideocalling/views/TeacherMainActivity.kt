@@ -28,6 +28,8 @@ import com.customvideocalling.views.fragment.JobRequestsFragment
 import com.customvideocalling.views.fragment.StudentHistoryFragment
 import com.customvideocalling.views.student.AddTokentActivity
 import com.customvideocalling.views.student.TokenHistoryActivity
+import com.customvideocalling.views.teacher.AddScheduleActivity
+import com.customvideocalling.views.teacher.ScheduleListActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -155,8 +157,8 @@ class TeacherMainActivity : BaseActivity() {
                         val intent = Intent(this, TokenHistoryActivity::class.java)
                         startActivity(intent)
                     }
-                    "tv_add_token" -> {
-                        val intent = Intent(this, AddTokentActivity::class.java)
+                    "tv_add_schedule" -> {
+                        val intent = Intent(this, ScheduleListActivity::class.java)
                         startActivity(intent)
                     }
                     "tv_nav_home" -> {

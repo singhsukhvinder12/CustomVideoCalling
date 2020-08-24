@@ -41,7 +41,17 @@ class TokenHistoryActivity : BaseActivity(), View.OnClickListener, CallBackResul
         activityTokenHistoryBinding.toolBar.toolbarText.setText(getString(R.string.token_history))
         activityTokenHistoryBinding.toolBar.toolbarBack.setOnClickListener(this)
         tokenHistoryList = ArrayList()
-        tokenHistoryViewModel.getTokenHistoryList(this, sharedPrefClass.getPrefValue(this,GlobalConstants.USERID).toString())
+        if (sharedPrefClass.getPrefValue(this,GlobalConstants.TYPE) == "1") {
+            tokenHistoryViewModel.getTokenHistoryList(
+                this,
+                sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString()
+            )
+        }else {
+            tokenHistoryViewModel.getTeacherTokenHistoryList(
+                this,
+                sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString()
+            )
+        }
     }
 
     override fun onClick(p0: View?) {

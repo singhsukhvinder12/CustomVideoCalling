@@ -54,4 +54,31 @@ class TokenHistoryRepository {
         return data!!
     }
 
+    fun getTokenHistoryTeacherList(callBack: CallBackResult.TokenHistoryCallBack, userId: String): MutableLiveData<TokenHistoryListResponse> {
+        val call = GetRestAdapter.getRestAdapter(false).getTeacherTokenHistoryList(userId)
+        call.enqueue(object : Callback<TokenHistoryListResponse> {
+            override fun onResponse(
+                call: Call<TokenHistoryListResponse>,
+                response: retrofit2.Response<TokenHistoryListResponse>?
+            ) {
+                if (response?.body() != null) {
+                    if (response?.body()!!.code == 200) {
+                        callBack.onGetTokenHistorySuccess(response.body()!!)
+                    }
+                    else {
+                        callBack.onGetTokenHistoryFailed(response?.body()?.message!!)
+                    }
+                } else {
+                    callBack.onGetTokenHistoryFailed("Something went wrong")
+                }
+
+            }
+
+            override fun onFailure(call: Call<TokenHistoryListResponse>, t: Throwable) {
+                callBack.onGetTokenHistoryFailed(t.message!!)
+            }
+        })
+        return data!!
+    }
+
 }

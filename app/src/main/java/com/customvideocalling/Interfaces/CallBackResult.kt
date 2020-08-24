@@ -61,4 +61,14 @@ class CallBackResult {
         fun onTeacherAcceptRejectSuccess(response: CommonModel)
         fun onTeacherAcceptRejectFailed(message: String)
     }
+
+    interface AddScheduleCallBack {
+        fun onAddScheduleSuccess(response: CommonModel)
+        fun onAddScheduleFailed(message: String)
+    }
+
+    interface ScheduleListCallBack {
+        fun onScheduleListSuccess(response: ScheduleListResponse)
+        fun onScheduleListFailed(message: String)
+    }
 }
