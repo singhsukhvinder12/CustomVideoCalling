@@ -199,10 +199,10 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener, CallBackResult
                 endDateDatePicker()
             }
             R.id.btn_add_schedule ->{
-                if (daysListFinal!!.isEmpty()){
+                if (daysListFinal == null ||daysListFinal!!.isEmpty()){
                     showToastError("Please select days")
                 }
-                else if(timeListFinal!!.isEmpty()){
+                else if(timeListFinal == null || timeListFinal!!.isEmpty()){
                     showToastError("Please select slot time")
                 }else if(startDate.isEmpty()){
                     showToastError("Please select start date")

@@ -137,8 +137,13 @@ class LoginActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
                             mJsonObject.addProperty("token", "")*/
                             loginViewModel.addDeviceToken(this, mJsonObject)
                             showToastSuccess(message)
-                            val intent = Intent(this, TeacherMainActivity::class.java)
-                            startActivity(intent)
+                            if (loginResponse!!.result!!.type == 1){
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                            }else{
+                                val intent = Intent(this, TeacherMainActivity::class.java)
+                                startActivity(intent)
+                            }
                             finish()
 
                         } else {

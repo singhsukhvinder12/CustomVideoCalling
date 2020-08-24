@@ -47,6 +47,7 @@ class TeacherHistoryAdapter(
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         viewHolder = holder
         //holder.binding!!.tvAddress.text = jobsList!![position]
+        holder.binding!!.tvTime.text = jobsList[position].timeSlot
         holder.binding!!.tvFromLocationName.text = jobsList[position].bookingDate
       //  holder.binding.tvToLocationName.text = jobsList[position].to_location
 

@@ -63,7 +63,7 @@ class MainActivity : BaseActivity() {
         activityMainBinding!!.commonToolBar.toolbarNavigationBtn.visibility=View.VISIBLE
         activityMainBinding!!.commonToolBar.toolbarBack.visibility=View.GONE
 
-        activityMainBinding!!.commonToolBar.toolbarRightImage.visibility = View.VISIBLE
+        activityMainBinding!!.commonToolBar.toolbarRightImage.visibility = View.GONE
         activityMainBinding!!.commonToolBar.toolbarRightImage.setImageResource(R.drawable.ic_notifications)
         activityMainBinding!!.commonToolBar.toolbarText.text =
             resources.getString(R.string.home)

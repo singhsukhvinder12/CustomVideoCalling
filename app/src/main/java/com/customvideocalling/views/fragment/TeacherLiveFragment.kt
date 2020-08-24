@@ -100,7 +100,7 @@ class TeacherLiveFragment : BaseFragment(), DialogssInterface {
     }
 
     override fun onDialogConfirmAction(mView: View?, mKey: String) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onDialogCancelAction(mView: View?, mKey: String) {
