@@ -62,7 +62,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationChannel!!.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         }
         Log.e(TAG, "Notification Message Body: " + remoteMessage.data)
-        message = remoteMessage.data.get("message")
+        message = remoteMessage.data.get("body")
         title = remoteMessage.data.get("title")
         try {
             sendMessagePush(message!!);

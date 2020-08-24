@@ -47,6 +47,7 @@ class StudentHistoryAdapter(
         viewHolder = holder
         //holder.binding!!.tvAddress.text = jobsList!![position]
         holder.binding!!.tvFromLocationName.text = jobsList[position].bookingDate
+        holder.binding!!.tvTime.text = jobsList[position].timeSlot
       //  holder.binding.tvToLocationName.text = jobsList[position].to_location
 
       /*  if (!TextUtils.isEmpty(jobsList[position].scheduleDatetime) && !jobsList[position].scheduleDatetime.equals("null")) {

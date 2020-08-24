@@ -46,6 +46,9 @@ class JobsResponse {
         @SerializedName("accessToken")
         @Expose
         var accessToken : String? = null
+        @SerializedName("status")
+        @Expose
+        var status : Int? = null
     }
 
 }

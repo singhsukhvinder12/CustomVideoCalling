@@ -3,10 +3,7 @@ package com.customvideocalling.api
 //* Created by Saira on 03/07/2019.
 
 
-import com.customvideocalling.model.ClassSubjectListResponse
-import com.customvideocalling.model.PlanListResponse
-import com.customvideocalling.model.SlotListResponse
-import com.customvideocalling.model.TokenHistoryListResponse
+import com.customvideocalling.model.*
 import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -68,4 +65,10 @@ interface ApiInterface {
 
     @POST("updateDeviceToken")
     fun addDeviceToken(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @GET("getRequestlist/{id}")
+    fun getTeacherNotificationList(@Path("id") id: String):Call<TeacherNotificationListResponse>
+
+    @POST("changeStatus")
+    fun hitAcceptRejectApi(@Body jsonObject:JsonObject):Call<CommonModel>
 }

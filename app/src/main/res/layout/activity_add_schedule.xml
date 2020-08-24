@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <variable
+            name="MainViewModel"
+            type="com.customvideocalling.viewmodels.MainViewModel" />
+
+    </data>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.teacher.AddScheduleActivity">
+
+    <include
+        android:id="@+id/common_tool_bar"
+        layout="@layout/common_toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+
+        app:onClick="@{(v) -> MainViewModel.clickListener(v)}" />
+
+    <RelativeLayout
+        android:id="@+id/dateParent"
+        android:layout_margin="@dimen/dp_20"
+        android:layout_below="@+id/common_tool_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:padding="@dimen/dp_5"
+            android:background="@drawable/shape_round_corner"
+          android:hint="start date"
+            android:id="@+id/tvStartDate"
+            android:layout_marginTop="@dimen/dp_40"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:padding="@dimen/dp_5"
+            android:background="@drawable/shape_round_corner"
+            android:hint="end date"
+            android:layout_marginTop="@dimen/dp_40"
+            android:textSize="20sp"
+            android:id="@+id/tvEndDate"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/dp_10"
+        android:layout_below="@+id/dateParent"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="@drawable/shape_round_corner"
+            android:id="@+id/rel_spinner_days"
+            android:layout_weight="1"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:padding="@dimen/dp_2"
+
+            tools:ignore="UnusedAttribute">
+
+            <TextView
+                android:id="@+id/tv_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="Select day"
+
+                android:background="@drawable/edittext_round_layout"
+               android:layout_toLeftOf="@+id/iv_arrow_days"
+                />
+
+            <ImageView
+                android:id="@+id/iv_arrow_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_down"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@drawable/shape_round_corner"
+            android:id="@+id/rel_spinner_time"
+            android:layout_weight="1"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:padding="@dimen/dp_2"
+
+            tools:ignore="UnusedAttribute">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:layout_marginLeft="@dimen/dp_10"
+
+                android:ellipsize="end"
+                android:text="Select time"
+                android:background="@drawable/edittext_round_layout"
+                android:layout_toLeftOf="@+id/iv_arrow_time"
+                />
+
+            <ImageView
+                android:id="@+id/iv_arrow_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_down"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_booking"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/round_back_transparent"
+        android:padding="@dimen/dp_10"
+        android:text="Add Booking"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+
+        />
+</RelativeLayout>
+</layout>

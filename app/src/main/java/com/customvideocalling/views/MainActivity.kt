@@ -67,9 +67,9 @@ class MainActivity : BaseActivity() {
         activityMainBinding!!.commonToolBar.toolbarRightImage.setImageResource(R.drawable.ic_notifications)
         activityMainBinding!!.commonToolBar.toolbarText.text =
             resources.getString(R.string.home)
-//        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("Active"))
-//        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("History"))
-//        activityMainBinding!!.tabs.tabGravity = TabLayout.GRAVITY_CENTER
+        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("Active"))
+        activityMainBinding!!.tabs.addTab(activityMainBinding!!.tabs.newTab().setText("History"))
+        activityMainBinding!!.tabs.tabGravity = TabLayout.GRAVITY_CENTER
 
         val adapter = MyViewPagerAdapter(this, supportFragmentManager, activityMainBinding!!.tabs.tabCount)
         activityMainBinding!!.pager.adapter = adapter
@@ -162,10 +162,16 @@ class MainActivity : BaseActivity() {
                     "tv_nav_history" -> {
                         val intent = Intent(this, TokenHistoryActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "tv_add_token" -> {
                         val intent = Intent(this, AddTokentActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "tv_nav_home" -> {
                         if (drawer!!.isDrawerOpen(GravityCompat.START)) {
@@ -179,6 +185,9 @@ class MainActivity : BaseActivity() {
                     "ivProfile" -> {
                         val intent = Intent(this, ProfileActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "img_nav_cancel" -> {
                         if (drawer!!.isDrawerOpen(GravityCompat.START)) {

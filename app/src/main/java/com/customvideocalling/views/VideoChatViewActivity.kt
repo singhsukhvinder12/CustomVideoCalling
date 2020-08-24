@@ -321,11 +321,11 @@ class VideoChatViewActivity : AppCompatActivity() {
         // same channel successfully using the same app id.
         // 2. One token is only valid for the channel name that
         // you use to generate this token.
-        var token: String? = getString(R.string.agora_access_token)//accessToken
+        var token: String? = /*getString(R.string.agora_access_token)*/accessToken
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null // default, no token
         }
-        mRtcEngine!!.joinChannel(token, "KLteacher_e66374dc-2793-4c82-b903-ed86ffe2f0df"/*channelName*/, "Extra Optional Data", 0)
+        mRtcEngine!!.joinChannel(token, channelName, "Extra Optional Data", 0)
     }
 
     protected override fun onDestroy() {

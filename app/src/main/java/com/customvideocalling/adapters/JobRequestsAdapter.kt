@@ -48,10 +48,15 @@ class JobRequestsAdapter(
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         viewHolder = holder
         //holder.binding!!.tvAddress.text = jobsList!![position]
+        if (jobsList[position].status == 1){
+            holder.binding!!.button.visibility = View.VISIBLE
+        }else{
+            holder.binding!!.button.visibility = View.GONE
+        }
         holder.binding!!.tvFromLocationName.text = jobsList[position].bookingDate
         holder.binding!!.tvTime.text = jobsList[position].timeSlot
       //  if (jobsList[position].channelName!!.isNotEmpty() && jobsList[position].accessToken!!.isNotEmpty()){
-            holder.binding!!.cardView.setOnClickListener {
+            holder.binding!!.button.setOnClickListener {
                 val intent = Intent(activity, VideoChatViewActivity::class.java)
                 intent.putExtra("channelName", jobsList[position].channelName)
                 intent.putExtra("accessToken", jobsList[position].accessToken)
