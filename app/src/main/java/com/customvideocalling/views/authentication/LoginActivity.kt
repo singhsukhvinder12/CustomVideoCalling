@@ -16,6 +16,7 @@ import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.viewmodels.LoginViewModel
 import com.customvideocalling.views.MainActivity
+import com.customvideocalling.views.TeacherMainActivity
 import com.customvideocalling.views.VideoChatViewActivity
 import com.example.artha.model.CommonModel
 
@@ -133,7 +134,7 @@ class LoginActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
                             mJsonObject.addProperty("token", "")*/
                             loginViewModel.addDeviceToken(this, mJsonObject)
                             showToastSuccess(message)
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, TeacherMainActivity::class.java)
                             startActivity(intent)
                             finish()
 

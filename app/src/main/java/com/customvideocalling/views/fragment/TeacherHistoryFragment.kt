@@ -11,6 +11,7 @@ import com.customvideocalling.R
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.databinding.FragmentHomeBinding
+import com.customvideocalling.databinding.FragmentTeacherHomeBinding
 import com.customvideocalling.model.JobsResponse
 import com.customvideocalling.utils.DialogClass
 import com.customvideocalling.utils.DialogssInterface
@@ -18,26 +19,28 @@ import com.google.gson.JsonObject
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseFragment
 import com.customvideocalling.viewmodels.HomeViewModel
+import com.customvideocalling.viewmodels.TeacherHomeViewModel
 import com.customvideocalling.views.student.AddAppoitmentActivity
 import com.uniongoods.adapters.JobRequestsAdapter
 import com.uniongoods.adapters.StudentHistoryAdapter
+import com.uniongoods.adapters.TeacherHistoryAdapter
 
-class StudentHistoryFragment : BaseFragment(), DialogssInterface {
+class TeacherHistoryFragment : BaseFragment(), DialogssInterface {
     private var pendingJobsList = ArrayList<JobsResponse.Data>()
-    private var myStudentHistoryAdapter : StudentHistoryAdapter? = null
+    private var myTeacherHistoryAdapter : TeacherHistoryAdapter? = null
     private var confirmationDialog : Dialog? = null
     private var mDialogClass = DialogClass()
     private val mJobListObject = JsonObject()
     override fun getLayoutResId() : Int {
-        return R.layout.fragment_home
+        return R.layout.fragment_teacher_home
     }
 
-    private lateinit var fragmentHomeBinding : FragmentHomeBinding
-    private lateinit var homeViewModel : HomeViewModel
+    private lateinit var fragmentHomeBinding : FragmentTeacherHomeBinding
+    private lateinit var homeViewModel : TeacherHomeViewModel
     private val mJsonObject = JsonObject()
     override fun initView() {
-        fragmentHomeBinding = viewDataBinding as FragmentHomeBinding
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        fragmentHomeBinding = viewDataBinding as FragmentTeacherHomeBinding
+        homeViewModel = ViewModelProviders.of(this).get(TeacherHomeViewModel::class.java)
         fragmentHomeBinding.homeViewModel = homeViewModel
         baseActivity.startProgressDialog()
         fragmentHomeBinding.floatAdd.setOnClickListener {
@@ -82,12 +85,12 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
 
 
     private fun initRecyclerView() {
-        myStudentHistoryAdapter =
-            StudentHistoryAdapter(this@StudentHistoryFragment, pendingJobsList, activity!!)
+        myTeacherHistoryAdapter =
+            TeacherHistoryAdapter(this@TeacherHistoryFragment, pendingJobsList, activity!!)
         val linearLayoutManager = LinearLayoutManager(this.baseActivity)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         fragmentHomeBinding.rvJobs.layoutManager = linearLayoutManager
-        fragmentHomeBinding.rvJobs.adapter = myStudentHistoryAdapter
+        fragmentHomeBinding.rvJobs.adapter = myTeacherHistoryAdapter
         fragmentHomeBinding.rvJobs.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView : RecyclerView, dx : Int, dy : Int) {
 
