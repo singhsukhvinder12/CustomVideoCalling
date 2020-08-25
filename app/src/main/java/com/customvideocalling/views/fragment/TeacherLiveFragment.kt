@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.customvideocalling.Interfaces.CallBackResult
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.customvideocalling.R
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.constants.GlobalConstants
@@ -17,7 +18,6 @@ import com.customvideocalling.databinding.FragmentTeacherHomeBinding
 import com.customvideocalling.model.JobsResponse
 import com.customvideocalling.utils.DialogClass
 import com.customvideocalling.utils.DialogssInterface
-import com.google.gson.JsonObject
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseFragment
 import com.customvideocalling.viewmodels.HomeViewModel
@@ -26,6 +26,7 @@ import com.customvideocalling.views.VideoChatViewActivity
 import com.customvideocalling.views.student.AddAppoitmentActivity
 import com.example.artha.model.CommonModel
 import com.uniongoods.adapters.JobRequestsAdapter
+import com.google.gson.JsonObject
 import com.uniongoods.adapters.TeacherLiveAdapter
 
 class TeacherLiveFragment : BaseFragment(), DialogssInterface, CallBackResult.OnStartButtonClickCallBack,
@@ -37,6 +38,7 @@ CallBackResult.StartCallApiCallBack{
     private val mJobListObject = JsonObject()
     private var sharedPrefClass = SharedPrefClass()
     private var position = 0
+    private var userId = ""
     override fun getLayoutResId() : Int {
         return R.layout.fragment_teacher_home
     }
@@ -55,15 +57,27 @@ CallBackResult.StartCallApiCallBack{
         }
 
         if (UtilsFunctions.isNetworkConnected()) {
-            val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+            userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
             teacherHomeViewModel.getMyJobs(userId)
         } else {
             baseActivity.stopProgressDialog()
         }
 
+        fragmentTeacherHomeBinding.swipeContainer.setOnRefreshListener {
+            pendingJobsList.clear()
+            teacherHomeViewModel.getMyJobs(userId)
+        }
+
+
+        // Your code to refresh the list here.
+            // Make sure you call swipeContainer.setRefreshing(false)
+            // once the network request has completed successfully.
+
+
         teacherHomeViewModel.getJobs().observe(this,
             Observer<JobsResponse> { response->
                 baseActivity.stopProgressDialog()
+                fragmentTeacherHomeBinding.swipeContainer.isRefreshing = false
                 if (response != null) {
                     val message = response.message
                     when {
@@ -135,5 +149,16 @@ CallBackResult.StartCallApiCallBack{
 
     override fun onStartCallApiFailed(message: String) {
         baseActivity.showToastError(message)
+    }
+    override fun onResume() {
+        super.onResume()
+        if (UtilsFunctions.isNetworkConnected()) {
+            userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+            pendingJobsList.clear()
+            teacherHomeViewModel.getMyJobs(userId)
+
+        } else {
+            baseActivity.stopProgressDialog()
+        }
     }
 }

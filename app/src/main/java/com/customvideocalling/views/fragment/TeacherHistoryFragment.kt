@@ -31,6 +31,7 @@ class TeacherHistoryFragment : BaseFragment(), DialogssInterface {
     private var confirmationDialog : Dialog? = null
     private var mDialogClass = DialogClass()
     private val mJobListObject = JsonObject()
+    private var userId = ""
     override fun getLayoutResId() : Int {
         return R.layout.fragment_teacher_home
     }
@@ -48,15 +49,21 @@ class TeacherHistoryFragment : BaseFragment(), DialogssInterface {
             activity!!.startActivity(intent)
         }
         if (UtilsFunctions.isNetworkConnected()) {
-            val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+             userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
             homeViewModel.getMyJobsHistory(userId)
         } else {
             baseActivity.stopProgressDialog()
         }
 
+        fragmentHomeBinding.swipeContainer.setOnRefreshListener {
+            pendingJobsList.clear()
+            homeViewModel.getMyJobsHistory(userId)
+        }
+
         homeViewModel.getJobsHistory().observe(this,
             Observer<JobsResponse> { response->
                 baseActivity.stopProgressDialog()
+                fragmentHomeBinding.swipeContainer.isRefreshing = false
                 if (response != null) {
                     val message = response.message
                     when {
@@ -104,5 +111,16 @@ class TeacherHistoryFragment : BaseFragment(), DialogssInterface {
 
     override fun onDialogCancelAction(mView: View?, mKey: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (UtilsFunctions.isNetworkConnected()) {
+            userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+            pendingJobsList.clear()
+            homeViewModel.getMyJobsHistory(userId)
+        } else {
+            baseActivity.stopProgressDialog()
+        }
     }
 }
