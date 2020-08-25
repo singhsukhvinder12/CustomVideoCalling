@@ -24,16 +24,17 @@ import com.uniongoods.adapters.StudentHistoryAdapter
 
 class StudentHistoryFragment : BaseFragment(), DialogssInterface {
     private var pendingJobsList = ArrayList<JobsResponse.Data>()
-    private var myStudentHistoryAdapter : StudentHistoryAdapter? = null
-    private var confirmationDialog : Dialog? = null
+    private var myStudentHistoryAdapter: StudentHistoryAdapter? = null
+    private var confirmationDialog: Dialog? = null
     private var mDialogClass = DialogClass()
     private val mJobListObject = JsonObject()
-    override fun getLayoutResId() : Int {
+    var userId = ""
+    override fun getLayoutResId(): Int {
         return R.layout.fragment_home
     }
 
-    private lateinit var fragmentHomeBinding : FragmentHomeBinding
-    private lateinit var homeViewModel : HomeViewModel
+    private lateinit var fragmentHomeBinding: FragmentHomeBinding
+    private lateinit var homeViewModel: HomeViewModel
     private val mJsonObject = JsonObject()
     override fun initView() {
         fragmentHomeBinding = viewDataBinding as FragmentHomeBinding
@@ -45,15 +46,21 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
             activity!!.startActivity(intent)
         }
         if (UtilsFunctions.isNetworkConnected()) {
-            val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+            userId = SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
             homeViewModel.getMyJobsHistory(userId)
         } else {
             baseActivity.stopProgressDialog()
         }
 
+        fragmentHomeBinding.swipeContainer.setOnRefreshListener {
+            pendingJobsList.clear()
+            homeViewModel.getMyJobsHistory(userId)
+        }
+
         homeViewModel.getJobsHistory().observe(this,
-            Observer<JobsResponse> { response->
+            Observer<JobsResponse> { response ->
                 baseActivity.stopProgressDialog()
+                fragmentHomeBinding.swipeContainer.isRefreshing = false
                 if (response != null) {
                     val message = response.message
                     when {
@@ -67,7 +74,7 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
                              FirebaseFunctions.sendOTP("signup", mJsonObject, this)
                          }*/
                         else -> message?.let {
-                        //    UtilsFunctions.showToastError(it)
+                            //    UtilsFunctions.showToastError(it)
 
                             fragmentHomeBinding.rvJobs.visibility = View.GONE
                             fragmentHomeBinding.tvNoRecord.visibility = View.VISIBLE
@@ -89,7 +96,7 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
         fragmentHomeBinding.rvJobs.layoutManager = linearLayoutManager
         fragmentHomeBinding.rvJobs.adapter = myStudentHistoryAdapter
         fragmentHomeBinding.rvJobs.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView : RecyclerView, dx : Int, dy : Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
             }
         })
@@ -101,5 +108,16 @@ class StudentHistoryFragment : BaseFragment(), DialogssInterface {
 
     override fun onDialogCancelAction(mView: View?, mKey: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (UtilsFunctions.isNetworkConnected()) {
+            userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+            pendingJobsList.clear()
+            homeViewModel.getMyJobsHistory(userId)
+        } else {
+            baseActivity.stopProgressDialog()
+        }
     }
 }

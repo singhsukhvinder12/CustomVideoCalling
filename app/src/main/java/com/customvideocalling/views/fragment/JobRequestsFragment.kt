@@ -35,6 +35,7 @@ class JobRequestsFragment : BaseFragment(), DialogssInterface {
     private lateinit var fragmentHomeBinding : FragmentHomeBinding
     private lateinit var homeViewModel : HomeViewModel
     private val mJsonObject = JsonObject()
+    var userId = ""
     override fun initView() {
         fragmentHomeBinding = viewDataBinding as FragmentHomeBinding
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
@@ -46,15 +47,20 @@ class JobRequestsFragment : BaseFragment(), DialogssInterface {
         }
 
         if (UtilsFunctions.isNetworkConnected()) {
-            val userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+             userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
             homeViewModel.getMyJobs(userId)
         } else {
             baseActivity.stopProgressDialog()
+        }
+        fragmentHomeBinding.swipeContainer.setOnRefreshListener {
+            pendingJobsList.clear()
+            homeViewModel.getMyJobs(userId)
         }
 
         homeViewModel.getJobs().observe(this,
             Observer<JobsResponse> { response->
                 baseActivity.stopProgressDialog()
+                fragmentHomeBinding.swipeContainer.isRefreshing = false
                 if (response != null) {
                     val message = response.message
                     when {
@@ -102,5 +108,16 @@ class JobRequestsFragment : BaseFragment(), DialogssInterface {
 
     override fun onDialogCancelAction(mView: View?, mKey: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (UtilsFunctions.isNetworkConnected()) {
+            userId =  SharedPrefClass().getPrefValue(activity!!, GlobalConstants.USERID) as String
+            pendingJobsList.clear()
+            homeViewModel.getMyJobs(userId)
+        } else {
+            baseActivity.stopProgressDialog()
+        }
     }
 }
