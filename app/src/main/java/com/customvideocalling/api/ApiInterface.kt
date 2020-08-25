@@ -71,4 +71,13 @@ interface ApiInterface {
 
     @POST("changeStatus")
     fun hitAcceptRejectApi(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @GET("tTokenHistory/{id}")
+    fun getTeacherTokenHistoryList(@Path("id") id: String):Call<TokenHistoryListResponse>
+
+    @POST("addSchudle")
+    fun hitAddScheduleApi(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @GET("getAllSchedule/{id}")
+    fun getScheduleList(@Path("id") id: String):Call<ScheduleListResponse>
 }

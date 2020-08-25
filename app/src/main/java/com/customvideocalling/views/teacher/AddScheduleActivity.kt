@@ -6,15 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.adapters.TimeDropdownAdapter
+import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.databinding.ActivityAddScheduleBinding
 import com.customvideocalling.model.DaysModel
 import com.customvideocalling.model.TimesModel
 import com.customvideocalling.utils.DateTimeUtil
+import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
+import com.customvideocalling.viewmodels.AddScheduleViewModel
+import com.customvideocalling.viewmodels.TeacherNotificationViewModel
+import com.example.artha.model.CommonModel
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.uniongoods.adapters.DaysListAdapter
 import com.uniongoods.adapters.TimeListAdapter
@@ -22,32 +31,50 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddScheduleActivity : BaseActivity(), View.OnClickListener {
+class AddScheduleActivity : BaseActivity(), View.OnClickListener, CallBackResult.AddScheduleCallBack {
 
     var binding:ActivityAddScheduleBinding?=null
+    private lateinit var addScheduleViewModel: AddScheduleViewModel
+    private var sharedPrefClass = SharedPrefClass()
     var daysList:ArrayList<DaysModel>?=null
     var timeList:ArrayList<TimesModel>?=null
    lateinit var pw:PopupWindow
    lateinit var pw2:PopupWindow
+    private var startDate = ""
+    private var endDate = ""
+    private var daysListFinal: ArrayList<DaysModel>?=null
+    private var timeListFinal: ArrayList<TimesModel>?=null
 
     override fun initViews() {
         binding=viewDataBinding as ActivityAddScheduleBinding
+        addScheduleViewModel = ViewModelProviders.of(this).get(AddScheduleViewModel::class.java)
+        binding!!.commonToolBar.toolbarText.setText("Add Schedule")
+        binding!!.commonToolBar.toolbarBack.setOnClickListener(this)
         daysList= ArrayList<DaysModel>()
 
         daysList!!.add(DaysModel("Sunday","false"))
         daysList!!.add(DaysModel("Monday","false"))
         daysList!!.add(DaysModel("Tuesday","false"))
         daysList!!.add(DaysModel("Wednesday","false"))
-        daysList!!.add(DaysModel("Thusday","false"))
+        daysList!!.add(DaysModel("Thursday","false"))
         daysList!!.add(DaysModel("Friday","false"))
         daysList!!.add(DaysModel("Saturday","false"))
 
         timeList= ArrayList<TimesModel>()
-        timeList!!.add(TimesModel("7:00AM","false"))
-        timeList!!.add(TimesModel("7:00AM","false"))
-        timeList!!.add(TimesModel("7:00AM","false"))
-        timeList!!.add(TimesModel("7:00AM","false"))
-        timeList!!.add(TimesModel("7:00AM","false"))
+        timeList!!.add(TimesModel("07:00 AM","false"))
+        timeList!!.add(TimesModel("08:00 AM","false"))
+        timeList!!.add(TimesModel("09:00 AM","false"))
+        timeList!!.add(TimesModel("10:00 AM","false"))
+        timeList!!.add(TimesModel("11:00 AM","false"))
+        timeList!!.add(TimesModel("12:00 PM","false"))
+        timeList!!.add(TimesModel("01:00 PM","false"))
+        timeList!!.add(TimesModel("02:00 PM","false"))
+        timeList!!.add(TimesModel("03:00 PM","false"))
+        timeList!!.add(TimesModel("04:00 PM","false"))
+        timeList!!.add(TimesModel("05:00 PM","false"))
+        timeList!!.add(TimesModel("06:00 PM","false"))
+        timeList!!.add(TimesModel("07:00 PM","false"))
+        timeList!!.add(TimesModel("08:00 PM","false"))
 
 
 
@@ -55,6 +82,7 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
         binding!!.relSpinnerTime.setOnClickListener(this)
         binding!!.tvStartDate.setOnClickListener(this)
         binding!!.tvEndDate.setOnClickListener(this)
+        binding!!.btnAddSchedule.setOnClickListener(this)
 
 
 
@@ -96,9 +124,11 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
     fun updateValue(){
 
         var multipleValue=""
+        daysListFinal = ArrayList()
         for ( i in 0 until daysList!!.size){
 
             if (daysList!!.get(i).isSelected.equals("true")){
+                daysListFinal!!.add(daysList!!.get(i))
                 if (multipleValue.isEmpty()){
                     multipleValue=daysList!!.get(i).name
                 }else{
@@ -121,9 +151,11 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
     fun updateValueForTime(){
 
         var multipleValue=""
+        timeListFinal = ArrayList()
         for ( i in 0 until timeList!!.size){
 
             if (timeList!!.get(i).isSelected.equals("true")){
+                timeListFinal!!.add(timeList!!.get(i))
                 if (multipleValue.isEmpty()){
                     multipleValue=timeList!!.get(i).name
                 }else{
@@ -150,6 +182,9 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
+                R.id.toolbar_back -> {
+                    finish()
+                }
             R.id.rel_spinner_days->{
                 pw!!.showAsDropDown(binding!!.relSpinnerDays)
             }
@@ -163,9 +198,44 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
             R.id.tvEndDate->{
                 endDateDatePicker()
             }
+            R.id.btn_add_schedule ->{
+                if (daysListFinal == null ||daysListFinal!!.isEmpty()){
+                    showToastError("Please select days")
+                }
+                else if(timeListFinal == null || timeListFinal!!.isEmpty()){
+                    showToastError("Please select slot time")
+                }else if(startDate.isEmpty()){
+                    showToastError("Please select start date")
+                }else if (endDate.isEmpty()){
+                    showToastError("Please select end date")
+                }
+                else {
+                    startProgressDialog()
+                    val gson = GsonBuilder().setPrettyPrinting().create()
+                    val array = JsonArray()
+                    for (i in 0 until daysListFinal!!.size) {
+                        array.add(daysListFinal!![i].name)
+                    }
+                    val gsonTime = GsonBuilder().setPrettyPrinting().create()
+                    val arrayTime = JsonArray()
+                    for (i in 0 until timeListFinal!!.size) {
+                        arrayTime.add(timeListFinal!![i].name)
+                    }
+                    val mJsonObject = JsonObject()
+                    mJsonObject.addProperty(
+                        "teacherId",
+                        sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString()
+                    )
+                    mJsonObject.addProperty("slotsTime", gsonTime.toJson(arrayTime))
+                    mJsonObject.addProperty("slotsday", gson.toJson(array))
+                    mJsonObject.addProperty("fromDate", startDate)
+                    mJsonObject.addProperty("toDate", endDate)
+                    addScheduleViewModel.hitAddSchedule(this, mJsonObject)
+                }
+            }
         }
     }
-    private var date = ""
+
     fun selectDatePicker() {
         val calendar = Calendar.getInstance()
         val calendar2 = Calendar.getInstance()
@@ -182,7 +252,7 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
                 showToastError("Please select future date")
             } else {
                 //strDate = sdf.format(calendar.time)
-                date = sdf2.format(calendar.time)
+                startDate = sdf2.format(calendar.time)
                 binding!!.tvStartDate.setText(sdf.format(calendar.time))
                 val mJsonObject = JsonObject()
 //                mJsonObject.addProperty("subjectId", subjectId)
@@ -214,7 +284,7 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
                 showToastError("Please select future date")
             } else {
                 //strDate = sdf.format(calendar.time)
-                date = sdf2.format(calendar.time)
+                endDate = sdf2.format(calendar.time)
                 binding!!.tvEndDate.setText(sdf.format(calendar.time))
                 val mJsonObject = JsonObject()
 //                mJsonObject.addProperty("subjectId", subjectId)
@@ -228,6 +298,15 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         dpDialog.show()
+    }
+
+    override fun onAddScheduleSuccess(response: CommonModel) {
+        stopProgressDialog()
+        finish()
+    }
+
+    override fun onAddScheduleFailed(message: String) {
+        showToastError(message)
     }
 
 }

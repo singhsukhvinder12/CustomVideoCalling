@@ -20,6 +20,7 @@ import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
 import com.customvideocalling.viewmodels.SignUpViewModel
 import com.customvideocalling.views.MainActivity
+import com.customvideocalling.views.TeacherMainActivity
 import com.customvideocalling.views.student.AddTokentActivity
 import com.example.artha.model.CommonModel
 import com.google.gson.GsonBuilder
@@ -210,10 +211,17 @@ class SignUpActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack, Ca
                         mJsonObject.addProperty("token", "")*/
                         signUpViewModel.addDeviceToken(this, mJsonObject)
                         showToastSuccess(message)
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
+                        if (loginResponse!!.result!!.type == 1){
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }else{
+                            val intent = Intent(this, TeacherMainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
                         finish()
 
                     } else {

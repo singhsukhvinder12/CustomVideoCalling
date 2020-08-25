@@ -54,7 +54,9 @@ class ProfileActivity : BaseActivity() {
         //profileBinding.commonToolBar.imgRight.setImageResource(R.drawable.ic_nav_edit_icon)
         profileBinding.commonToolBar.toolbarText.text =
             resources.getString(R.string.view_profile)
-
+        profileBinding!!.commonToolBar.toolbarBack.setOnClickListener {
+            finish()
+        }
         // makeEnableDisableViews(false)
         mJsonObject.addProperty(
             "id", "id"/* sharedPrefClass!!.getPrefValue(

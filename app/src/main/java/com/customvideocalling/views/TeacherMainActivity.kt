@@ -28,13 +28,16 @@ import com.customvideocalling.views.fragment.JobRequestsFragment
 import com.customvideocalling.views.fragment.StudentHistoryFragment
 import com.customvideocalling.views.student.AddTokentActivity
 import com.customvideocalling.views.student.TokenHistoryActivity
+import com.customvideocalling.views.teacher.AddScheduleActivity
+import com.customvideocalling.views.teacher.ScheduleListActivity
+import com.customvideocalling.views.teacher.TeacherNotificationListActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_custom_alert.*
 
 
-class TeacherMainActivity : BaseActivity() {
+class TeacherMainActivity : BaseActivity(), View.OnClickListener {
     private var activityTeacherMainBinding: ActivityTeacherMainBinding? = null
     var teacherMainViewModel: TeacherMainViewModel? = null
     private var navigationView: NavigationView? = null
@@ -59,11 +62,13 @@ class TeacherMainActivity : BaseActivity() {
         teacherMainViewModel = ViewModelProviders.of(this).get(TeacherMainViewModel::class.java)
         activityTeacherMainBinding!!.mainViewModel = teacherMainViewModel
 
-        activityTeacherMainBinding!!.commonToolBar.toolbarBack.setImageResource(R.drawable.ic_sidebar)
+        activityTeacherMainBinding!!.commonToolBar.toolbarNavigationBtn.visibility=View.VISIBLE
+        activityTeacherMainBinding!!.commonToolBar.toolbarBack.visibility=View.GONE
         activityTeacherMainBinding!!.commonToolBar.toolbarRightImage.visibility = View.VISIBLE
         activityTeacherMainBinding!!.commonToolBar.toolbarRightImage.setImageResource(R.drawable.ic_notifications)
         activityTeacherMainBinding!!.commonToolBar.toolbarText.text =
             resources.getString(R.string.home)
+
 
         activityTeacherMainBinding!!.tabs.addTab(
             activityTeacherMainBinding!!.tabs!!.newTab().setText("Active")
@@ -141,6 +146,13 @@ class TeacherMainActivity : BaseActivity() {
             this, Observer<String>(function =
             fun(it: String?) {
                 when (it) {
+                    "toolbar_navigationBtn"->{
+                        drawer!!.openDrawer(Gravity.LEFT)
+                    }
+                    "toolbar_right_image" ->{
+                        val intent = Intent(this, TeacherNotificationListActivity::class.java)
+                        startActivity(intent)
+                    }
                     "img_right" -> {
                         /* val intent = Intent(this, NotificationsListActivity::class.java)
                  startActivity(intent)*/
@@ -154,10 +166,16 @@ class TeacherMainActivity : BaseActivity() {
                     "tv_nav_history" -> {
                         val intent = Intent(this, TokenHistoryActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
-                    "tv_add_token" -> {
-                        val intent = Intent(this, AddTokentActivity::class.java)
+                    "tv_add_schedule" -> {
+                        val intent = Intent(this, ScheduleListActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "tv_nav_home" -> {
                         if (drawer!!.isDrawerOpen(GravityCompat.START)) {
@@ -171,6 +189,9 @@ class TeacherMainActivity : BaseActivity() {
                     "ivProfile" -> {
                         val intent = Intent(this, ProfileActivity::class.java)
                         startActivity(intent)
+                        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+                            drawer!!.closeDrawer(Gravity.LEFT) //CLOSE Nav Drawer!
+                        }
                     }
                     "img_nav_cancel" -> {
                         if (drawer!!.isDrawerOpen(GravityCompat.START)) {
@@ -271,6 +292,15 @@ class TeacherMainActivity : BaseActivity() {
             text2.setBackgroundResource(R.drawable.shape_right_round_yellow)
             text2.setTypeface(text2.getTypeface(), Typeface.NORMAL);
 
+        }
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0!!.id) {
+            R.id.toolbar_right_image -> {
+                val intent = Intent(this, TeacherNotificationListActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 }
