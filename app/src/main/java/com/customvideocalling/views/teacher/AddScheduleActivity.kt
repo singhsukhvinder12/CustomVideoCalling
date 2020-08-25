@@ -52,13 +52,13 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener, CallBackResult
         binding!!.commonToolBar.toolbarBack.setOnClickListener(this)
         daysList= ArrayList<DaysModel>()
 
-        daysList!!.add(DaysModel("Sunday","false"))
-        daysList!!.add(DaysModel("Monday","false"))
-        daysList!!.add(DaysModel("Tuesday","false"))
-        daysList!!.add(DaysModel("Wednesday","false"))
-        daysList!!.add(DaysModel("Thursday","false"))
-        daysList!!.add(DaysModel("Friday","false"))
-        daysList!!.add(DaysModel("Saturday","false"))
+        daysList!!.add(DaysModel("Sunday","sun","false"))
+        daysList!!.add(DaysModel("Monday","mon","false"))
+        daysList!!.add(DaysModel("Tuesday","tue","false"))
+        daysList!!.add(DaysModel("Wednesday","wed","false"))
+        daysList!!.add(DaysModel("Thursday","thu","false"))
+        daysList!!.add(DaysModel("Friday","fri","false"))
+        daysList!!.add(DaysModel("Saturday","sat","false"))
 
         timeList= ArrayList<TimesModel>()
         timeList!!.add(TimesModel("07:00 AM","false"))
@@ -214,7 +214,7 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener, CallBackResult
                     val gson = GsonBuilder().setPrettyPrinting().create()
                     val array = JsonArray()
                     for (i in 0 until daysListFinal!!.size) {
-                        array.add(daysListFinal!![i].name)
+                        array.add(daysListFinal!![i].apiName)
                     }
                     val gsonTime = GsonBuilder().setPrettyPrinting().create()
                     val arrayTime = JsonArray()

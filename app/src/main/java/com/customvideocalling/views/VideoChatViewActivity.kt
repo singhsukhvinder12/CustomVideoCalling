@@ -2,6 +2,8 @@ package com.customvideocalling.views
 
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
@@ -16,14 +18,21 @@ import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
+import com.customvideocalling.constants.GlobalConstants
+import com.customvideocalling.utils.SharedPrefClass
+import com.customvideocalling.viewmodels.TeacherHomeViewModel
+import com.example.artha.model.CommonModel
+import com.google.gson.JsonObject
 import io.agora.rtc.IRtcEngineEventHandler
 import io.agora.rtc.RtcEngine
 import io.agora.rtc.video.VideoCanvas
 import io.agora.rtc.video.VideoEncoderConfiguration
 
 
-class VideoChatViewActivity : AppCompatActivity() {
+class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCallBack {
     private var mRtcEngine: RtcEngine? = null
     private var mCallEnd = false
     private var mMuted = false
@@ -36,6 +45,8 @@ class VideoChatViewActivity : AppCompatActivity() {
     private var mSwitchCameraBtn: ImageView? = null
     private var accessToken = ""
     private var channelName = ""
+    private lateinit var teacherHomeViewModel : TeacherHomeViewModel
+    private var sharedPrefClass = SharedPrefClass()
 
     // Customized logger view
 
@@ -164,6 +175,7 @@ class VideoChatViewActivity : AppCompatActivity() {
     protected override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_chat_view)
+        teacherHomeViewModel = ViewModelProviders.of(this).get(TeacherHomeViewModel::class.java)
         initUI()
         if (intent.hasExtra("channelName")) {
             val extras = intent.extras
@@ -377,9 +389,16 @@ class VideoChatViewActivity : AppCompatActivity() {
     }
 
     private fun endCall() {
-        removeLocalVideo()
-        removeRemoteVideo()
-        leaveChannel()
+        if (sharedPrefClass.getPrefValue(this,GlobalConstants.TYPE)=="1") {
+            removeLocalVideo()
+            removeRemoteVideo()
+            leaveChannel()
+            finish()
+        }else{
+            val mJsonObject = JsonObject()
+            mJsonObject.addProperty("channelName",channelName)
+            teacherHomeViewModel.endCallApi(this, mJsonObject)
+        }
     }
 
     private fun removeLocalVideo() {
@@ -407,5 +426,16 @@ class VideoChatViewActivity : AppCompatActivity() {
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
+    }
+
+    override fun onEndCallApiSuccess(response: CommonModel) {
+        removeLocalVideo()
+        removeRemoteVideo()
+        leaveChannel()
+        finish()
+    }
+
+    override fun onEndCallApiFailed(message: String) {
+       Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,12 +1,14 @@
 package com.customvideocalling.views.fragment
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.constants.GlobalConstants
@@ -22,15 +24,19 @@ import com.customvideocalling.viewmodels.HomeViewModel
 import com.customvideocalling.viewmodels.TeacherHomeViewModel
 import com.customvideocalling.views.VideoChatViewActivity
 import com.customvideocalling.views.student.AddAppoitmentActivity
+import com.example.artha.model.CommonModel
 import com.uniongoods.adapters.JobRequestsAdapter
 import com.uniongoods.adapters.TeacherLiveAdapter
 
-class TeacherLiveFragment : BaseFragment(), DialogssInterface {
+class TeacherLiveFragment : BaseFragment(), DialogssInterface, CallBackResult.OnStartButtonClickCallBack,
+CallBackResult.StartCallApiCallBack{
     private var pendingJobsList = ArrayList<JobsResponse.Data>()
     private var mTeacherLiveAdapter : TeacherLiveAdapter? = null
     private var confirmationDialog : Dialog? = null
     private var mDialogClass = DialogClass()
     private val mJobListObject = JsonObject()
+    private var sharedPrefClass = SharedPrefClass()
+    private var position = 0
     override fun getLayoutResId() : Int {
         return R.layout.fragment_teacher_home
     }
@@ -87,7 +93,7 @@ class TeacherLiveFragment : BaseFragment(), DialogssInterface {
 
     private fun initRecyclerView() {
         mTeacherLiveAdapter =
-            TeacherLiveAdapter(this@TeacherLiveFragment, pendingJobsList, activity!!)
+            TeacherLiveAdapter(this@TeacherLiveFragment, pendingJobsList, activity!!,this)
         val linearLayoutManager = LinearLayoutManager(this.baseActivity)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         fragmentTeacherHomeBinding.rvJobs.layoutManager = linearLayoutManager
@@ -104,6 +110,30 @@ class TeacherLiveFragment : BaseFragment(), DialogssInterface {
     }
 
     override fun onDialogCancelAction(mView: View?, mKey: String) {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun onStartCallClick(pos: Int) {
+        position = pos
+        val mJsonObject = JsonObject()
+        mJsonObject.addProperty("classId", "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
+        mJsonObject.addProperty("subjectId", "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
+        mJsonObject.addProperty("topicId", "2ea15426-ee5f-4c3a-bc83-45eca850036d")
+        mJsonObject.addProperty("sectionId", "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
+        mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(activity as Context, GlobalConstants.USERID).toString())
+        mJsonObject.addProperty("studentId", pendingJobsList[pos].userId)
+        mJsonObject.addProperty("bookingId", pendingJobsList[pos].id)
+        teacherHomeViewModel.startCallApi(this, mJsonObject)
+    }
+
+    override fun onStartCallApiSuccess(response: CommonModel) {
+        val intent = Intent(activity, VideoChatViewActivity::class.java)
+        intent.putExtra("channelName", pendingJobsList[position].channelName)
+        intent.putExtra("accessToken", pendingJobsList[position].accessToken)
+        startActivity(intent)
+    }
+
+    override fun onStartCallApiFailed(message: String) {
+        baseActivity.showToastError(message)
     }
 }

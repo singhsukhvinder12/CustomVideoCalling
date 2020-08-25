@@ -3,10 +3,12 @@ package com.customvideocalling.viewmodels
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.common.UtilsFunctions
 import com.customvideocalling.model.JobsResponse
 import com.customvideocalling.repositories.HomeJobsRepository
 import com.customvideocalling.repositories.TeacherHomeJobsRepository
+import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
 
 class TeacherHomeViewModel : BaseViewModel() {
@@ -15,6 +17,7 @@ class TeacherHomeViewModel : BaseViewModel() {
     private var teacherHomeRepository = TeacherHomeJobsRepository()
     private var jobsListResponse = MutableLiveData<JobsResponse>()
     private var jobsHistoryResponse = MutableLiveData<JobsResponse>()
+    private var startCallResponse = MutableLiveData<CommonModel>()
     //  private var acceptRejectJob = MutableLiveData<CommonModel>()
     //  private var startCompleteJob = MutableLiveData<CommonModel>()
 
@@ -60,6 +63,20 @@ class TeacherHomeViewModel : BaseViewModel() {
     fun getMyJobsHistory(userid: String) {
         if (UtilsFunctions.isNetworkConnected()) {
             jobsListResponse = teacherHomeRepository.getMyJobsHistoryList(userid)
+            mIsUpdating.postValue(true)
+        }
+    }
+
+    fun startCallApi(callBack: CallBackResult.StartCallApiCallBack,mJsonObject: JsonObject ) {
+        if (UtilsFunctions.isNetworkConnected()) {
+            startCallResponse = teacherHomeRepository.startCallApi(callBack, mJsonObject)
+            mIsUpdating.postValue(true)
+        }
+    }
+
+    fun endCallApi(callBack: CallBackResult.EndCallApiCallBack,mJsonObject: JsonObject ) {
+        if (UtilsFunctions.isNetworkConnected()) {
+            startCallResponse = teacherHomeRepository.endCallApi(callBack, mJsonObject)
             mIsUpdating.postValue(true)
         }
     }

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.databinding.RequestItemBinding
 import com.customvideocalling.model.JobsResponse
@@ -22,16 +23,19 @@ import com.customvideocalling.views.fragment.TeacherLiveFragment
 class TeacherLiveAdapter(
         context: TeacherLiveFragment,
         jobsList: ArrayList<JobsResponse.Data>,
-        var activity: Context
+        var activity: Context,
+        var callBack: CallBackResult.OnStartButtonClickCallBack
 ) :
         RecyclerView.Adapter<TeacherLiveAdapter.ViewHolder>() {
     private val mContext: TeacherLiveFragment
     private var viewHolder: ViewHolder? = null
     private var jobsList: ArrayList<JobsResponse.Data>
+    private var callBackButton: CallBackResult.OnStartButtonClickCallBack?=null
 
     init {
         this.mContext = context
         this.jobsList = jobsList
+        this.callBackButton = callBack
     }
 
     @NonNull
@@ -48,16 +52,18 @@ class TeacherLiveAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         viewHolder = holder
+        if (jobsList[position].status == 0){
+            holder.binding!!.button.visibility = View.VISIBLE
+        }else{
+            holder.binding!!.button.visibility = View.GONE
+        }
         //holder.binding!!.tvAddress.text = jobsList!![position]
         holder.binding!!.tvFromLocationName.text = jobsList[position].bookingDate
         holder.binding!!.tvTime.text = jobsList[position].timeSlot
       //  if (jobsList[position].channelName!!.isNotEmpty() && jobsList[position].accessToken!!.isNotEmpty()){
         holder.binding!!.button.text = "Start"
             holder.binding!!.button.setOnClickListener {
-                val intent = Intent(activity, VideoChatViewActivity::class.java)
-                intent.putExtra("channelName", jobsList[position].channelName)
-                intent.putExtra("accessToken", jobsList[position].accessToken)
-                activity.startActivity(intent)
+               callBackButton!!.onStartCallClick(position)
             }
       //  }
 

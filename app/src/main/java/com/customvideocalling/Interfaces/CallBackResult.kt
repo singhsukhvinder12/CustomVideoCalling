@@ -71,4 +71,18 @@ class CallBackResult {
         fun onScheduleListSuccess(response: ScheduleListResponse)
         fun onScheduleListFailed(message: String)
     }
+
+    interface OnStartButtonClickCallBack {
+        fun onStartCallClick(pos: Int)
+    }
+
+    interface StartCallApiCallBack {
+        fun onStartCallApiSuccess(response: CommonModel)
+        fun onStartCallApiFailed(message: String)
+    }
+
+    interface EndCallApiCallBack {
+        fun onEndCallApiSuccess(response: CommonModel)
+        fun onEndCallApiFailed(message: String)
+    }
 }

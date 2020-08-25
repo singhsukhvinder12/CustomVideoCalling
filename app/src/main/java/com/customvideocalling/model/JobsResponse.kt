@@ -28,6 +28,9 @@ class JobsResponse {
         @SerializedName("bookingDate")
         @Expose
         var bookingDate : String? = null
+        @SerializedName("userId")
+        @Expose
+        var userId : String? = null
         @SerializedName("teacherId")
         @Expose
         var teacherId : String? = null

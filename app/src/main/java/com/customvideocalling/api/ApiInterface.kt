@@ -80,4 +80,10 @@ interface ApiInterface {
 
     @GET("getAllSchedule/{id}")
     fun getScheduleList(@Path("id") id: String):Call<ScheduleListResponse>
+
+    @POST("startPrivateClass")
+    fun startCallApi(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @POST("completeClass")
+    fun endCallApi(@Body jsonObject:JsonObject):Call<CommonModel>
 }
