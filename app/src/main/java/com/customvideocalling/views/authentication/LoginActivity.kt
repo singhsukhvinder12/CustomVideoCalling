@@ -45,7 +45,7 @@ class LoginActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
             when (it) {
 
                 "tv_signup" ->{
-                    val i = Intent(applicationContext, SignUpActivity::class.java)
+                    val i = Intent(applicationContext, ChooseUserTypeActivity::class.java)
                     startActivity(i)
                 }
                 "btn_login" -> {

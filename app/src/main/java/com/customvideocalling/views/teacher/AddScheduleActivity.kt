@@ -48,7 +48,7 @@ class AddScheduleActivity : BaseActivity(), View.OnClickListener, CallBackResult
     override fun initViews() {
         binding=viewDataBinding as ActivityAddScheduleBinding
         addScheduleViewModel = ViewModelProviders.of(this).get(AddScheduleViewModel::class.java)
-        binding!!.commonToolBar.toolbarText.setText("Add Schedule")
+        binding!!.commonToolBar.toolbarText.setText(getString(R.string.add_schedule))
         binding!!.commonToolBar.toolbarBack.setOnClickListener(this)
         daysList= ArrayList<DaysModel>()
 

@@ -15,7 +15,6 @@ import com.customvideocalling.adapters.SubjectListDropdownAdapter
 import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.databinding.ActivityAddAppoitmentBinding
 import com.customvideocalling.databinding.ActivityLoginBinding
-import com.customvideocalling.generated.callback.OnClickListener
 import com.customvideocalling.model.ClassSubjectListResponse
 import com.customvideocalling.model.SlotListResponse
 import com.customvideocalling.utils.DateTimeUtil
@@ -129,6 +128,7 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
                     mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString())
                     mJsonObject.addProperty("subjectId", subjectId)
                     mJsonObject.addProperty("time", selectedSlot)
+                    mJsonObject.addProperty("credit", "30")
                     bookingAddStudentViewModel.hitAddBookingApi(this,mJsonObject)
                 }
 

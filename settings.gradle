@@ -1,2 +1,4 @@
+include ':libagorartc'
+include ':screensharing'
 include ':app'
-rootProject.name = "SecretMenu"
+rootProject.name = "CustomVideoCalling"

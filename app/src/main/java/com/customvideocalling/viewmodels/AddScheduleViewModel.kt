@@ -13,6 +13,7 @@ import com.example.artha.model.CommonModel
 class AddScheduleViewModel : BaseViewModel() {
     private var data: MutableLiveData<ScheduleListResponse>? = null
     private var data1: MutableLiveData<CommonModel>? = null
+    private var dataScheduleDetail: MutableLiveData<ScheduleDetailResponse>? = null
     private var addScheduleRepository = AddScheduleRepository()
     private val mIsUpdating = MutableLiveData<Boolean>()
     private val btnClick = MutableLiveData<String>()
@@ -43,6 +44,13 @@ class AddScheduleViewModel : BaseViewModel() {
     fun hitAddSchedule(callBack: CallBackResult.AddScheduleCallBack, jsonObject:JsonObject) {
         if (UtilsFunctions.isNetworkConnected()) {
             data1 = addScheduleRepository.hitAddSchedule(callBack, jsonObject)
+            mIsUpdating.postValue(true)
+        }
+    }
+
+    fun scheduleDetailAPi(callBack: CallBackResult.ScheduleDetailCallBack, jsonObject:JsonObject) {
+        if (UtilsFunctions.isNetworkConnected()) {
+            dataScheduleDetail = addScheduleRepository.scheduleDetailApi(callBack, jsonObject)
             mIsUpdating.postValue(true)
         }
     }

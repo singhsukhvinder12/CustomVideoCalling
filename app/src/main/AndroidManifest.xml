@@ -20,8 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".views.teacher.ScheduleListActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".views.teacher.FeedBackActivity"></activity>
+        <activity android:name=".views.authentication.TeacherSignupActivity" />
+        <activity android:name=".views.authentication.ChooseUserTypeActivity" />
+        <activity android:name=".views.teacher.ScheduleDetailActivity" />
+        <activity
+            android:name=".views.teacher.ScheduleListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.teacher.AddScheduleActivity"
             android:screenOrientation="portrait" />

@@ -38,7 +38,7 @@ CallBackResult.TeacherAcceptRejectCallBack, CallBackResult.TeacherAcceptRejectAp
     override fun initViews() {
         activityTeacherNotificationListBinding = DataBindingUtil.setContentView(this, R.layout.activity_teacher_notification_list)
         teacherNotificationViewModel = ViewModelProviders.of(this).get(TeacherNotificationViewModel::class.java)
-        activityTeacherNotificationListBinding.toolBar.toolbarText.setText("Requests")
+        activityTeacherNotificationListBinding.toolBar.toolbarText.setText(getString(R.string.requests))
         activityTeacherNotificationListBinding.toolBar.toolbarBack.setOnClickListener(this)
         notificationList = ArrayList()
         teacherNotificationViewModel.getNotificationListTeacherList(this, sharedPrefClass.getPrefValue(this,

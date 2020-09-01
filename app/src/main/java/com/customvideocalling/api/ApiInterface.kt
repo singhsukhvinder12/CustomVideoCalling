@@ -6,8 +6,11 @@ package com.customvideocalling.api
 import com.customvideocalling.model.*
 import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.util.HashMap
 
 interface ApiInterface {
 
@@ -24,8 +27,16 @@ interface ApiInterface {
     @POST("sRegister")
     fun callStudentSignUp(@Body jsonObject:JsonObject):Call<JsonObject>
 
-    @POST("tRegister")
-    fun callTeacherSignUp(@Body jsonObject:JsonObject):Call<JsonObject>
+   /* @POST("tRegister")
+    fun callTeacherSignUp(@Body jsonObject:JsonObject):Call<JsonObject>*/
+    @Multipart
+    @POST("tSignup")
+    fun callTeacherSignUp(@PartMap params: HashMap<String, RequestBody>,
+                          @Part licenseImage: MultipartBody.Part?,
+                          @Part document: MultipartBody.Part?,
+                          @Part report: MultipartBody.Part?,
+                          @Part cv: MultipartBody.Part?):Call<JsonObject>
+
 
     @POST("auth/logout/")
     fun callLogout(@Body mJsonObject:JsonObject):Call<JsonObject>
@@ -78,6 +89,9 @@ interface ApiInterface {
     @POST("addSchudle")
     fun hitAddScheduleApi(@Body jsonObject:JsonObject):Call<CommonModel>
 
+    @POST("getScheduleDetails")
+    fun getScheduleDetail(@Body jsonObject:JsonObject):Call<ScheduleDetailResponse>
+
     @GET("getAllSchedule/{id}")
     fun getScheduleList(@Path("id") id: String):Call<ScheduleListResponse>
 
@@ -86,4 +100,10 @@ interface ApiInterface {
 
     @POST("completeClass")
     fun endCallApi(@Body jsonObject:JsonObject):Call<CommonModel>
+
+    @GET("tRegisterList")
+    fun getFacultyDesignation():Call<facultyDesignationResponse>
+
+    @POST("feedbackToStudent")
+    fun addFeedback(@Body jsonObject:JsonObject):Call<CommonModel>
 }

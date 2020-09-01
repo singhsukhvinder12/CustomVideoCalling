@@ -243,6 +243,134 @@
 
     </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/rel_spinner_faculty"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:visibility="gone"
+            android:padding="@dimen/dp_2"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            tools:ignore="UnusedAttribute">
+
+
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_down"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+            <Spinner
+                android:id="@+id/sp_faculty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow"
+                android:background="@drawable/edittext_round_layout"
+                tools:ignore="RtlHardcoded,UnusedAttribute" />
+        </RelativeLayout>
+        <View
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@color/gray"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"/>
+
+        <RelativeLayout
+            android:id="@+id/rel_spinner_designation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:visibility="gone"
+            android:padding="@dimen/dp_2"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            tools:ignore="UnusedAttribute">
+
+
+            <ImageView
+                android:id="@+id/iv_arrow_designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_down"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+            <Spinner
+                android:id="@+id/sp_designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow_designation"
+                android:background="@drawable/edittext_round_layout"
+                tools:ignore="RtlHardcoded,UnusedAttribute" />
+        </RelativeLayout>
+        <View
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@color/gray"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"/>
+        <RelativeLayout
+            android:id="@+id/rel_spinner_subject"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:visibility="gone"
+            android:padding="@dimen/dp_2"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            tools:ignore="UnusedAttribute">
+
+
+            <ImageView
+                android:id="@+id/iv_arrow_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_down"
+                tools:ignore="ContentDescription,RtlHardcoded,VectorDrawableCompat" />
+
+            <Spinner
+                android:id="@+id/sp_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow_subject"
+                android:background="@drawable/edittext_round_layout"
+                tools:ignore="RtlHardcoded,UnusedAttribute" />
+        </RelativeLayout>
+        <View
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@color/gray"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"/>
+
         <Button
             android:id="@+id/btn_select_questionnaire"
             android:layout_width="match_parent"

@@ -30,5 +30,7 @@ object GlobalConstants {
     val TYPE = "type"
     @JvmStatic
     val DEVICETOKEN = "deviceToken"
+    @JvmStatic
+    val SCREEN_SHARE_UID = 2
 
 }

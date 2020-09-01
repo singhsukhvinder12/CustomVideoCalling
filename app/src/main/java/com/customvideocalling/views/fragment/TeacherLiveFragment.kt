@@ -144,6 +144,11 @@ CallBackResult.StartCallApiCallBack{
         val intent = Intent(activity, VideoChatViewActivity::class.java)
         intent.putExtra("channelName", pendingJobsList[position].channelName)
         intent.putExtra("accessToken", pendingJobsList[position].accessToken)
+        intent.putExtra("email", pendingJobsList[position].user!!.email)
+        intent.putExtra("name", pendingJobsList[position].userDetail!!.fName
+                +" "+pendingJobsList[position].userDetail!!.lName)
+        intent.putExtra("bookingDateTime", pendingJobsList[position].bookingDate
+                +" "+pendingJobsList[position].timeSlot)
         startActivity(intent)
     }
 

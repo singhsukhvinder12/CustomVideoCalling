@@ -368,6 +368,15 @@
     <string name="no_record_found">No Record Found</string>
     <string name="choose">Choose</string>
     <string name="new_user_signup"><u>New User? Signup</u></string>
+    <string name="label_stop_sharing_your_screen">Stop Screen Share</string>
+    <string name="label_start_sharing_your_screen">Start Screen Share</string>
+    <string name="schedule_detail">Schedule Detail</string>
+    <string name="add_schedule">Add Schedule</string>
+    <string name="schedules">Schedules</string>
+    <string name="requests">Requests</string>
+    <string name="gallery_select_title_msg">Tap to select</string>
+    <string name="folder">Folder</string>
+    <string name="add_feedback">Add Feedback</string>
 
 </resources>
 

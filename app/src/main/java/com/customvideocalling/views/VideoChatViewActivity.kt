@@ -2,7 +2,6 @@ package com.customvideocalling.views
 
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,11 +9,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.SurfaceView
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.Toast
-import androidx.annotation.NonNull
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,10 +19,13 @@ import com.customvideocalling.R
 import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.viewmodels.TeacherHomeViewModel
+import com.customvideocalling.views.teacher.FeedBackActivity
 import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
 import io.agora.rtc.IRtcEngineEventHandler
 import io.agora.rtc.RtcEngine
+import io.agora.rtc.ss.ScreenSharingClient
+import io.agora.rtc.ss.ScreenSharingClient.IStateListener
 import io.agora.rtc.video.VideoCanvas
 import io.agora.rtc.video.VideoEncoderConfiguration
 
@@ -43,13 +41,41 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
     private var mCallBtn: ImageView? = null
     private var mMuteBtn: ImageView? = null
     private var mSwitchCameraBtn: ImageView? = null
+    private var btnScreeShare: Button? = null
     private var accessToken = ""
     private var channelName = ""
+    private var email = ""
+    private var name = ""
+    private var bookingDateTime = ""
     private lateinit var teacherHomeViewModel : TeacherHomeViewModel
     private var sharedPrefClass = SharedPrefClass()
+    private var mSS = false
+    private var mVEC: VideoEncoderConfiguration? = null
+    private var mSSClient: ScreenSharingClient? = null
+    private var isScreenShare = false
 
     // Customized logger view
 
+    private val mListener: IStateListener = object : IStateListener {
+        override fun onError(error: Int) {
+            Log.e("Screen Share Error", "Screen share service error happened: $error")
+        }
+
+        override fun onTokenWillExpire() {
+            Log.d("Token Expire", "Screen share service token will expire")
+            mSSClient!!.renewToken(accessToken) // Replace the token with your valid token
+        }
+    }
+       /* {
+            fun onError(error: Int) {
+                Log.e("Screen share error", "Screen share service error happened: $error")
+            }
+
+            fun onTokenWillExpire() {
+                Log.d("Token expire", "Screen share service token will expire")
+                mSSClient!!.renewToken(null) // Replace the token with your valid token
+            }
+        }*/
     /**
      * Event handler registered into RTC engine for RTC callbacks.
      * Note that UI operations needs to be in UI thread because RTC
@@ -135,7 +161,7 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
         // Only one remote video view is available for this
         // tutorial. Here we check if there exists a surface
         // view tagged as this uid.
-        val count = mRemoteContainer!!.childCount
+      /*  val count = mRemoteContainer!!.childCount
         var view: View? = null
         for (i in 0 until count) {
             val v = mRemoteContainer!!.getChildAt(i)
@@ -145,7 +171,7 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
         }
         if (view != null) {
             return
-        }
+        }*/
 
         /*
           Creates the video renderer view.
@@ -154,10 +180,24 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
           The video display view must be created using this method instead of directly
           calling SurfaceView.
          */mRemoteView = RtcEngine.CreateRendererView(getBaseContext())
-        mRemoteContainer!!.addView(mRemoteView)
-        // Initializes the video view of a remote user.
-        mRtcEngine!!.setupRemoteVideo(VideoCanvas(mRemoteView, VideoCanvas.RENDER_MODE_HIDDEN, uid))
-        mRemoteView!!.setTag(uid)
+        if (uid == GlobalConstants.SCREEN_SHARE_UID && sharedPrefClass.getPrefValue(this, GlobalConstants.TYPE).toString() == "2"){
+
+        }else {
+            if (uid == GlobalConstants.SCREEN_SHARE_UID) {
+                mRemoteView!!.setZOrderOnTop(true)
+                mRemoteView!!.setZOrderMediaOverlay(true)
+            }
+            mRemoteContainer!!.addView(mRemoteView)
+            // Initializes the video view of a remote user.
+            mRtcEngine!!.setupRemoteVideo(
+                VideoCanvas(
+                    mRemoteView,
+                    VideoCanvas.RENDER_MODE_FIT,
+                    uid
+                )
+            )
+            mRemoteView!!.setTag(uid)
+        }
     }
 
     private fun onRemoteUserLeft() {
@@ -185,6 +225,21 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
             val extras = intent.extras
             accessToken = (extras!!.getString("accessToken")).toString()
         }
+        if (intent.hasExtra("email")) {
+            val extras = intent.extras
+            email = (extras!!.getString("email")).toString()
+        }
+        if (intent.hasExtra("name")) {
+            val extras = intent.extras
+            name = (extras!!.getString("name")).toString()
+        }
+        if (intent.hasExtra("bookingDateTime")) {
+            val extras = intent.extras
+            bookingDateTime = (extras!!.getString("bookingDateTime")).toString()
+        }
+
+        mSSClient = ScreenSharingClient.getInstance();
+        mSSClient!!.setListener(mListener);
         // Ask for permissions at runtime.
         // This is just an example set of permissions. Other permissions
         // may be needed, and please refer to our online documents.
@@ -211,6 +266,19 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
         mCallBtn = findViewById(R.id.btn_call)
         mMuteBtn = findViewById(R.id.btn_mute)
         mSwitchCameraBtn = findViewById(R.id.btn_switch_camera)
+        btnScreeShare = findViewById(R.id.btn_screen_share)
+        if(sharedPrefClass.getPrefValue(this, GlobalConstants.TYPE).toString() == "1"){
+            btnScreeShare!!.visibility = View.GONE
+        }
+        btnScreeShare!!.setOnClickListener {
+            if (isScreenShare){
+                isScreenShare = false
+            startStopShare(true)}
+            else {
+                isScreenShare = true
+                startStopShare(false)
+            }
+        }
 
 
         // Sample logs are optional.
@@ -301,13 +369,19 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
 
         // Please go to this page for detailed explanation
         // https://docs.agora.io/en/Video/API%20Reference/java/classio_1_1agora_1_1rtc_1_1_rtc_engine.html#af5f4de754e2c1f493096641c5c5c1d8f
-        mRtcEngine!!.setVideoEncoderConfiguration(
-            VideoEncoderConfiguration(
+        mVEC = VideoEncoderConfiguration(
+            VideoEncoderConfiguration.VD_640x360,
+            VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
+            VideoEncoderConfiguration.STANDARD_BITRATE,
+            VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT
+        )
+        mRtcEngine!!.setVideoEncoderConfiguration(mVEC
+           /* VideoEncoderConfiguration(
                 VideoEncoderConfiguration.VD_640x360,
                 VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
                 VideoEncoderConfiguration.STANDARD_BITRATE,
                 VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT
-            )
+            )*/
         )
     }
 
@@ -351,6 +425,9 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
           This method is useful for apps that occasionally make voice or video calls,
           to free up resources for other operations when not making calls.
          */RtcEngine.destroy()
+        if (mSS) {
+            mSSClient!!.stop(getApplicationContext());
+        }
     }
 
     private fun leaveChannel() {
@@ -432,10 +509,36 @@ class VideoChatViewActivity : AppCompatActivity(), CallBackResult.EndCallApiCall
         removeLocalVideo()
         removeRemoteVideo()
         leaveChannel()
+        val intent = Intent(this, FeedBackActivity::class.java)
+        intent.putExtra("email", email)
+        intent.putExtra("name", name)
+        intent.putExtra("bookingDateTime", bookingDateTime)
+        startActivity(intent)
         finish()
     }
 
     override fun onEndCallApiFailed(message: String) {
        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun startStopShare(isScreenShareOn: Boolean?){
+
+
+        mSS = if (!isScreenShareOn!!) {
+            mSSClient!!.start(
+                applicationContext,
+                resources.getString(R.string.agora_app_id),
+                accessToken,
+               channelName,
+                GlobalConstants.SCREEN_SHARE_UID,
+                mVEC
+            )
+            btnScreeShare!!.setText(resources.getString(R.string.label_stop_sharing_your_screen))
+            true
+        } else {
+            mSSClient!!.stop(applicationContext)
+            btnScreeShare!!.setText(resources.getString(R.string.label_start_sharing_your_screen))
+            false
+        }
     }
 }

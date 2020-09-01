@@ -20,12 +20,14 @@ import retrofit2.Response
 class AddScheduleRepository {
     private var data : MutableLiveData<ScheduleListResponse>? = null
     private var data1 : MutableLiveData<CommonModel>? = null
+    private var dataScheduleDetail : MutableLiveData<ScheduleDetailResponse>? = null
 
 
 
     init {
         data = MutableLiveData()
         data1 = MutableLiveData()
+        dataScheduleDetail = MutableLiveData()
 
     }
 
@@ -82,6 +84,33 @@ class AddScheduleRepository {
             }
         })
         return data1!!
+    }
+
+    fun scheduleDetailApi(callBack: CallBackResult.ScheduleDetailCallBack, jsonObject:JsonObject): MutableLiveData<ScheduleDetailResponse> {
+        val call = GetRestAdapter.getRestAdapter(false).getScheduleDetail(jsonObject)
+        call.enqueue(object : Callback<ScheduleDetailResponse> {
+            override fun onResponse(
+                call: Call<ScheduleDetailResponse>,
+                response: retrofit2.Response<ScheduleDetailResponse>?
+            ) {
+                if (response?.body() != null) {
+                    if (response?.body()!!.code == 200) {
+                        callBack.onScheduleDetailSuccess(response.body()!!)
+                    }
+                    else {
+                        callBack.onScheduleDetailFailed(response?.body()?.message!!)
+                    }
+                } else {
+                    callBack.onScheduleDetailFailed("Something went wrong")
+                }
+
+            }
+
+            override fun onFailure(call: Call<ScheduleDetailResponse>, t: Throwable) {
+                callBack.onScheduleDetailFailed(t.message!!)
+            }
+        })
+        return dataScheduleDetail!!
     }
 
 }

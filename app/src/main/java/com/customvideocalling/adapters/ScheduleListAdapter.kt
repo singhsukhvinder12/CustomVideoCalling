@@ -20,10 +20,12 @@ import com.customvideocalling.model.PlanListResponse
 import com.customvideocalling.model.ScheduleListResponse
 import com.customvideocalling.model.TokenHistoryListResponse
 import com.customvideocalling.views.MainActivity
+import com.customvideocalling.views.TeacherMainActivity
 import com.customvideocalling.views.VideoChatViewActivity
 import com.customvideocalling.views.fragment.JobRequestsFragment
 import com.customvideocalling.views.student.AddTokentActivity
 import com.customvideocalling.views.student.TokenHistoryActivity
+import com.customvideocalling.views.teacher.ScheduleDetailActivity
 import com.customvideocalling.views.teacher.ScheduleListActivity
 
 
@@ -58,6 +60,10 @@ class ScheduleListAdapter(
         viewHolder = holder
         holder.binding!!.tvFromDateValue.text = scheduleList!![position].fromDate.toString()
         holder.binding!!.tvToDateValue.text = scheduleList!![position].toDate.toString()
+        holder.binding!!.cardView.setOnClickListener {
+            val intent = Intent(mContext, ScheduleDetailActivity::class.java)
+            mContext.startActivity(intent)
+        }
 
     }
 

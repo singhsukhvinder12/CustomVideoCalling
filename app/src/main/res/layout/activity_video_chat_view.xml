@@ -48,6 +48,14 @@
             android:src="@drawable/icon_agora_large" />
     </FrameLayout>
 
+    <Button
+        android:id="@+id/btn_screen_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:text="@string/label_start_sharing_your_screen"
+        android:layout_above="@+id/control_panel"/>
+
     <RelativeLayout
         android:id="@+id/control_panel"
         android:layout_width="match_parent"

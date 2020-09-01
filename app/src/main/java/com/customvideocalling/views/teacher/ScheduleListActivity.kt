@@ -36,7 +36,7 @@ class ScheduleListActivity : BaseActivity(), View.OnClickListener, CallBackResul
     override fun initViews() {
         activityScheduleListBinding = DataBindingUtil.setContentView(this, R.layout.activity_schedule_list)
         addScheduleViewModel = ViewModelProviders.of(this).get(AddScheduleViewModel::class.java)
-        activityScheduleListBinding.toolBar.toolbarText.setText("Schedules")
+        activityScheduleListBinding.toolBar.toolbarText.setText(getString(R.string.schedules))
         activityScheduleListBinding.toolBar.toolbarBack.setOnClickListener(this)
         activityScheduleListBinding.floatAddSchedule.setOnClickListener(this)
         scheduleList = ArrayList()

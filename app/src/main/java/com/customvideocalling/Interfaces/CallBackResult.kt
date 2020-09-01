@@ -85,4 +85,14 @@ class CallBackResult {
         fun onEndCallApiSuccess(response: CommonModel)
         fun onEndCallApiFailed(message: String)
     }
+
+    interface FacultyDesignationCallBack {
+        fun onFacultyDesignationSuccess(response: facultyDesignationResponse)
+        fun onFacultyDesignationFailed(message: String)
+    }
+
+    interface ScheduleDetailCallBack {
+        fun onScheduleDetailSuccess(response: ScheduleDetailResponse)
+        fun onScheduleDetailFailed(message: String)
+    }
 }

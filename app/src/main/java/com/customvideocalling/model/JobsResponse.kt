@@ -52,6 +52,27 @@ class JobsResponse {
         @SerializedName("status")
         @Expose
         var status : Int? = null
+        @SerializedName("user")
+        @Expose
+        var user : User? = null
+        @SerializedName("userDetail")
+        @Expose
+        var userDetail : UserDetail? = null
+    }
+
+    class User{
+        @SerializedName("email")
+        @Expose
+        var email : String? = null
+    }
+
+    class UserDetail{
+        @SerializedName("fName")
+        @Expose
+        var fName : String? = null
+        @SerializedName("lName")
+        @Expose
+        var lName : String? = null
     }
 
 }
