@@ -25,8 +25,8 @@ class ScheduleDetailActivity : BaseActivity(), View.OnClickListener, CallBackRes
     private lateinit var activityScheduleDetailBinding: ActivityScheduleDetailBinding
     private lateinit var addScheduleViewModel: AddScheduleViewModel
     private var sharedPrefClass = SharedPrefClass()
-    private var fromDate = "2020-08-29"
-    private var endDate = "2020-08-31"
+    private var fromDate = ""
+    private var endDate = ""
     private var adapter: ScheduleDetailExpandableAdapter?=null
     private var scheduleDetailParent: ArrayList<ScheduleDetailResponse.Result>?=null
 
@@ -39,7 +39,17 @@ class ScheduleDetailActivity : BaseActivity(), View.OnClickListener, CallBackRes
         activityScheduleDetailBinding=viewDataBinding as ActivityScheduleDetailBinding
         addScheduleViewModel = ViewModelProviders.of(this).get(AddScheduleViewModel::class.java)
         activityScheduleDetailBinding!!.toolBar.toolbarText.setText(getString(R.string.schedule_detail))
-        activityScheduleDetailBinding!!.toolBar.toolbarBack.setOnClickListener(this)
+        activityScheduleDetailBinding!!.toolBar.toolbarBack.setOnClickListener {
+            finish()
+        }
+        if (intent.hasExtra("fromDate")) {
+            val extras = intent.extras
+            fromDate = (extras!!.getString("fromDate")).toString()
+        }
+        if (intent.hasExtra("toDate")) {
+            val extras = intent.extras
+            endDate = (extras!!.getString("toDate")).toString()
+        }
         scheduleDetailParent = ArrayList()
         //initRecyclerView()
         val mJsonObject = JsonObject()

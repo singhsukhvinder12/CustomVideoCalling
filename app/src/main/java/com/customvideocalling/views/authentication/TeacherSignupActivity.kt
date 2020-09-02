@@ -1,25 +1,34 @@
 package com.customvideocalling.views.authentication
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.text.TextUtils
 import android.util.Base64.DEFAULT
 import android.util.Base64.encodeToString
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.core.net.toFile
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.adapters.SlotListDropdownAdapter
+import com.customvideocalling.adapters.SubjectListDropdownAdapter
 import com.customvideocalling.application.MyApplication
 import com.customvideocalling.constants.GlobalConstants
 import com.customvideocalling.databinding.ActivityTeacherSignupBinding
+import com.customvideocalling.model.ClassSubjectListResponse
 import com.customvideocalling.model.LoginResponse
+import com.customvideocalling.model.SubjectListMultipleModel
 import com.customvideocalling.utils.ConvertBase64
 import com.customvideocalling.utils.SharedPrefClass
 import com.customvideocalling.utils.core.BaseActivity
@@ -35,12 +44,15 @@ import com.google.gson.JsonObject
 import com.jaiselrahman.filepicker.activity.FilePickerActivity
 import com.jaiselrahman.filepicker.config.Configurations
 import com.jaiselrahman.filepicker.model.MediaFile
+import com.uniongoods.adapters.SubjectListMultipleAdapter
+import com.uniongoods.adapters.TimeListAdapter
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack {
+class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallBack,
+    CallBackResult.ClassSubjectListCallBack{
     private lateinit var binding: ActivityTeacherSignupBinding
     private lateinit var signUpViewModel: SignUpViewModel
     private var sharedPrefClass = SharedPrefClass()
@@ -57,6 +69,7 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
      var selectedDocument = ""
      var selectedReport = ""
      var selectedCV = ""
+    private var subjectId = ""
     private var isArrested = false
     private var isCharged = false
     private var arrested = "0"
@@ -66,6 +79,10 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
     var documentFile: File? = null
     var reportFile: File? = null
     var cvFile: File? = null
+    private var subjectList: ArrayList<ClassSubjectListResponse.Subject>?=null
+    private var subjectListLocal: ArrayList<SubjectListMultipleModel>?=null
+    private var subjectListFinal: ArrayList<SubjectListMultipleModel>?=null
+    lateinit var pw2: PopupWindow
 
 
 
@@ -80,6 +97,14 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
         binding.signUpViewModel = signUpViewModel
         binding.llSignupCrime.visibility = View.GONE
         binding.llSignupArrest.visibility = View.GONE
+        subjectList = ArrayList()
+        subjectListLocal = ArrayList()
+        subjectListFinal = ArrayList()
+        signUpViewModel.getSubjectList(this)
+        //subjectItemSelection()
+        binding.spSubject.setOnClickListener {
+            pw2!!.showAsDropDown(binding!!.spSubject)
+        }
         spinnerList!!.add("Please Select")
         spinnerList!!.add("Level 1")
         spinnerList!!.add("Level 2")
@@ -157,8 +182,9 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
                                 }else {*/
                             val gson = GsonBuilder().setPrettyPrinting().create()
                             val array = JsonArray()
-                            array.add("11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000")
-                            array.add("75442486-0878-440c-9db1-a7006c25a39f")
+                            for (i in 0 until subjectListFinal!!.size) {
+                                array.add(subjectListFinal!![i].id)
+                            }
                                     val mJsonObject = JsonObject()
                                     mJsonObject.addProperty("email", email)
                                     mJsonObject.addProperty("password", password)
@@ -424,6 +450,73 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
     }
 
     override fun onAddDeviceTokenFailed(message: String) {
+
+    }
+
+    /*private fun subjectItemSelection() {
+        binding!!.spSubject.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                if (subjectList != null) {
+                    subjectId = subjectList!![p2].id!!
+                    //   binding!!.noRecordFound.visibility = View.GONE
+                }
+            }
+        }
+    }*/
+
+    override fun onGetClassSubjectListSuccess(response: ClassSubjectListResponse) {
+        stopProgressDialog()
+        for ( i in 0 until response.result!!.subjectList!!.size){
+           subjectListLocal!!.add(SubjectListMultipleModel(response.result!!.subjectList!![i].name!!,
+               "false", response.result!!.subjectList!![i].id!!))
+        }
+        var inflater2 = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        var views2=inflater2!!.inflate(R.layout.days_dialog, null, false)
+        pw2 =  PopupWindow(views2, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true)
+        pw2!!.setOutsideTouchable(true);
+        var daysRecyclerView2=views2.findViewById<RecyclerView>(R.id.rvDays)
+
+
+        val adapter2 = SubjectListMultipleAdapter(this, subjectListLocal!!)
+        var layout2= LinearLayoutManager(this)
+        daysRecyclerView2.adapter=adapter2
+        daysRecyclerView2.layoutManager=layout2
+
+    }
+
+    override fun onGetClassSubjectListFailed(message: String) {
+
+    }
+
+    fun updateValueForSubject(){
+
+        var multipleValue=""
+        subjectListFinal = ArrayList()
+        for ( i in 0 until subjectListLocal!!.size){
+
+            if (subjectListLocal!!.get(i).isSelected.equals("true")){
+                subjectListFinal!!.add(subjectListLocal!!.get(i))
+                if (multipleValue.isEmpty()){
+                    multipleValue=subjectListLocal!!.get(i).name
+                }else{
+                    multipleValue=multipleValue+","+subjectListLocal!!.get(i).name
+
+                }
+
+            }
+
+        }
+
+        if (multipleValue.isEmpty()){
+            binding!!.spSubject.text="Please Select Subject"
+        }else{
+            binding!!.spSubject.text=multipleValue
+
+        }
 
     }
 }

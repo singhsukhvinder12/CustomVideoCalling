@@ -212,6 +212,7 @@
         android:layout_marginRight="@dimen/dp_10"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_10"
+        android:visibility="gone"
         android:background="@drawable/ic_edit_back"
         android:paddingTop="@dimen/dp_15"
         android:paddingRight="@dimen/dp_10"
@@ -220,6 +221,7 @@
         <RadioGroup
             android:id="@+id/rg_user_type"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton

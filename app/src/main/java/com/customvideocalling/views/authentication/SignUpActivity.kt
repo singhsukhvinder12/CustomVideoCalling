@@ -58,7 +58,12 @@ CallBackResult.FacultyDesignationCallBack, CallBackResult.ClassSubjectListCallBa
         activitySignUpBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         signUpViewModel = ViewModelProviders.of(this).get(SignUpViewModel::class.java)
         activitySignUpBinding.signUpViewModel = signUpViewModel
-        activitySignUpBinding.rgUserType.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+        activitySignUpBinding.btnSelectPlan.visibility = View.VISIBLE
+        activitySignUpBinding.btnSelectQuestionnaire.visibility = View.VISIBLE
+        activitySignUpBinding.relSpinnerDesignation.visibility = View.GONE
+        activitySignUpBinding.relSpinnerFaculty.visibility = View.GONE
+        activitySignUpBinding.relSpinnerSubject.visibility = View.GONE
+       /* activitySignUpBinding.rgUserType.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
             if(i == R.id.rb_teacher){
                 isTeacher = true
                 isStudent = false
@@ -76,7 +81,7 @@ CallBackResult.FacultyDesignationCallBack, CallBackResult.ClassSubjectListCallBa
                 isTeacher = false
                 isStudent = true
             }
-        })
+        })*/
         facultyList = ArrayList()
         designationList = ArrayList()
         subjectList = ArrayList()
@@ -113,7 +118,7 @@ CallBackResult.FacultyDesignationCallBack, CallBackResult.ClassSubjectListCallBa
                             showConfirmPasswordError("Password and confirm password is different")
                         }
                         else {
-                            if (isStudent) {
+                            if (true) {
                                 if(planId.isEmpty() && amount.isEmpty()){
                                     showPlanAmountError("Please Select plan")
                                     return

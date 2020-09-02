@@ -62,6 +62,8 @@ class ScheduleListAdapter(
         holder.binding!!.tvToDateValue.text = scheduleList!![position].toDate.toString()
         holder.binding!!.cardView.setOnClickListener {
             val intent = Intent(mContext, ScheduleDetailActivity::class.java)
+            intent.putExtra("fromDate", scheduleList[position].fromDate)
+            intent.putExtra("toDate", scheduleList[position].toDate)
             mContext.startActivity(intent)
         }
 
