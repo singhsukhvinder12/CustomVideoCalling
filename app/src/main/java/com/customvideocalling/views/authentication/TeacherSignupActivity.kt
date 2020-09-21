@@ -61,6 +61,7 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
     val FILE_REQUEST_CODE_report = 4000
     val FILE_REQUEST_CODE_cv = 5000
     private var grade = ""
+    private var hours = ""
     var images: MutableList<com.esafirm.imagepicker.model.Image> = mutableListOf()
     var filesDocument: ArrayList<MediaFile>? = ArrayList()
     var filesReport: ArrayList<MediaFile>? = ArrayList()
@@ -72,9 +73,11 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
     private var subjectId = ""
     private var isArrested = false
     private var isCharged = false
+    private var isOverEighteen = "No"
     private var arrested = "0"
     private var charged = "0"
     private var spinnerList: ArrayList<String>?= ArrayList()
+    private var availableHoursList: ArrayList<String>?= ArrayList()
     var licenseImageFile: File? = null
     var documentFile: File? = null
     var reportFile: File? = null
@@ -105,9 +108,26 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
         binding.spSubject.setOnClickListener {
             pw2!!.showAsDropDown(binding!!.spSubject)
         }
-        spinnerList!!.add("Please Select")
-        spinnerList!!.add("Level 1")
-        spinnerList!!.add("Level 2")
+        spinnerList!!.add("Please Select Grade")
+        spinnerList!!.add("First Grade")
+        spinnerList!!.add("Second Grade")
+        spinnerList!!.add("Third Grade")
+        spinnerList!!.add("Fourth Grade")
+        spinnerList!!.add("Fifth Grade")
+        spinnerList!!.add("Sixth Grade")
+        spinnerList!!.add("Seventh Grade")
+        spinnerList!!.add("Eighth Grade")
+        spinnerList!!.add("Ninth Grade")
+        spinnerList!!.add("Tenth Grade")
+        spinnerList!!.add("Eleventh Grade")
+        spinnerList!!.add("Twelfth Grade")
+        availableHoursList!!.add("Please Select Available Hours")
+        availableHoursList!!.add("08:00 AM - 05:00 PM")
+        availableHoursList!!.add("09:00 AM - 06:00 PM")
+        availableHoursList!!.add("10:00 AM - 07:00 PM")
+        availableHoursList!!.add("11:00 AM - 08:00 PM")
+        availableHoursList!!.add("12:00 PM - 09:00 PM")
+        val hourAdapter = SlotListDropdownAdapter(this, availableHoursList)
         val adapter = SlotListDropdownAdapter(this, spinnerList)
         binding.spGrade.adapter = adapter
         binding.spGrade?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -116,6 +136,15 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 grade = spinnerList!![position]
+            }
+        }
+        binding.etHours.adapter = hourAdapter
+        binding.etHours?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                hours = availableHoursList!![position]
             }
         }
         binding.checkBoxArrest.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -140,6 +169,13 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
                 binding.llSignupCrime.visibility = View.GONE
             }
         }
+        binding.checkBoxOverEighteen.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                isOverEighteen = "Yes"
+            }else{
+                isOverEighteen = "No"
+            }
+        }
         signUpViewModel.isClick().observe(
             this, Observer<String>(function =
             fun(it: String?) {
@@ -150,7 +186,8 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
                 val confirmPassword = binding.etConfirmPassword.text.toString()
                 val address = binding.etAddress.text.toString()
                 val education = binding.etEducation.text.toString()
-                val hours = binding.etHours.text.toString()
+                val phone = binding.etPhone.text.toString()
+                val hours = hours
                 val arrestedDetail = binding.etArrest.text.toString()
                 val crime = binding.etCrime.text.toString()
                 val bankName = binding.etBankeName.text.toString()
@@ -193,9 +230,11 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
                                     mJsonObject.addProperty("education", education)
                                      mJsonObject.addProperty("teacherId", "123456")
                                     mJsonObject.addProperty("address", address)
+                                    mJsonObject.addProperty("phoneNo", phone)
                                     mJsonObject.addProperty("grade", grade)
                                     mJsonObject.addProperty("hours", hours)
                                     mJsonObject.addProperty("arrested", arrested)
+                                    mJsonObject.addProperty("over18", isOverEighteen)
                                     mJsonObject.addProperty("arrestedDetails",arrestedDetail)
                                     mJsonObject.addProperty("charged", charged)
                                     mJsonObject.addProperty("chargedDetails", crime)
@@ -342,10 +381,10 @@ class TeacherSignupActivity : BaseActivity(), CallBackResult.AddDeviceTokenCallB
         binding.etAddress.error = passError
     }
 
-    private fun showHoursError(passError: String) {
+   /* private fun showHoursError(passError: String) {
         binding.etHours.requestFocus()
         binding.etHours.error = passError
-    }
+    }*/
 
     private fun showBankNameError(passError: String) {
         binding.etBankeName.requestFocus()

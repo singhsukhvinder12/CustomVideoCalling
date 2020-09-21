@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.customvideocalling.Interfaces.CallBackResult
 import com.customvideocalling.R
 import com.customvideocalling.adapters.SlotListDropdownAdapter
@@ -24,6 +25,9 @@ import com.customvideocalling.viewmodels.BookingAddStudentViewModel
 import com.customvideocalling.viewmodels.LoginViewModel
 import com.example.artha.model.CommonModel
 import com.google.gson.JsonObject
+import com.uniongoods.adapters.AddAppoitmentListAdapter
+import com.uniongoods.adapters.PlanListAdapter
+import java.text.FieldPosition
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -38,6 +42,9 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
     private var selectedSlot = ""
     private var subjectId = ""
     private var date = ""
+    private var planAdapter: AddAppoitmentListAdapter? = null
+    private var planList: ArrayList<String>?=null
+    private var selectedCredit = "30"
 
     override fun initViews() {
         activityAddAppoitmentBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_appoitment)
@@ -48,12 +55,21 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
         activityAddAppoitmentBinding.tvDate.setOnClickListener(this)
         subjectList = ArrayList()
         slotList = ArrayList()
+        planList = ArrayList()
+        planList!!.add("Super Learning (30 Credit)")
+        planList!!.add("Mega Brain Power (45 Credit)")
+        planList!!.add("Project X (60 Credit)")
         bookingAddStudentViewModel.getSubjectList(this)
         subjectItemSelection()
         slotItemSelection()
         slotList!!.add(0,"Please Select")
         val adapter = SlotListDropdownAdapter(this, slotList)
         activityAddAppoitmentBinding!!.spSlot.adapter = adapter
+        planAdapter = AddAppoitmentListAdapter(this, planList!!, this)
+        // binding.reyclerviewMembershipPlanList.setLayoutManager(LinearLayoutManager(this))
+        activityAddAppoitmentBinding.reyclerviewMembershipPlanList.layoutManager = LinearLayoutManager(this)
+        activityAddAppoitmentBinding.reyclerviewMembershipPlanList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL ,false)
+        activityAddAppoitmentBinding.reyclerviewMembershipPlanList.setAdapter(planAdapter)
     }
 
     override fun getLayoutId(): Int {
@@ -128,7 +144,7 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
                     mJsonObject.addProperty("userId", sharedPrefClass.getPrefValue(this, GlobalConstants.USERID).toString())
                     mJsonObject.addProperty("subjectId", subjectId)
                     mJsonObject.addProperty("time", selectedSlot)
-                    mJsonObject.addProperty("credit", "30")
+                    mJsonObject.addProperty("credit", selectedCredit)
                     bookingAddStudentViewModel.hitAddBookingApi(this,mJsonObject)
                 }
 
@@ -206,5 +222,15 @@ View.OnClickListener, CallBackResult.AddBookingCallBack, CallBackResult.SlotList
 
     private fun showSlotError(passError: String) {
         showToastError(passError)
+    }
+
+    fun onClickPlan(position: Int){
+        if (position == 0){
+            selectedCredit = "30"
+        }else if(position == 1){
+            selectedCredit = "45"
+        }else if (position == 2){
+            selectedCredit == "60"
+        }
     }
 }

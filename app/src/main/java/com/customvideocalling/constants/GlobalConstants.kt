@@ -11,7 +11,9 @@ object GlobalConstants {
     val SHARED_PREF = "DEMOO_APP"
     @JvmStatic
    // val BASE_URL = "http://203.100.79.168:8083/"
-    val BASE_URL = "https://conference.infinitywebtechnologies.com:8089/api/v1/"
+    //val BASE_URL = "https://conference.infinitywebtechnologies.com:8089/api/v1/"
+    val BASE_URL = "https://k12superheros.com:8089/api/v1/"
+
     const val EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     @JvmStatic

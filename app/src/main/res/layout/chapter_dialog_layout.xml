@@ -41,7 +41,7 @@
             android:orientation="vertical"
             android:background="@android:color/white">
 
-            <EditText
+            <Spinner
                 android:id="@+id/ed_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="12sp" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/ed_what_grade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/ed_what_is_needed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/ed_what_need_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/ed_superhero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
